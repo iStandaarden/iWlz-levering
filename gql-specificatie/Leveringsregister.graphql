@@ -45,7 +45,7 @@ type Query {
     verzoek: [Verzoek!]
     leveringperiode: [Leveringperiode!]
     uitstelperiode: [Uitstelperiode!]
-    afstel: [Afstel!]
+    afstel: Afstel
 }
 
   type Client {
