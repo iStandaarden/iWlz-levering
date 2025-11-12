@@ -5,7 +5,7 @@ datum
 Gabseerd op Leveringregister 1
 """
 schema {
-    query: Query
+  query: Query
 }
 
 """
@@ -30,43 +30,47 @@ scalar DateTime
 """
 
 type Query {
-  
+  levevering (where: LeveringFilterInput): [Levering!]
+  leveringperiode (where: LeveringperiodeFilterInput): [Leveringperiode!]
+  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]  
+  afstel (where: AfstelFilterInput): [Afstel!]
 }
     
 
- """
- object types
- """
-  type Levering {
-    leveringID: UUID!
-    clientID: UUID!
-    bemiddelingspecificatieID: UUID!
-    client: Client!
-    verzoek: [Verzoek!]
-    leveringperiode: [Leveringperiode!]
-    uitstelperiode: [Uitstelperiode!]
-    afstel: Afstel
+"""
+object types
+"""
+type Levering {
+  leveringID: UUID!
+  # clientID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel client toegevoegd als edge
+  bemiddelingspecificatieID: UUID!
+  client: Client!
+  verzoek: [Verzoek!]
+  leveringperiode (where: LeveringFilterInput): [Leveringperiode!]
+  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]
+  afstel (where: AfstelFilterInput): Afstel
+  client: Client!
 }
 
-  type Client {
-    clientID: UUID! 
-    bsn: String! 
+type Client {
+  clientID: UUID! 
+  bsn: String! 
 }
 
-  type Verzoek {
-   verzoekID: UUID!
-    leveringID: UUID!
-    verzoekdatum: date!
-    product: String!
-    toewijzingSoort: String!
-    leveringsvorm: String!
-    volume: Float
-    eenheid: String
-    frequentie: String
-    doelmatig: String
-    toeslagreden: String
-    verantwoord: String
-    verzoekAanbieder: [VerzoekAanbieder!]!
+type Verzoek {
+  verzoekID: UUID!
+  leveringID: UUID!
+  verzoekdatum: date!
+  product: String!
+  toewijzingSoort: String!
+  leveringsvorm: String!
+  volume: Float
+  eenheid: String
+  frequentie: String
+  doelmatig: String
+  toeslagreden: String
+  verantwoord: String
+  verzoekAanbieder: [VerzoekAanbieder!]!
 }
 
 type VerzoekAanbieder {
@@ -82,7 +86,7 @@ type VerzoekAanbieder {
 
 type Leveringperiode {
   leveringperiodeID: UUID!
-  leveringID: UUID!
+  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
   ingangsdatum: Date!
   vaststellingMoment: DateTime!
   sleuteldatum: Date
@@ -90,31 +94,67 @@ type Leveringperiode {
   beeindigingReden: String
   aanbiederBestemming: String
   behandeling: [Behandeling!]
+  levering: Levering!
 }
 
 type Behandeling {
   behandelingID: UUID!
-  leveringperiodeID: UUID!
+  # leveringperiodeID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit
   ingangsdatum: Date!
   einddatum: Date
 }
 
 type Uitstelperiode {
   uitstelperiodeID: UUID!
-  leveringID: UUID!
+  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
   ingangsdatum: Date!
   vaststellingMoment: DateTime!
   reden: String!
   leveringsstatus: String!
   leveringsstatusClassificatie: String!
   einddatum: Date
+  levering: Levering!
 }
 
 type Afstel {
   afstelID: UUID!
-  leveringID: UUID!
+  #leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
   afsteldatum: Date!
   vaststellingMoment: DateTime!
   reden: String!
   aanbiederBestemming: String 
+  levering: Levering!
+}
+
+"""
+Filter input types
+"""
+input LeveringFilterInput {
+  leveringID: UuidOperationFilterInput
+  bemiddelingspecificatieID: UuidOperationFilterInput
+}
+
+input LeveringperiodeFilterInput {
+  leveringperiodeID: UuidOperationFilterInput
+  leveringID: UuidOperationFilterInput
+}
+
+input UitstelperiodeFilterInput {
+  uitstelperiodeID: UuidOperationFilterInput
+  leveringID: UuidOperationFilterInput
+}
+
+input AfstelFilterInput {
+  afstelID: UuidOperationFilterInput
+  leveringID: UuidOperationFilterInput
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
 }

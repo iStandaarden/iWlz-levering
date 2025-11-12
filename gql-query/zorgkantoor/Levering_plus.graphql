@@ -1,0 +1,42 @@
+query Levering(
+  $leveringID: UUID!
+  $bemiddelingspecificatieID: UUID
+  $leveringperiodeID: UUID
+  $uitstelperiodeID: UUID
+  $afstelID: UUID
+) {
+  levering(where: { leveringID: { eq: $leveringID } }) {
+    leveringID
+    clientID
+    bemiddelingspecificatieID
+    client {
+      clientID
+      bsn
+    }
+    leveringperiode(where: { leveringperiodeID: { eq: $leveringperiodeID } }) {
+      leveringperiodeID
+      leveringID
+      startdatum
+      einddatum
+      behandeling {
+        behandelingID
+        leveringperiodeID
+        ingangsdatum
+        einddatum
+      }
+    }
+    uitstelperiode(where: { uitstelperiodeID: { eq: $uitstelperiodeID } }) {
+      uitstelperiodeID
+      leveringID
+      startdatum
+      einddatum
+      redenUitstel
+    }
+    afstel(where: { afstelID: { eq: $afstelID } }) {
+      afstelID
+      leveringID
+      afsteldatum
+      redenAfstel
+    }
+  }
+}

@@ -1,0 +1,25 @@
+query Leveringperiode(
+  $leveringperiodeID: UUID!
+) {
+  leveringperiode(where: { leveringperiodeID: { eq: $leveringperiodeID } }) {
+    leveringperiodeID
+    startdatum
+    einddatum
+    behandeling {
+      behandelingID
+      leveringperiodeID
+      ingangsdatum
+      einddatum
+    }
+    levering {
+      leveringID
+      clientID
+      bemiddelingspecificatieID
+      client {
+        clientID
+        bsn
+      }
+    # je kan hier eventueel ook leveringperiode, uitstelperiode en afstel toevoegen als je die mee wilt terugkrijgen
+    }
+  }
+}
