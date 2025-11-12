@@ -1,0 +1,120 @@
+"""
+Graphql Schemadefinitie voor het Leveringregister
+Versie 
+datum 
+Gabseerd op Leveringregister 1
+"""
+schema {
+    query: Query
+}
+
+"""
+The `UUID` scalar represents an version 4 UUID specification
+"""
+scalar UUID @specifiedBy(url: "https://tools.ietf.org/html/rfc4122")
+
+"""
+The `Date` scalar represents an ISO-8601 compliant date type. YYYY-MM-DD
+"""
+scalar Date
+  @specifiedBy(url: "https://scalars.graphql.org/andimarek/local-date")
+
+"""
+The `DateTime` scalar represents an ISO-8601 compliant date time type.
+"""
+scalar DateTime
+  @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time")
+
+"""
+  QUERY definities
+"""
+
+type Query {
+  
+}
+    
+
+ """
+ object types
+ """
+  type Levering {
+    leveringID: UUID!
+    clientID: UUID!
+    bemiddelingspecificatieID: UUID!
+    client: Client!
+    verzoek: [Verzoek!]
+    leveringperiode: [Leveringperiode!]
+    uitstelperiode: [Uitstelperiode!]
+    afstel: [Afstel!]
+}
+
+  type Client {
+    clientID: UUID! 
+    bsn: String! 
+}
+
+  type Verzoek {
+   verzoekID: UUID!
+    leveringID: UUID!
+    verzoekdatum: date!
+    product: String!
+    toewijzingSoort: String!
+    leveringsvorm: String!
+    volume: Float
+    eenheid: String
+    frequentie: String
+    doelmatig: String
+    toeslagreden: String
+    verantwoord: String
+    verzoekAanbieder: [VerzoekAanbieder!]!
+}
+
+type VerzoekAanbieder {
+  verzoekAanbiederID: UUID!
+  verzoekID: UUID!
+  aanbieder: String!
+  toewijzingIngangsdatum: Date!
+  toewijzingEinddatum: Date
+  toewijzingPercentage: Integer!
+  opname: String
+  regiehouder: String!
+}
+
+type Leveringperiode {
+  leveringperiodeID: UUID!
+  leveringID: UUID!
+  ingangsdatum: Date!
+  vaststellingMoment: DateTime!
+  sleuteldatum: Date
+  einddatum: Date
+  beeindigingReden: String
+  aanbiederBestemming: String
+  behandeling: [Behandeling!]
+}
+
+type Behandeling {
+  behandelingID: UUID!
+  leveringperiodeID: UUID!
+  ingangsdatum: Date!
+  einddatum: Date
+}
+
+type Uitstelperiode {
+  uitstelperiodeID: UUID!
+  leveringID: UUID!
+  ingangsdatum: Date!
+  vaststellingMoment: DateTime!
+  reden: String!
+  leveringsstatus: String!
+  leveringsstatusClassificatie: String!
+  einddatum: Date
+}
+
+type Afstel {
+  afstelID: UUID!
+  leveringID: UUID!
+  afsteldatum: Date!
+  vaststellingMoment: DateTime!
+  reden: String!
+  aanbiederBestemming: String 
+}
