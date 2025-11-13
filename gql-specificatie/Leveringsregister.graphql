@@ -29,6 +29,18 @@ scalar DateTime
   QUERY definities
 """
 
+directive @deprecated(
+  reason: String = "No longer supported"
+) on FIELD_DEFINITION | ENUM_VALUE
+
+directive @authorized(
+  roles: [String!]
+) on OBJECT | FIELD_DEFINITION
+
+directive @forbidden(
+  reason: String = "Access forbidden"
+) on OBJECT | FIELD_DEFINITION
+
 type Query {
   levevering (where: LeveringFilterInput): [Levering!]
   leveringperiode (where: LeveringperiodeFilterInput): [Leveringperiode!]
@@ -40,7 +52,7 @@ type Query {
 """
 object types
 """
-type Levering {
+type Levering @authorized(roles: ["ROLE_LEVERINGREGISTER_READ"], reason: "Alleen geautoriseerde gebruikers kunnen leveringen opvragen") {
   leveringID: UUID!
   # clientID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel client toegevoegd als edge
   bemiddelingspecificatieID: UUID!
