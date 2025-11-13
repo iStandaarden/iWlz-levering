@@ -38,5 +38,6 @@ query Levering(
       afsteldatum
       redenAfstel
     }
+    # Verzoek mag niet direct worden opgevraagd vanuit levering vanwege autorisatie regels.
   }
 }
