@@ -1,8 +1,8 @@
 """
-Graphql Schemadefinitie voor het Leveringregister
+Graphql Schemadefinitie voor het Leveringsregister
 Versie 
 datum 
-Gabseerd op Leveringregister 1
+Gabseerd op Leveringsregister 1
 """
 schema {
   query: Query
@@ -72,7 +72,7 @@ type Client {
 type Verzoek {
   verzoekID: UUID!
   leveringID: UUID!
-  verzoekdatum: date!
+  verzoekdatum: Date!
   product: String!
   toewijzingSoort: String!
   leveringsvorm: String!
