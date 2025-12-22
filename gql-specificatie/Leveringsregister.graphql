@@ -1,8 +1,8 @@
 """
-Graphql Schemadefinitie voor het Leveringregister
+Graphql Schemadefinitie voor het Leveringsregister
 Versie 
 datum 
-Gabseerd op Leveringregister 1
+Gabseerd op Leveringsregister 1
 """
 schema {
   query: Query
@@ -72,7 +72,7 @@ type Client {
 type Verzoek {
   verzoekID: UUID!
   leveringID: UUID!
-  verzoekdatum: date!
+  verzoekdatum: Date!
   product: String!
   toewijzingSoort: String!
   leveringsvorm: String!
@@ -91,7 +91,7 @@ type VerzoekAanbieder {
   aanbieder: String!
   toewijzingIngangsdatum: Date!
   toewijzingEinddatum: Date
-  toewijzingPercentage: Integer!
+  toewijzingPercentage: Float!
   opname: String
   regiehouder: String!
 }
@@ -105,11 +105,11 @@ type Leveringperiode {
   einddatum: Date
   beeindigingReden: String
   aanbiederBestemming: String
-  behandeling: [Behandeling!]
+  behandeling: [Behandelingperiode!]
   levering: Levering!
 }
 
-type Behandeling {
+type Behandelingperiode {
   behandelingID: UUID!
   # leveringperiodeID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit
   ingangsdatum: Date!
@@ -169,4 +169,13 @@ input StringOperationFilterInput {
   and: [StringOperationFilterInput!]
   or: [StringOperationFilterInput!]
   eq: String
+}
+input DateOperationFilterInput {
+  and: [DateOperationFilterInput!]
+  or: [DateOperationFilterInput!]
+  eq: Date
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
 }
