@@ -91,7 +91,7 @@ type VerzoekAanbieder {
   aanbieder: String!
   toewijzingIngangsdatum: Date!
   toewijzingEinddatum: Date
-  toewijzingPercentage: Integer!
+  toewijzingPercentage: Float!
   opname: String
   regiehouder: String!
 }
