@@ -2,16 +2,13 @@
 Graphql Schemadefinitie voor het Leveringsregister
 Versie 
 datum 
-Gabseerd op Leveringsregister 1
+Gebaseerd op Leveringsregister 1
 """
 
 schema {
   query: Query
 }
 
-"""
-Custom Scalar definities
-"""
 
 """
 The `UUID` scalar represents an version 4 UUID specification
@@ -42,12 +39,116 @@ _Query: query
 """
 object types
 """
+type Levering {
+  leveringID: UUID!
+  # clientID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel client toegevoegd als edge
+  bemiddelingspecificatieID: UUID!
+  client: Client!
+  verzoek: [Verzoek!]
+  leveringperiode (where: LeveringperiodeFilterInput): [Leveringperiode!]
+  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]
+  afstel (where: AfstelFilterInput): Afstel
+  client: Client!
+}
 
+type Client {
+  clientID: UUID! 
+  bsn: String! 
+  leveringen (where: LeveringFilterInput): [Levering!]
+}
+
+type Leveringperiode {
+  leveringperiodeID: UUID!
+  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
+  ingangsdatum: Date!
+  vaststellingMoment: DateTime!
+  sleuteldatum: Date
+  einddatum: Date
+  beeindigingReden: String
+  aanbiederBestemming: String
+  behandelingperiode: [Behandelingperiode!]
+  levering: Levering!
+}
+
+type Behandelingperiode {
+  behandelingperiodeID: UUID!
+  # leveringperiodeID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit
+  ingangsdatum: Date!
+  einddatum: Date
+}
+
+type Uitstelperiode {
+  uitstelperiodeID: UUID!
+  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
+  ingangsdatum: Date!
+  vaststellingMoment: DateTime!
+  reden: String!
+  leveringsstatus: String!
+  leveringsstatusClassificatie: String!
+  einddatum: Date
+  levering: Levering!
+}
+
+type Afstel {
+  afstelID: UUID!
+  #leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
+  afsteldatum: Date!
+  vaststellingMoment: DateTime!
+  reden: String!
+  aanbiederBestemming: String 
+  levering: Levering!
+}
+
+type Verzoek {
+  verzoekID: UUID!
+  leveringID: UUID!
+  verzoekdatum: Date!
+  product: String!
+  toewijzingSoort: String!
+  leveringsvorm: String!
+  volume: Float
+  eenheid: String
+  frequentie: String
+  doelmatig: String
+  toeslagreden: String
+  verantwoord: String
+  verzoekAanbieder: [VerzoekAanbieder!]!
+}
+
+type VerzoekAanbieder {
+  verzoekAanbiederID: UUID!
+  verzoekID: UUID!
+  aanbieder: String!
+  toewijzingIngangsdatum: Date!
+  toewijzingEinddatum: Date
+  toewijzingPercentage: Float!
+  opname: String
+  regiehouder: String!
+}
 
 """
 Filter input types
 """
 
+input LeveringFilterInput {
+  leveringID: UuidOperationFilterInput
+  bemiddelingspecificatieID: UuidOperationFilterInput
+}
+
+input LeveringperiodeFilterInput {
+  leveringperiodeID: UuidOperationFilterInput
+  leveringID: UuidOperationFilterInput
+}
+
+input UitstelperiodeFilterInput {
+  uitstelperiodeID: UuidOperationFilterInput
+  leveringID: UuidOperationFilterInput
+}
+
+input AfstelFilterInput {
+  afstelID: UuidOperationFilterInput
+  leveringID: UuidOperationFilterInput
+}
 
 input UuidOperationFilterInput {
   eq: UUID
@@ -57,4 +158,13 @@ input StringOperationFilterInput {
   and: [StringOperationFilterInput!]
   or: [StringOperationFilterInput!]
   eq: String
+}
+input DateOperationFilterInput {
+  and: [DateOperationFilterInput!]
+  or: [DateOperationFilterInput!]
+  eq: Date
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
 }
