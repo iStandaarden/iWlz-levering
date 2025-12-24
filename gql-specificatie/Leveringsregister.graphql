@@ -4,9 +4,14 @@ Versie
 datum 
 Gabseerd op Leveringsregister 1
 """
+
 schema {
   query: Query
 }
+
+"""
+Custom Scalar definities
+"""
 
 """
 The `UUID` scalar represents an version 4 UUID specification
@@ -29,137 +34,20 @@ scalar DateTime
   QUERY definities
 """
 
-directive @deprecated(
-  reason: String = "No longer supported"
-) on FIELD_DEFINITION | ENUM_VALUE
-
-directive @authorized(
-  roles: [String!]
-) on OBJECT | FIELD_DEFINITION
-
-directive @forbidden(
-  reason: String = "Access forbidden"
-) on OBJECT | FIELD_DEFINITION
-
 type Query {
-  levevering (where: LeveringFilterInput): [Levering!]
-  leveringperiode (where: LeveringperiodeFilterInput): [Leveringperiode!]
-  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]  
-  afstel (where: AfstelFilterInput): [Afstel!]
+_Query: query
 }
     
 
 """
 object types
 """
-type Levering @authorized(roles: ["ROLE_LEVERINGREGISTER_READ"], reason: "Alleen geautoriseerde gebruikers kunnen leveringen opvragen") {
-  leveringID: UUID!
-  # clientID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel client toegevoegd als edge
-  bemiddelingspecificatieID: UUID!
-  client: Client!
-  verzoek: [Verzoek!]
-  leveringperiode (where: LeveringFilterInput): [Leveringperiode!]
-  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]
-  afstel (where: AfstelFilterInput): Afstel
-  client: Client!
-}
 
-type Client {
-  clientID: UUID! 
-  bsn: String! 
-}
-
-type Verzoek {
-  verzoekID: UUID!
-  leveringID: UUID!
-  verzoekdatum: Date!
-  product: String!
-  toewijzingSoort: String!
-  leveringsvorm: String!
-  volume: Float
-  eenheid: String
-  frequentie: String
-  doelmatig: String
-  toeslagreden: String
-  verantwoord: String
-  verzoekAanbieder: [VerzoekAanbieder!]!
-}
-
-type VerzoekAanbieder {
-  verzoekAanbiederID: UUID!
-  verzoekID: UUID!
-  aanbieder: String!
-  toewijzingIngangsdatum: Date!
-  toewijzingEinddatum: Date
-  toewijzingPercentage: Float!
-  opname: String
-  regiehouder: String!
-}
-
-type Leveringperiode {
-  leveringperiodeID: UUID!
-  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
-  ingangsdatum: Date!
-  vaststellingMoment: DateTime!
-  sleuteldatum: Date
-  einddatum: Date
-  beeindigingReden: String
-  aanbiederBestemming: String
-  behandeling: [Behandeling!]
-  levering: Levering!
-}
-
-type Behandeling {
-  behandelingID: UUID!
-  # leveringperiodeID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit
-  ingangsdatum: Date!
-  einddatum: Date
-}
-
-type Uitstelperiode {
-  uitstelperiodeID: UUID!
-  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
-  ingangsdatum: Date!
-  vaststellingMoment: DateTime!
-  reden: String!
-  leveringsstatus: String!
-  leveringsstatusClassificatie: String!
-  einddatum: Date
-  levering: Levering!
-}
-
-type Afstel {
-  afstelID: UUID!
-  #leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
-  afsteldatum: Date!
-  vaststellingMoment: DateTime!
-  reden: String!
-  aanbiederBestemming: String 
-  levering: Levering!
-}
 
 """
 Filter input types
 """
-input LeveringFilterInput {
-  leveringID: UuidOperationFilterInput
-  bemiddelingspecificatieID: UuidOperationFilterInput
-}
 
-input LeveringperiodeFilterInput {
-  leveringperiodeID: UuidOperationFilterInput
-  leveringID: UuidOperationFilterInput
-}
-
-input UitstelperiodeFilterInput {
-  uitstelperiodeID: UuidOperationFilterInput
-  leveringID: UuidOperationFilterInput
-}
-
-input AfstelFilterInput {
-  afstelID: UuidOperationFilterInput
-  leveringID: UuidOperationFilterInput
-}
 
 input UuidOperationFilterInput {
   eq: UUID
