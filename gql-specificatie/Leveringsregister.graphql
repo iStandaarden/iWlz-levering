@@ -32,7 +32,7 @@ scalar DateTime
 """
 
 type Query {
-_Query: query
+_temp: String
 }
     
 
