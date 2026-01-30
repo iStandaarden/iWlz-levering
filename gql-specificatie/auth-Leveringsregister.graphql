@@ -41,6 +41,11 @@ directive @forbidden(
   reason: String = "Access forbidden"
 ) on OBJECT | FIELD_DEFINITION
 
+directive @specifiedBy(
+  url: String!
+) on SCALAR
+
+
 type Query {
   levevering (where: LeveringFilterInput): [Levering!]
   leveringperiode (where: LeveringperiodeFilterInput): [Leveringperiode!]
