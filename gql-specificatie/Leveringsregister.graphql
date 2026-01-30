@@ -292,3 +292,13 @@ input DateOperationFilterInput {
   gt: Date
   gte: Date
 }
+
+input DateTimeOperationFilterInput {
+  and: [DateTimeOperationFilterInput!]
+  or: [DateTimeOperationFilterInput!]
+  eq: DateTime
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+}
