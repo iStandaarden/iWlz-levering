@@ -32,186 +32,187 @@ The `DateTime` scalar represents an ISO-8601 compliant date time type.
 scalar DateTime
   @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time")
 
-# Query definities
+" Query definities voor het Leveringsregister "
 type Query {
-  # voor het opvragen van leveringen
+  " voor het opvragen van leveringen "
   levering(where: LeveringFilterInput): [Levering!]
 
-  # voor het opvragen van leveringperiodes
+  " voor het opvragen van leveringperiodes "
   leveringperiode(where: LeveringperiodeFilterInput): [Leveringperiode!]
 
-  # voor het opvragen van uitstelperiodes
+  "voor het opvragen van uitstelperiodes"
   uitstelperiode(where: UitstelperiodeFilterInput): [Uitstelperiode!]
 
-  # voor het opvragen van afstel
+  "voor het opvragen van afstel"
   afstel(where: AfstelFilterInput): [Afstel!]
 
-  # voor het opvragen van verzoeken
+  "voor het opvragen van verzoeken"
   verzoek(where: VerzoekFilterInput): [Verzoek!]
 
-  # voor het opvragen van verzoekaanbieders
+  "voor het opvragen van verzoekaanbieders"
   verzoekAanbieder(where: VerzoekAanbiederFilterInput): [VerzoekAanbieder!]
 }
-# Object types
 
-# Persoon met een toewijzing voor zorg of ondersteuning vanuit de Wlz, Wmo of Jw voor wie een levering is vastgelegd.
+# Object types "
+
+" Persoon met een toewijzing voor zorg of ondersteuning vanuit de Wlz, Wmo of Jw voor wie een levering is vastgelegd. "
 type Client {
-  # Technische sleutel cliënt.
+  " Technische sleutel cliënt. "
   clientID: UUID!
-  # Burgerservicenummer van de cliënt.
+  " Burgerservicenummer van de cliënt. "
   bsn: String!
-  # Leveringen behorende bij deze cliënt.
+  " Leveringen behorende bij deze cliënt. "
   leveringen: [Levering!]!
 }
 
-# Gegevens over de levering van zorg of ondersteuning en over verzoeken voor toewijzingen voor het leveren van zorg of ondersteuning.
+" Gegevens over de levering van zorg of ondersteuning en over verzoeken voor toewijzingen voor het leveren van zorg of ondersteuning."
 type Levering {
-  # Technische sleutel levering.
+  " Technische sleutel levering. "
   leveringID: UUID!
-  # client behorende bij deze levering.
+  " client behorende bij deze levering. "
   client: Client!
-  # Technische sleutel bemiddelingspecificatie waarbij deze levering hoort.
+  " Technische sleutel bemiddelingspecificatie waarbij deze levering hoort. "
   bemiddelingspecificatieID: UUID!
-  # Lijst van leveringperiodes behorende bij deze levering.
+  " Lijst van leveringperiodes behorende bij deze levering. "
   leveringperiodes: [Leveringperiode!]
-  # Lijst van uitstelperiodes behorende bij deze levering.
+  " Lijst van uitstelperiodes behorende bij deze levering. "
   uitstelperiodes: [Uitstelperiode!]
-  # Afstel behorende bij deze levering.
+  " Afstel behorende bij deze levering. "
   afstel: Afstel
-  # Lijst van verzoeken behorende bij deze levering.
+  " Lijst van verzoeken behorende bij deze levering. "
   verzoeken: [Verzoek!]
 }
 
-# Periode waarin de toegewezen zorg of ondersteuning geleverd wordt aan de cliënt.
+" Periode waarin de toegewezen zorg of ondersteuning geleverd wordt aan de cliënt."
 type Leveringperiode {
-  # Technische sleutel leveringperiode.
+  " Technische sleutel leveringperiode. "
   leveringperiodeID: UUID!
-  # Eerste datum waarop de toegewezen zorg of ondersteuning geleverd is.
+  " Eerste datum waarop de toegewezen zorg of ondersteuning geleverd is. "
   ingangsdatum: Date!
-  # Datum en tijdstip waarop de aanbieder de nieuwe of gewijzigde gegevens over de Leveringperiode heeft vastgesteld.
+  " Datum en tijdstip waarop de aanbieder de nieuwe of gewijzigde gegevens over de Leveringperiode heeft vastgesteld. "
   vaststellingMoment: DateTime!
-  # Datum waarop de cliënt de sleutel van de toekomstige kamer ontvangt.
+  " Datum waarop de cliënt de sleutel van de toekomstige kamer ontvangt. "
   sleuteldatum: Date
-  # Laatste datum waarop de toegewezen zorg of ondersteuning geleverd is.
+  " Laatste datum waarop de toegewezen zorg of ondersteuning geleverd is. "
   einddatum: Date
-  # Aanduiding van de reden van beëindiging van de levering van zorg of ondersteuning.
+  " Aanduiding van de reden van beëindiging van de levering van zorg of ondersteuning. "
   beeindigingReden: String
-  # Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen.
+  " Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen. "
   aanbiederBestemming: String
-  # Lijst van behandelingperiodes behorende bij deze leveringperiode.
+  " Lijst van behandelingperiodes behorende bij deze leveringperiode. "
   behandelingperiodes: [BehandelingPeriode!]
-  # Levering behorende bij deze leveringperiode.
+  " Levering behorende bij deze leveringperiode. "
   levering: Levering!
 }
 
-# Periode waarin behandeling wordt geleverd door de aanbieder waarbij de cliënt is opgenomen.
+" Periode waarin behandeling wordt geleverd door de aanbieder waarbij de cliënt is opgenomen."
 type BehandelingPeriode {
-  # Technische sleutel behandelingperiode.
+  " Technische sleutel behandelingperiode. "
   behandelingperiodeID: UUID!
-  # Eerste datum van de behandelingperiode.
+  " Eerste datum van de behandelingperiode. "
   ingangsdatum: Date!
-  # Laatste datum van de behandelingperiode.
+  " Laatste datum van de behandelingperiode. "
   einddatum: Date
-  # Leveringperiode behorende bij deze behandelingperiode.
+  " Leveringperiode behorende bij deze behandelingperiode. "
   leveringperiode: Leveringperiode!
 }
 
-# Periode waarin levering van de toegewezen zorg of ondersteuning is uitgesteld en de cliënt op levering wacht.
+" Periode waarin levering van de toegewezen zorg of ondersteuning is uitgesteld en de cliënt op levering wacht."
 type Uitstelperiode {
-  # Technische sleutel uitstelperiode.
+  " Technische sleutel uitstelperiode. "
   uitstelperiodeID: UUID!
-  # Eerste datum van de uitstelperiode.
+  " Eerste datum van de uitstelperiode. "
   ingangsdatum: Date!
-  # Datum en tijdstip waarop de aanbieder de nieuwe of gewijzigde gegevens over de Uitstelperiode heeft vastgesteld.
+  " Datum en tijdstip waarop de aanbieder de nieuwe of gewijzigde gegevens over de Uitstelperiode heeft vastgesteld. "
   vaststellingMoment: DateTime!
-  # Aanduiding van de reden waarom de levering van zorg of ondersteuning is uitgesteld.
+  " Aanduiding van de reden waarom de levering van zorg of ondersteuning is uitgesteld. "
   reden: String!
-  # Aanduiding van de status van de te leveren zorg.
+  " Aanduiding van de status van de te leveren zorg. "
   leveringsstatus: String!
-  # Nadere classificatie van de leveringsstatus.
+  " Nadere classificatie van de leveringsstatus. "
   leveringsstatusClassificatie: String!
-  # Laatste datum van de uitstelperiode.
+  " Laatste datum van de uitstelperiode. "
   einddatum: Date
-  # Levering behorende bij deze uitstelperiode.
+  " Levering behorende bij deze uitstelperiode. "
   levering: Levering!
 }
 
-# Gegevens over het definitief niet doorgaan van de levering van de toegewezen zorg of ondersteuning.
+" Gegevens over het definitief niet doorgaan van de levering van de toegewezen zorg of ondersteuning."
 type Afstel {
-  # Technische sleutel afstel.
+  " Technische sleutel afstel. "
   afstelID: UUID!
-  # Datum waarop is vastgesteld dat de levering van zorg of ondersteuning definitief niet doorgaat.
+  " Datum waarop is vastgesteld dat de levering van zorg of ondersteuning definitief niet doorgaat. "
   afsteldatum: Date!
-  # Datum en tijdstip waarop de aanbieder  de nieuwe of gewijzigde gegevens over het Afstel heeft vastgesteld.
+  " Datum en tijdstip waarop de aanbieder  de nieuwe of gewijzigde gegevens over het Afstel heeft vastgesteld. "
   vaststellingMoment: Date!
-  # Aanduiding van de reden waarom de levering van zorg of ondersteuning definitief niet doorgaat.
+  " Aanduiding van de reden waarom de levering van zorg of ondersteuning definitief niet doorgaat. "
   reden: String!
-  # Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen.
+  " Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen. "
   aanbiederBestemming: String
-  # Levering behorende bij dit afstel.
+  " Levering behorende bij dit afstel. "
   levering: Levering!
 }
 
-# Gegevens over een verzoek (aanvraag) voor een of meer nieuwe of aangepaste toewijzingen.
+" Gegevens over een verzoek (aanvraag) voor een of meer nieuwe of aangepaste toewijzingen."
 type Verzoek {
-  # Technische sleutel verzoek.
+  " Technische sleutel verzoek. "
   verzoekID: UUID!
-  # Datum waarop het verzoek is ingediend.
+  " Datum waarop het verzoek is ingediend. "
   verzoekdatum: Date!
-  # Aanduiding van een product, dienst of resultaat voor het leveren van zorg of ondersteuning aan de cliënt.
+  " Aanduiding van een product, dienst of resultaat voor het leveren van zorg of ondersteuning aan de cliënt. "
   product: String!
-  # Aanduiding van de soort toewijzing.
+  " Aanduiding van de soort toewijzing. "
   toewijzingSoort: String!
-  # Aanduiding van de vorm waarin de zorg geleverd moet worden. Bij zorg in natura geeft de leveringsvorm tevens aan waar de zorg geleverd moet worden (thuis, in de instelling of deels thuis en deels in de instelling).
+  " Aanduiding van de vorm waarin de zorg geleverd moet worden. "
   leveringsvorm: String!
-  # Aanduiding van de hoeveelheid gevraagde zorg of ondersteuning.
+  " Aanduiding van de hoeveelheid gevraagde zorg of ondersteuning. "
   volume: Float
-  # Aanduiding van de eenheid waarin de hoeveelheid gevraagde zorg of ondersteuning is uitgedrukt.
+  " Aanduiding van de eenheid waarin de hoeveelheid gevraagde zorg of ondersteuning is uitgedrukt. "
   eenheid: String
-  # Aanduiding van de regelmaat waarmee de gevraagde zorg of ondersteuning geleverd moet worden.
+  " Aanduiding van de regelmaat waarmee de gevraagde zorg of ondersteuning geleverd moet worden. "
   frequentie: String
-  # Aanduiding die aangeeft of het verzoek binnen het toegestane budget past.
+  " Aanduiding die aangeeft of het verzoek binnen het toegestane budget past. "
   doelmatig: String
-  # Aanduiding van de reden waarom een toeslag wordt aangevraagd.
+  " Aanduiding van de reden waarom een toeslag wordt aangevraagd. "
   toeslagreden: String
-  # Aanduiding die aangeeft of de zorg of ondersteuning verantwoord geleverd kan worden.
+  " Aanduiding die aangeeft of de zorg of ondersteuning verantwoord geleverd kan worden. "
   verantwoord: String
-  # Lijst van verzoekaanbieders behorende bij dit verzoek.
+  " Lijst van verzoekaanbieders behorende bij dit verzoek. "
   verzoekAanbieders: [VerzoekAanbieder!]!
-  # Levering behorende bij dit verzoek.
+  " Levering behorende bij dit verzoek. "
   levering: Levering!
 }
 
-# Gegevens over de aangevraagde toewijzing gespecificeerd per aanbieder.
+" Gegevens over de aangevraagde toewijzing gespecificeerd per aanbieder."
 type VerzoekAanbieder {
-  # Technische sleutel verzoekAanbieder.
+  " Technische sleutel verzoekAanbieder. "
   verzoekAanbiederID: UUID!
-  # Aanduiding van de aanbieder waarvoor het verzoek (de aangevraagde toewijzing) bestemd is.
+  " Aanduiding van de aanbieder waarvoor het verzoek bestemd is. "
   aanbieder: String!
-  # Aangevraagde ingangsdatum van het toe te wijzen product.
+  " Aangevraagde ingangsdatum van het toe te wijzen product. "
   toewijzingIngangsdatum: Date!
-  # Aangevraagde einddatum van het toe te wijzen product.
+  " Aangevraagde einddatum van het toe te wijzen product. "
   toewijzingEinddatum: Date
-  # Aangevraagde deel van het budget dat geldt voor het betreffende product uitgedrukt in een percentage.
+  " Aangevraagde deel van het budget dat geldt voor het betreffende product, uitgedrukt in een percentage. "
   toewijzingPercentage: Int!
-  # Aanduiding of de cliënt wel of niet wordt opgenomen bij de aanbieder.
+  " Aanduiding of de cliënt wel of niet wordt opgenomen bij de aanbieder. "
   opname: String
-  # Aanduiding of de aanbieder op de ingangsdatum van de aangevraagde toewijzing regiehouder is of wordt voor de aangevraagde leveringsvorm.
+  " Aanduiding of de aanbieder regiehouder is of wordt. "
   regiehouder: String!
-  # Verzoek behorende bij deze verzoekaanbieder.
+  " Verzoek behorende bij deze verzoekaanbieder. "
   verzoek: Verzoek!
 }
 
-# Filter input types
+# Filter input types "
 
-# for filtering Levering queries
+" for filtering Levering queries "
 input LeveringFilterInput {
   leveringID: UuidOperationFilterInput
   bemiddelingspecificatieID: UuidOperationFilterInput
   clientID: UuidOperationFilterInput
 }
 
-# for filtering Leveringperiode queries
+" for filtering Leveringperiode queries "
 input LeveringperiodeFilterInput {
   leveringperiodeID: UuidOperationFilterInput
   leveringID: UuidOperationFilterInput
@@ -223,7 +224,7 @@ input LeveringperiodeFilterInput {
   aanbiederBestemming: StringOperationFilterInput
 }
 
-# for filtering Uitstelperiode queries
+" for filtering Uitstelperiode queries "
 input UitstelperiodeFilterInput {
   uitstelperiodeID: UuidOperationFilterInput
   leveringID: UuidOperationFilterInput
@@ -235,17 +236,17 @@ input UitstelperiodeFilterInput {
   einddatum: DateOperationFilterInput
 }
 
-# for filtering Afstel queries
+" for filtering Afstel queries "
 input AfstelFilterInput {
   afstelID: UuidOperationFilterInput
   leveringID: UuidOperationFilterInput
   afsteldatum: DateOperationFilterInput
-  vaststellingMoment: DateTimeOperationFilterInput
+  vaststellingMoment: DateOperationFilterInput
   reden: StringOperationFilterInput
   aanbiederBestemming: StringOperationFilterInput
 }
 
-# for filtering Verzoek queries
+" for filtering Verzoek queries "
 input VerzoekFilterInput {
   verzoekID: UuidOperationFilterInput
   leveringID: UuidOperationFilterInput
@@ -261,7 +262,7 @@ input VerzoekFilterInput {
   verantwoord: StringOperationFilterInput
 }
 
-# for filtering VerzoekAanbieder queries
+" for filtering VerzoekAanbieder queries "
 input VerzoekAanbiederFilterInput {
   verzoekAanbiederID: UuidOperationFilterInput
   verzoekID: UuidOperationFilterInput
@@ -273,7 +274,7 @@ input VerzoekAanbiederFilterInput {
   regiehouder: StringOperationFilterInput
 }
 
-# Type definities voor filters bij queries
+" Type definities voor filters bij queries "
 input UuidOperationFilterInput {
   eq: UUID
 }
@@ -283,6 +284,7 @@ input StringOperationFilterInput {
   or: [StringOperationFilterInput!]
   eq: String
 }
+
 input DateOperationFilterInput {
   and: [DateOperationFilterInput!]
   or: [DateOperationFilterInput!]
@@ -301,4 +303,24 @@ input DateTimeOperationFilterInput {
   lte: DateTime
   gt: DateTime
   gte: DateTime
+}
+
+input FloatOperationFilterInput {
+  and: [FloatOperationFilterInput!]
+  or: [FloatOperationFilterInput!]
+  eq: Float
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+}
+
+input IntOperationFilterInput {
+  and: [IntOperationFilterInput!]
+  or: [IntOperationFilterInput!]
+  eq: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
 }
