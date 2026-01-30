@@ -1,12 +1,12 @@
-"""
-Graphql Schemadefinitie voor het Leveringsregister
-Versie 
-datum 
-Gabseerd op Leveringsregister 1
-"""
+# name: Graphql Schemadefinitie voor het Leveringsregister
+# version: leveringsregister 1
+
+
 schema {
   query: Query
 }
+
+# Scalar definities
 
 """
 The `UUID` scalar represents an version 4 UUID specification
@@ -25,157 +25,163 @@ The `DateTime` scalar represents an ISO-8601 compliant date time type.
 scalar DateTime
   @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time")
 
-"""
-  QUERY definities
-"""
+# Query definities
 
-directive @deprecated(
-  reason: String = "No longer supported"
-) on FIELD_DEFINITION | ENUM_VALUE
 
-directive @authorized(
-  roles: [String!]
-) on OBJECT | FIELD_DEFINITION
+# Object types
 
-directive @forbidden(
-  reason: String = "Access forbidden"
-) on OBJECT | FIELD_DEFINITION
-
-type Query {
-  levevering (where: LeveringFilterInput): [Levering!]
-  leveringperiode (where: LeveringperiodeFilterInput): [Leveringperiode!]
-  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]  
-  afstel (where: AfstelFilterInput): [Afstel!]
-}
-    
-
-"""
-object types
-"""
-type Levering @authorized(roles: ["ROLE_LEVERINGREGISTER_READ"], reason: "Alleen geautoriseerde gebruikers kunnen leveringen opvragen") {
-  leveringID: UUID!
-  # clientID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel client toegevoegd als edge
-  bemiddelingspecificatieID: UUID!
-  client: Client!
-  verzoek: [Verzoek!]
-  leveringperiode (where: LeveringFilterInput): [Leveringperiode!]
-  uitstelperiode (where: UitstelperiodeFilterInput): [Uitstelperiode!]
-  afstel (where: AfstelFilterInput): Afstel
-  client: Client!
-}
-
+# Persoon met een toewijzing voor zorg of ondersteuning vanuit de Wlz, Wmo of Jw voor wie een levering is vastgelegd.
 type Client {
-  clientID: UUID! 
-  bsn: String! 
+
+    # Technische sleutel cliënt.
+    clientID: UUID!
+    # Burgerservicenummer van de cliënt.
+    bsn: String!
+    # Leveringen behorende bij deze cliënt.
+    leveringen: [Levering!]!
 }
 
-type Verzoek {
-  verzoekID: UUID!
-  leveringID: UUID!
-  verzoekdatum: Date!
-  product: String!
-  toewijzingSoort: String!
-  leveringsvorm: String!
-  volume: Float
-  eenheid: String
-  frequentie: String
-  doelmatig: String
-  toeslagreden: String
-  verantwoord: String
-  verzoekAanbieder: [VerzoekAanbieder!]!
+# Gegevens over de levering van zorg of ondersteuning en over verzoeken voor toewijzingen voor het leveren van zorg of ondersteuning.
+type Levering {
+
+    # Technische sleutel levering.
+    leveringID: UUID!
+    # Technische sleutel cliënt.
+    client: Client!
+    # Technische sleutel bemiddelingspecificatie.
+    bemiddelingspecificatieID: UUID!
+    # Lijst van leveringperiodes behorende bij deze levering.
+    leveringperiodes: [Leveringperiode!]
+    # Lijst van uitstelperiodes behorende bij deze levering.
+    uitstelperiodes: [Uitstelperiode!] 
+    # Afstel behorende bij deze levering.
+    afstel: Afstel
+    # Lijst van verzoeken behorende bij deze levering.
+    verzoeken: [Verzoek!]
+
 }
 
-type VerzoekAanbieder {
-  verzoekAanbiederID: UUID!
-  verzoekID: UUID!
-  aanbieder: String!
-  toewijzingIngangsdatum: Date!
-  toewijzingEinddatum: Date
-  toewijzingPercentage: Float!
-  opname: String
-  regiehouder: String!
-}
-
+# Periode waarin de toegewezen zorg of ondersteuning geleverd wordt aan de cliënt.
 type Leveringperiode {
-  leveringperiodeID: UUID!
-  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
-  ingangsdatum: Date!
-  vaststellingMoment: DateTime!
-  sleuteldatum: Date
-  einddatum: Date
-  beeindigingReden: String
-  aanbiederBestemming: String
-  behandeling: [Behandelingperiode!]
-  levering: Levering!
+
+    # Technische sleutel leveringperiode.
+    leveringperiodeID: UUID!
+    # Technische sleutel levering.
+    levering: Levering!
+    # Eerste datum waarop de toegewezen zorg of ondersteuning geleverd is.
+    ingangsdatum: Date!
+    # Datum en tijdstip waarop de aanbieder de nieuwe of gewijzigde gegevens over de Leveringperiode heeft vastgesteld.
+    vaststellingMoment: DateTime
+    # Datum waarop de cliënt de sleutel van de toekomstige kamer ontvangt.
+    sleuteldatum: Date
+    # Laatste datum waarop de toegewezen zorg of ondersteuning geleverd is.
+    einddatum: Date
+    # Aanduiding van de reden van beëindiging van de levering van zorg of ondersteuning.
+    beeindigingReden: LDT_RedenBeeindigingLevering
+    # Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen.
+    aanbiederBestemming: LDT_AgbCode
 }
 
-type Behandelingperiode {
-  behandelingID: UUID!
-  # leveringperiodeID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit
-  ingangsdatum: Date!
-  einddatum: Date
+@@@@@
+
+
+# Periode waarin behandeling wordt geleverd door de aanbieder waarbij de cliënt is opgenomen.
+type BehandelingPeriode {
+
+    # Technische sleutel behandelingperiode.
+    behandelingperiodeID: UUID!
+    # Technische sleutel leveringperiode.
+    leveringperiodeID: UUID!
+    # Eerste datum van de behandelingperiode.
+    ingangsdatum: Date
+    # Laatste datum van de behandelingperiode.
+    einddatum: Date
 }
 
+# Periode waarin levering van de toegewezen zorg of ondersteuning is uitgesteld en de cliënt op levering wacht.
 type Uitstelperiode {
-  uitstelperiodeID: UUID!
-  # leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
-  ingangsdatum: Date!
-  vaststellingMoment: DateTime!
-  reden: String!
-  leveringsstatus: String!
-  leveringsstatusClassificatie: String!
-  einddatum: Date
-  levering: Levering!
+
+    # Technische sleutel uitstelperiode.
+    uitstelperiodeID: UUID!
+    # Technische sleutel levering.
+    leveringID: UUID!
+    # Eerste datum van de uitstelperiode.
+    ingangsdatum: Date
+    # Datum en tijdstip waarop de aanbieder de nieuwe of gewijzigde gegevens over de Uitstelperiode heeft vastgesteld.
+    vaststellingMoment: DateTime
+    # Aanduiding van de reden waarom de levering van zorg of ondersteuning is uitgesteld.
+    reden: LDT_RedenUitstelLevering
+    # Aanduiding van de status van de te leveren zorg.
+    leveringsstatus: LDT_Leveringsstatus
+    # Nadere classificatie van de leveringsstatus.
+    leveringsstatusClassificatie: LDT_LeveringsstatusClassificatie
+    # Laatste datum van de uitstelperiode.
+    einddatum: Date
 }
 
+# Gegevens over het definitief niet doorgaan van de levering van de toegewezen zorg of ondersteuning.
 type Afstel {
-  afstelID: UUID!
-  #leveringID: UUID! -- deze kan weggelaten worden omdat het al in de parent zit wel Levering toegevoegd als edge
-  afsteldatum: Date!
-  vaststellingMoment: DateTime!
-  reden: String!
-  aanbiederBestemming: String 
-  levering: Levering!
+
+    # Technische sleutel afstel.
+    afstelID: UUID!
+    # Technische sleutel levering.
+    leveringID: UUID!
+    # Datum waarop is vastgesteld dat de levering van zorg of ondersteuning definitief niet doorgaat.
+    afsteldatum: Date
+    # Datum en tijdstip waarop de aanbieder  de nieuwe of gewijzigde gegevens over het Afstel heeft vastgesteld.
+    vaststellingMoment: Date
+    # Aanduiding van de reden waarom de levering van zorg of ondersteuning definitief niet doorgaat.
+    reden: LDT_RedenAfstelLevering
+    # Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen.
+    aanbiederBestemming: LDT_AgbCode
 }
 
-"""
-Filter input types
-"""
-input LeveringFilterInput {
-  leveringID: UuidOperationFilterInput
-  bemiddelingspecificatieID: UuidOperationFilterInput
+# Gegevens over een verzoek (aanvraag) voor een of meer nieuwe of aangepaste toewijzingen.
+type Verzoek {
+
+    # Technische sleutel verzoek.
+    verzoekID: UUID!
+    # Technische sleutel levering.
+    leveringID: UUID!
+    # Datum waarop het verzoek is ingediend.
+    verzoekdatum: Date
+    # Aanduiding van een product, dienst of resultaat voor het leveren van zorg of ondersteuning aan de cliënt.
+    product: LDT_Product
+    # Aanduiding van de soort toewijzing.
+    toewijzingSoort: LDT_SoortToewijzing
+    # Aanduiding van de vorm waarin de zorg geleverd moet worden. Bij zorg in natura geeft de leveringsvorm tevens aan waar de zorg geleverd moet worden (thuis, in de instelling of deels thuis en deels in de instelling).
+    leveringsvorm: LDT_Leveringsvorm
+    # Aanduiding van de hoeveelheid gevraagde zorg of ondersteuning.
+    volume: LDT_Volume
+    # Aanduiding van de eenheid waarin de hoeveelheid gevraagde zorg of ondersteuning is uitgedrukt.
+    eenheid: LDT_Eenheid
+    # Aanduiding van de regelmaat waarmee de gevraagde zorg of ondersteuning geleverd moet worden.
+    frequentie: LDT_Frequentie
+    # Aanduiding die aangeeft of het verzoek binnen het toegestane budget past.
+    doelmatig: LDT_JaNee
+    # Aanduiding van de reden waarom een toeslag wordt aangevraagd.
+    toeslagreden: LDT_ToeslagReden
+    # Aanduiding die aangeeft of de zorg of ondersteuning verantwoord geleverd kan worden.
+    verantwoord: LDT_JaNee
 }
 
-input LeveringperiodeFilterInput {
-  leveringperiodeID: UuidOperationFilterInput
-  leveringID: UuidOperationFilterInput
-}
+# Gegevens over de aangevraagde toewijzing gespecificeerd per aanbieder.
+type VerzoekAanbieder {
 
-input UitstelperiodeFilterInput {
-  uitstelperiodeID: UuidOperationFilterInput
-  leveringID: UuidOperationFilterInput
-}
-
-input AfstelFilterInput {
-  afstelID: UuidOperationFilterInput
-  leveringID: UuidOperationFilterInput
-}
-
-input UuidOperationFilterInput {
-  eq: UUID
-}
-
-input StringOperationFilterInput {
-  and: [StringOperationFilterInput!]
-  or: [StringOperationFilterInput!]
-  eq: String
-}
-input DateOperationFilterInput {
-  and: [DateOperationFilterInput!]
-  or: [DateOperationFilterInput!]
-  eq: Date
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
+    # Technische sleutel verzoekAanbieder.
+    verzoekAanbiederID: UUID!
+    # Technische sleutel verzoek.
+    verzoekID: UUID!
+    # Aanduiding van de aanbieder waarvoor het verzoek (de aangevraagde toewijzing) bestemd is.
+    aanbieder: LDT_AgbCode
+    # Aangevraagde ingangsdatum van het toe te wijzen product.
+    toewijzingIngangsdatum: Date
+    # Aangevraagde einddatum van het toe te wijzen product.
+    toewijzingEinddatum: Date
+    # Aangevraagde deel van het budget dat geldt voor het betreffende product uitgedrukt in een percentage.
+    toewijzingPercentage: LDT_Percentage
+    # Aanduiding of de cliënt wel of niet wordt opgenomen bij de aanbieder.
+    opname: LDT_JaNee
+    # Aanduiding of de aanbieder op de ingangsdatum van de aangevraagde toewijzing regiehouder is of wordt voor de aangevraagde leveringsvorm.
+    regiehouder: LDT_JaNee
 }
