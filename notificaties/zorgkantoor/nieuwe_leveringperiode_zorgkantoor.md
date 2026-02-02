@@ -25,7 +25,7 @@ stateDiagram
   [*] --> trigger
   verstuur --> ontvang
   verwerk --> [*]
-  verzender:Registrerende aanbieder
+  verzender: Aanbieder (bronhouder)
   trigger:Trigger
   trigger:- Registratie van
   trigger:- nieuwe Leveringperiode
@@ -68,7 +68,7 @@ De trigger voor het opstellen van de notificatie is:
 ## Instructie
 Stel de notificatie op voor: 
 > 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd.
-> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
+> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
 
 ## Type
 Het type notificatie is:

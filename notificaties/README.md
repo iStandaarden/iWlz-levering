@@ -9,8 +9,8 @@ Per notificatie is beschreven wat de aanleiding is voor het versturen van een no
 Meer informatie in het [Afsprakenstelsel iWlz](https://wlz.atlassian.net/wiki/spaces/IWLZAS/pages/23071204/Notificeren+en+Melden) 
 
 ## Notificaties Leveringsregister.
+Hieronder de notificaties vanuit het Leveringsregister.
 
-- 
 
 ### Notificaties aan de zorgaanbieder
 
@@ -22,6 +22,16 @@ Meer informatie in het [Afsprakenstelsel iWlz](https://wlz.atlassian.net/wiki/sp
 
 | Notificatie | Documentatie | Type |
 | :-- | :-- | :-- |
-| [NIEUW_VERZOEK_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md)|Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert. | VERPLICHT |
 | [NIEUWE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode registreert. | VERPLICHT |
 | [GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode wijzigt. | VERPLICHT |
+| [VERWIJDERDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een leveringperiode verwijdert | VERPLICHT |
+| [NIEUWE_BEHANDELINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe behandelingperiode registreert. | VERPLICHT |
+| [GEWIJZIGDE_BEHANDELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode wijzigt. | VERPLICHT |
+| [VERWIJDERDE_BEHANDELINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderde_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode verwijdert. | VERPLICHT |
+| [NIEUWE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe uitstelperiode registreert. | VERPLICHT |
+| [GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode wijzigt. | VERPLICHT |
+| [VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderde_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode verwijdert. | VERPLICHT |
+| [NIEUW_AFSTEL_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuw afstel registreert. | VERPLICHT |
+| [GEWIJZIGD_AFSTEL_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigd_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel wijzigt. | VERPLICHT |
+| [VERWIJDERD_AFSTEL_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderd_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel verwijdert. | VERPLICHT |
+| [NIEUW_VERZOEK_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md)|Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert. | VERPLICHT |

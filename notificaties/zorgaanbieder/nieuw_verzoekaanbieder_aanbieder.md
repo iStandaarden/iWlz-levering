@@ -25,7 +25,7 @@ stateDiagram
   [*] --> trigger
   verstuur --> ontvang
   verwerk --> [*]
-  verzender:Registrerende aanbieder
+  verzender: Aanbieder (bronhouder)
   trigger:Trigger
 trigger:- Registratie van
 trigger:- nieuw VerzoekAanbieder

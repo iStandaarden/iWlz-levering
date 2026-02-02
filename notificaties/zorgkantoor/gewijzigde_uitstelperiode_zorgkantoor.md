@@ -1,4 +1,4 @@
-# NIEUW_VERZOEK_ZORGKANTOOR
+# GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR
 
 ```mermaid
 ---
@@ -26,26 +26,26 @@ stateDiagram
   verstuur --> ontvang
   verwerk --> [*]
   verzender: Aanbieder (bronhouder)
-  trigger:Trigger
-trigger:- Registratie van
-trigger:- nieuw Verzoek
-  opstellen:Stel notificatie
-opstellen:NIEUW_VERZOEK_ZORGKANTOOR
-opstellen:- voor het zorgkantoor
-opstellen:- dat verantwoordelijk is
-  verstuur:Verstuur 
+  trigger: Trigger
+  trigger: - Wijziging van
+  trigger: - een Uitstelperiode
+  opstellen: Stel notificatie
+  opstellen: GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR
+  opstellen: - voor het zorgkantoor
+  opstellen: - dat verantwoordelijk of uitvoerend is
+  verstuur: Verstuur 
   verstuur: notificatie
   ontvanger: Zorgkantoor
-  ontvang:Ontvang 
-  ontvang:notificatie
-  verwerk:Verwerk 
-  verwerk:notificatie
+  ontvang: Ontvang 
+  ontvang: notificatie
+  verwerk: Verwerk 
+  verwerk: notificatie
 
 ```
 
 **Inhoud**
 
-- [NIEUW\_VERZOEK\_ZORGKANTOOR](#nieuw_verzoek_zorgkantoor)
+- [GEWIJZIGDE\_UITSTELPERIODE\_ZORGKANTOOR](#gewijzigde_uitstelperiode_zorgkantoor)
   - [Documentatie](#documentatie)
   - [Trigger](#trigger)
   - [Instructie](#instructie)
@@ -55,19 +55,20 @@ opstellen:- dat verantwoordelijk is
 
 
 ## Documentatie
-Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert.
+Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode wijzigt.
 
-Het zorgkantoor is daarmee geïnformeerd van de registratie van een nieuw verzoek. 
+Het zorgkantoor is daarmee geïnformeerd van de wijziging van een uitstelperiode. 
 
-De notificatie bevat informatie waarmee het zorgkantoor het verzoek kan raadplegen.
+De notificatie bevat informatie waarmee het zorgkantoor de gewijzigde uitstelperiode kan raadplegen.
 
 ## Trigger
 De trigger voor het opstellen van de notificatie is: 
- > De registratie van een `Verzoek` in het Leveringsregister
+ > De wijziging van een `Uitstelperiode` in het Leveringsregister
 
 ## Instructie
 Stel de notificatie op voor: 
-> het zorgkantoor dat verantwoordelijk is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder het `Verzoek` is geregistreerd .
+> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de gewijzigde `Uitstelperiode` is geregistreerd.
+> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de gewijzigde `Uitstelperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
 
 ## Type
 Het type notificatie is:
@@ -82,10 +83,10 @@ Het type notificatie is:
 | ontvangerIDType 	| UZOVI 	| ontvangerIDType: "UZOVI" 	|
 | ontvangerID 	| {uzovi-code verzender} 	| ontvangerID: "5555" 	|
 | ontvangerKenmerk 	| NULL 	|  	|
-| eventType 	| NIEUW_VERZOEK_ZORGKANTOOR 	| eventType: "NIEUW_VERZOEK_ZORGKANTOOR" 	|
+| eventType 	| GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR 	| eventType: "GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR" 	|
 | subjectList 	|  	| subjectList: [{ 	|
 | ../subject 	| Levering/{leveringID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
-| ../recordID 	| Verzoek/{VerzoekID} 	| subject: "Verzoek/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
+| ../recordID 	| Uitstelperiode/{UitstelperiodeID} 	| subject: "Uitstelperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
 | | | }] |
 
 # Overige notificaties Leveringsregister
