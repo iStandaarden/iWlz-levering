@@ -10,13 +10,18 @@ Meer informatie in het [Afsprakenstelsel iWlz](https://wlz.atlassian.net/wiki/sp
 
 ## Notificaties Leveringsregister.
 
+- 
+
 ### Notificaties aan de zorgaanbieder
 
 | Notificatie | Documentatie | Type |
 | :-- | :-- | :-- |
-| [NIEUW_VERZOEKAANBIEDER_AANBIEDER](/notificaties/nieuw_verzoekaanbieder_aanbieder.md) | Notificatie aan de aanbieder die in VerzoekAanbieder is opgenomen van een nieuw Verzoek dat is geregistreerd. | VERPLICHT |
+| [NIEUW_VERZOEKAANBIEDER_AANBIEDER](/notificaties/zorgaanbieder/nieuw_verzoekaanbieder_aanbieder.md) | Notificatie aan de aanbieder die in VerzoekAanbieder is opgenomen van een nieuw Verzoek dat is geregistreerd. | VERPLICHT |
 
 ### Notificaties aan het zorgkantoor
 
 | Notificatie | Documentatie | Type |
 | :-- | :-- | :-- |
+| [NIEUW_VERZOEK_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md)|Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert. | VERPLICHT |
+| [NIEUWE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode registreert. | VERPLICHT |
+| [GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode wijzigt. | VERPLICHT |
