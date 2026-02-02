@@ -1,0 +1,33 @@
+# QLR-0001-ZA.graphql
+# Query voor aanbieders op Leveringsregister
+# Verplichte input:
+#    - bemiddelingspecificatieID
+
+#Query
+query Levering(
+    $BemiddelingspecificatieID: UUID!
+) {
+    Levering(
+        where: {
+            bemiddelingspecificatieID: { eq: $BemiddelingspecificatieID}
+        }
+    ) {
+      leveringID
+      bemiddelingspecificatieID
+      leveringperiode{
+        leveringperiodeID
+        ingangsdatum
+        vaststellingMoment
+        sleuteldatum
+        einddatum
+        beeindigingReden
+        aanbiederBestemming
+        behandelingperiode{
+            
+        }
+      }
+
+    }
+
+
+}
