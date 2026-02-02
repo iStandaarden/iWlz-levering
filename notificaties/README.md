@@ -12,9 +12,9 @@ Meer informatie in het [Afsprakenstelsel iWlz](https://wlz.atlassian.net/wiki/sp
 
 ### Notificaties aan de zorgaanbieder
 
-
 | Notificatie | Documentatie | Type |
 | :-- | :-- | :-- |
+| [NIEUW_VERZOEKAANBIEDER_AANBIEDER](/notificaties/nieuw_verzoekaanbieder_aanbieder.md) | Notificatie aan de aanbieder die in VerzoekAanbieder is opgenomen van een nieuw Verzoek dat is geregistreerd. | VERPLICHT |
 
 ### Notificaties aan het zorgkantoor
 
