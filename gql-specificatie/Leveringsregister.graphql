@@ -144,7 +144,7 @@ type Afstel {
   " Datum waarop is vastgesteld dat de levering van zorg of ondersteuning definitief niet doorgaat. "
   afsteldatum: Date!
   " Datum en tijdstip waarop de aanbieder  de nieuwe of gewijzigde gegevens over het Afstel heeft vastgesteld. "
-  vaststellingMoment: Date!
+  vaststellingMoment: DateTime!
   " Aanduiding van de reden waarom de levering van zorg of ondersteuning definitief niet doorgaat. "
   reden: String!
   " Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen. "
@@ -241,7 +241,7 @@ input AfstelFilterInput {
   afstelID: UuidOperationFilterInput
   leveringID: UuidOperationFilterInput
   afsteldatum: DateOperationFilterInput
-  vaststellingMoment: DateOperationFilterInput
+  vaststellingMoment: DateTimeOperationFilterInput
   reden: StringOperationFilterInput
   aanbiederBestemming: StringOperationFilterInput
 }
