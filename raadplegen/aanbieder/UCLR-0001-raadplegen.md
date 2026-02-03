@@ -30,7 +30,7 @@ flowchart LR
 ### Autorisatie
 Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de gegevens over de status van de levering van de zorg of ondersteuning raadplegen die horen bij overlappende bemiddelingspecificaties.
 - Volledige autorisatieregel: [LRA005](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/)
-- Autorisatiematrix: [LRA0005](https://github.com/iStandaarden/iWlz-Autorisatiematrix/blob/main/autorisatiematrix_leveringsregister1.md) 
+- Autorisatiematrix: [LRA0005]() 
 
 **Trigger:**
 - Een aanbieder wil de levering die horen bij de overlappende bemiddelingspecificaties raadplegen.
