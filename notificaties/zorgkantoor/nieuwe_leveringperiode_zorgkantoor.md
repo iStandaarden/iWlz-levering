@@ -55,7 +55,7 @@ stateDiagram
 
 
 ## Documentatie
-Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode registreert.
+Notificatie aan het zorgkantoor wanneer de aanbieder een nieuwe leveringperiode registreert.
 
 Het zorgkantoor is daarmee geïnformeerd van de registratie van een nieuwe leveringperiode. 
 
