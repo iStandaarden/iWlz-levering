@@ -80,7 +80,7 @@ Het type notificatie is:
 | afzenderIDType 	| AGBCODE 	| `ontvangerIDType: "AGBCODE"` 	|
 | afzenderID 	| {agb-code verzender} 	| `ontvangerID: "12345678"` 	|
 | ontvangerIDType 	| AGBCODE 	| `ontvangerIDType: "AGBCODE"` 	|
-| ontvangerID 	| {agb-code verzender} 	| `ontvangerID: "87654321"` 	|
+| ontvangerID 	| {agb-code ontvanger} 	| `ontvangerID: "87654321"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
 | eventType 	| NIEUW_VERZOEKAANBIEDER_AANBIEDER 	| `eventType: "NIEUW_VERZOEKAANBIEDER_AANBIEDER"` 	|
 | subjectList 	|  	| `subjectList: [{` 	|
