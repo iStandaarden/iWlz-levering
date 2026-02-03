@@ -83,10 +83,10 @@ Het type notificatie is:
 | ontvangerID 	| {agb-code verzender} 	| `ontvangerID: "87654321"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
 | eventType 	| NIEUW_VERZOEKAANBIEDER_AANBIEDER 	| `eventType: "NIEUW_VERZOEKAANBIEDER_AANBIEDER"` 	|
-| subjectList 	|  	| subjectList: [{ 	|
+| subjectList 	|  	| `subjectList: [{` 	|
 | ../subject 	| Verzoek/{VerzoekID} 	| subject: "Verzoek/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| VerzoekAanbieder/{verzoekAanbiederID} 	| recordID: "VerzoekAanbieder/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
-| | | }] |
+| | | `}]` |
 
 # Overige notificaties Leveringsregister
 De overige notificaties van het Leveringsregister staan [hier](/notificaties/README.md)
