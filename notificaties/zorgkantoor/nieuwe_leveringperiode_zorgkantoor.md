@@ -77,17 +77,17 @@ Het type notificatie is:
 ## Inhoud notificatie
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
-| timestamp 	| {timestamp} 	| timestamp: "2024-07-02T00:00:00Z" 	|
-| afzenderIDType 	| AGBCODE 	| ontvangerIDType: "AGBCODE" 	|
-| afzenderID 	| {agb-code verzender} 	| ontvangerID: "12345678" 	|
-| ontvangerIDType 	| UZOVI 	| ontvangerIDType: "UZOVI" 	|
-| ontvangerID 	| {uzovi-code verzender} 	| ontvangerID: "5555" 	|
+| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
+| afzenderIDType 	| AGBCODE 	| `ontvangerIDType: "AGBCODE"` 	|
+| afzenderID 	| {agb-code verzender} 	| `ontvangerID: "12345678"` 	|
+| ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
+| ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
-| eventType 	| NIEUWE_LEVERINGPERIODE_ZORGKANTOOR 	| eventType: "NIEUWE_LEVERINGPERIODE_ZORGKANTOOR" 	|
-| subjectList 	|  	| subjectList: [{ 	|
+| eventType 	| NIEUWE_LEVERINGPERIODE_ZORGKANTOOR 	| `eventType: "NIEUWE_LEVERINGPERIODE_ZORGKANTOOR"` 	|
+| subjectList 	|  	| `subjectList: [{` 	|
 | ../subject 	| Levering/{leveringID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| Leveringperiode/{LeveringperiodeID} 	| subject: "Leveringperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
-| | | }] |
+| | | `}]` |
 
 # Overige notificaties Leveringsregister
 De overige notificaties van het Leveringsregister staan [hier](/notificaties/README.md)
