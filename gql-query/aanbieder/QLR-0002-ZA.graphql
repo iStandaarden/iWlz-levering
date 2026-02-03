@@ -11,7 +11,7 @@ Query VerzoekAanbieder(
 ){
     verzoekAanbieder(
         where:{
-            verzoekAanbiederID: {eq: $bemiddelingspecificatieID}
+            verzoekAanbiederID: {eq: $verzoekAanbiederID}
             aanbieder: {eq: $aanbieder}
         }
     ){
