@@ -31,7 +31,7 @@ trigger:- Registratie van
 trigger:- nieuw VerzoekAanbieder
   opstellen:Stel notificatie
 opstellen:- NIEUW_VERZOEKAANBIEDER_AANBIEDER
-opstellen:- voor de zorgaanbieder
+opstellen:- voor de aanbieder
 opstellen:- in VerzoekAanbieder
   verstuur:Verstuur 
   verstuur: notificatie
