@@ -20,13 +20,12 @@ flowchart LR
 
 ## Use Case Beschrijving
 
-**Titel:** Raadplegen van de Levering die horen bij overlappende Bemiddelingspecificatie(s) door de Aanbieder
+**Titel:** Raadplegen van de Levering die horen bij overlappende Bemiddelingspecificatie(s) door de Aanbieder<br/>
 **Actoren:** Aanbieder betrokken bij de levering van zorg en ondersteuning aan een cliënt
 
 ### Precondities:
 - De Levering is opgenomen in het Leveringsregister
 - De aanbieder is door het verantwoordelijk zorgkantoor betrokken bij de levering van zorg en ondersteuning aan de cliënt door de registratie van een bemiddelingspecificatie.
-- De aanbieder weet de toewijzing ingangsdatum, het vaststellingMoment en de toewijzing einddatum van de eigen bemiddelingspecificatie. 
 
 ### Autorisatie
 Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de gegevens over de status van de levering van de zorg of ondersteuning raadplegen die horen bij overlappende bemiddelingspecificaties.
@@ -44,7 +43,7 @@ Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de 
 
 ## **Proces raadplegen**
 
-Een aanbieder is bij de zorg van een cliënt betrokken door het zorgkantoor. Op basis van de overlappende bemddelingspecificaties mag de aanbieder de Leveringen van deze overlappende bemiddelingspecificaties raadplegen. 
+Een aanbieder is bij de zorg van een cliënt betrokken door het zorgkantoor. Op basis van de overlappende bemiddelingspecificaties mag de aanbieder de Leveringen van deze overlappende bemiddelingspecificaties raadplegen. 
 
 ### Schematisch:
 
