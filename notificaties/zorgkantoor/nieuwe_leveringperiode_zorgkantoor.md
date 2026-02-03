@@ -78,8 +78,8 @@ Het type notificatie is:
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
 | timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
-| afzenderIDType 	| AGBCODE 	| `ontvangerIDType: "AGBCODE"` 	|
-| afzenderID 	| {agb-code verzender} 	| `ontvangerID: "12345678"` 	|
+| afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
+| afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
 | ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
 | ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
