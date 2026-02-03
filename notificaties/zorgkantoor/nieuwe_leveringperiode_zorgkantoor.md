@@ -67,8 +67,8 @@ De trigger voor het opstellen van de notificatie is:
 
 ## Instructie
 Stel de notificatie op voor: 
-> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd.
-> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
+> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd.
+> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de `Leveringperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
 
 ## Type
 Het type notificatie is:
