@@ -35,5 +35,109 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
  >      - De `agbcode` (uit de acces-token)
  >      - En een `bemiddelingspecificatie` die hoort bij een `Bemiddeling` waar ook het `bemiddelingspecificatieID` uit de query bijhoort 
  >- En toegang geldt tot de einddatumToewijzing + 31 mei van deze bemiddelingspecificatie 
+>
+> Als aan deze voorwaarden is voldaan, mogen de volgende gegevens worden opgevraagd:
+>- De `Levering`, met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperiode` en `Afstel`.
 
 
+## Toegangscontrole-flows Aanbieder: QLR-0001-ZA
+Beschrijving van het autorisatieproces door de PEP.
+
+### Schematisch:
+
+```mermaid
+---
+config:
+  theme: neutral
+  look: classic
+---
+stateDiagram
+  direction TB
+  [*] -->  indienen
+  indienen --> validerenT
+  state PEP {
+    direction TB
+
+    validerenT --> validerenR: access-token is geldig
+    state PDP {
+    validerenR --> checkInput01
+    state check01 <<choice>>
+    checkInput01 --> check01
+
+    check01 --> checkInput02:ja
+    check01 --> error:nee
+    state PIP {
+        state check02 <<choice>>
+        checkInput02 --> check02
+        check02 --> error:nee
+        check02 --> access:ja
+        }
+    error
+    access
+    }
+
+  }
+
+  error --> [*]
+  access --> resource
+  resource --> [*]
+  
+  PEP:Autorisatie controle PEP
+  PDP:Toegangscontrole PDP
+  PIP:Contextinformatie controle PIP
+  indienen: Ontvang QLR-0001-ZA + Access token
+  validerenT: Valideer access token
+  validerenR: Valideer Request
+  checkInput01:bemiddelingspecificatieID aanwezig?
+  checkInput02:Is de aanbieder volgens Bemiddelingsregister betrokken bij bemiddelingspecificatie?
+  error:geen toegang tot Resource
+
+  access:toegang tot Resource
+  resource: Query mag door naar Leveringsregister
+  style validerenR,checkInput01,checkInput02 fill:#FFD600
+  style valideer2 fill:#C8E6C9
+  style error fill:#D50000
+  style access,Query,resource fill:#00C853
+  style indienen fill:#BBDEFB,color:none
+
+```
+
+| # | Toelichting |
+| --: | :-- |
+| 1. |Ontvangst GraphQL-request + access-token door **PEP** |
+| 2. |De **PEP** valideert de access-token en geeft na goedkeur het request door aan de PDP |
+| 3. |De **PDP** controleert op:<ol><li>Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd.<li> Aanwezigheid van de verplichte parameters in het request;</ol>Is aan alle voorwaarden voldaan?<br/> - **Ja** →  Controle context-informatie door **PIP**: stap 4<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)* |  
+| 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij:<br/><ol><li>De `aanbieder` overeenkomt met de `agbcode` uit de access-token, **én** <li>Deze `Bemiddelingspecificatie` behoort tot een `Bemiddeling` waarvoor de `bemiddelingspecificatieID` overeenkomt met de opgevraagde waarde.</ol> Is aan de voorwaarde voldaan?<br/> - **Ja** →  Toegang tot de resource: stap 5<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)*  |
+| 5. | De aanbieder krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperiode` en `Afstel`.
+| 6. | *Einde*
+
+## Toegangscontrole PIP:
+```gql
+Query Bemiddelingspecificatie(
+    $bemiddelingspecificatieID: UUID! #afkomstig uit query
+    $agbCodeInstelling: String! #afkomstig uit Acces-token
+){
+    bemiddelingspecificatie(
+        where: {
+            bemiddelingspecificatieID : { eq $bemiddelingspecificatieID}
+        }
+    ){
+        bemiddelingspecificatieID
+        bemiddeling{
+            bemiddelingID
+            bemiddelingspecificatie{
+                all: {
+                  instelling: {eq: $agbCodeInstelling}  
+
+                }
+            }
+
+            }
+        }
+
+    }
+
+```
+----
+
+Ga naar [UC beschrijving raadplegen](@@@) -- Terug naar [Raadplegen](@@@)
