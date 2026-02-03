@@ -23,11 +23,29 @@ query Levering(
         beeindigingReden
         aanbiederBestemming
         behandelingperiode{
-            
+          behandelingperiodeID
+          ingangsdatum
+          einddatum
         }
       }
+      uitstelperiode{
+        uitstelperiodeID
+        ingangsdatum
+        vaststellingMoment
+        reden
+        leveringsstatus
+        leveringsstatusClassificatie
+        einddatum
+       }
+       afstel{
+        afstelID
+        afsteldatum
+        vaststellingMoment
+        reden
+        aanbiederBestemming
+        }
+      }
+  }
+  
 
-    }
 
-
-}
