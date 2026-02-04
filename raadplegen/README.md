@@ -33,6 +33,11 @@ flowchart LR
 ```
 Meer informatie over de structuur van het raadplegen en het valideren ervan is te lezen in het [Afsprakenstelsel iWlz](https://wlz.atlassian.net/wiki/spaces/IWLZAS/pages/23071274/Raadplegen)
 
+
+## Autorisatieregels en autorisatiematrix
+De toegang tot gegevens is vastgelegd doormiddel van **Autorisatieregels** en de **Autorisatiematrix**. De [autorisatieregels](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/) zijn te vinden in het Informatiemodel leveringsregister (via [hier](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/)) en de [autorisatiematrix](/raadplegen/autorisatiematrix_leveringsregister.md) is [hier](/raadplegen/autorisatiematrix_leveringsregister.md) te vinden.
+
+
 # Use cases raadplegen Leveringsregister
 
 De use-cases voor het raadplegen van het Leveringsregister per rol en bijbehorende beschrijving van de toegangscontrole door de PDP[^1].
@@ -49,8 +54,12 @@ Kies een use-case voor de beschrijving van het raadplegen of controleren van de 
 | Doel | toelichting | raadplegen | toegangscontrole |
 | :--- | :--- | :--- | :--- |
 | Levering | **Als** zorgkantoor **wil ik** de status van de levering kunnen raadplegen horend bij een toewijzing (bemiddelingspecificaties), **zodat ik** inzicht heb in de leveringen door deze aanbieder aan de cliënt. | UCBR-0003-raadplegen  | UCBR-0003-toegangscontrole |
-| Verzoek | **Als** verantwoordelijk zorgkantoor **wil ik** het Verzoek en bijbehorende VerzoekAanbieders kunnen raadplegen **zodat ik** de client naar de juiste zorg kan toeleiden. | UCBR-0003-raadplegen  | UCBR-0003-toegangscontrole  |
-| Compleet overzicht | **Als** uitvoerend zorgkantoor **wil ik** de status van de levering van de zorg of ondersteuning raadplegen die horen bij de (informatieve) toewijzingen (bemiddelingspecificaties) van andere zorgkantoren, **zodat ik** het volledige inzicht heb in de levering. | UCBR-0004-raadplegen  | UCBR-0004-toegangscontrole  | 
+| Verzoek | **Als** verantwoordelijk zorgkantoor **wil ik** het Verzoek en bijbehorende VerzoekAanbieders kunnen raadplegen **zodat ik** de client naar de juiste zorg kan toeleiden. | UCBR-0004-raadplegen  | UCBR-0004-toegangscontrole  |
+| Compleet overzicht | **Als** uitvoerend zorgkantoor **wil ik** de status van de levering van de zorg of ondersteuning raadplegen die horen bij de (informatieve) toewijzingen (bemiddelingspecificaties) van andere zorgkantoren, **zodat ik** het volledige inzicht heb in de levering. | UCBR-0005-raadplegen  | UCBR-0005-toegangscontrole  | 
+| Leveringperiode | Op basis van notificatie actuele status | 0006 | |
+| Uitstelperiode | Op basis van notificatie actuele status | 0007 | |
+| Afstel | Op basis van notificatie de actuele status | 0008 | |
+
 
 ---
 Terug naar [HOME](/README.md)
