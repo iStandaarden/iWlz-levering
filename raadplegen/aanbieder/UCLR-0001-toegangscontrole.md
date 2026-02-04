@@ -113,30 +113,7 @@ stateDiagram
 
 ## Toegangscontrole PIP:
 ```gql
-Query Bemiddelingspecificatie(
-    $bemiddelingspecificatieID: UUID! #afkomstig uit query
-    $agbCodeInstelling: String! #afkomstig uit Acces-token
-){
-    bemiddelingspecificatie(
-        where: {
-            bemiddelingspecificatieID : { eq $bemiddelingspecificatieID}
-        }
-    ){
-        bemiddelingspecificatieID
-        bemiddeling{
-            bemiddelingID
-            bemiddelingspecificatie{
-                all: {
-                  instelling: {eq: $agbCodeInstelling}  
-
-                }
-            }
-
-            }
-        }
-
-    }
-
+Moet nog gedaan worden
 ```
 ----
 
