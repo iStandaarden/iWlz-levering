@@ -1,5 +1,6 @@
 # QLR-0006-ZK.graphql
 # Query voor zorgkantoor op Leveringsregister
+# volledig overzicht vanuit een leveringperiode
 # Verplichte input:
 #    - leveringperiodeID
 
@@ -31,6 +32,20 @@ query Leveringperiode (
         client{
           clientID
           bsn
+        }
+        leveringperiodes{
+          leveringperiodeID
+          ingangsdatum
+          vaststellingMoment
+          sleuteldatum
+          einddatum
+          beeindigingReden
+          aanbiederBestemming
+          behandelingperiodes{
+            behandelingperiodeID
+            ingangsdatum
+            einddatum
+          }
         }
         uitstelperiodes{
           uitstelperiodeID

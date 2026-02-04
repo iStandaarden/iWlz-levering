@@ -1,25 +1,23 @@
 # QLR-0007-ZK.graphql
 # Query voor zorgkantoor op Leveringsregister
-# volledig overzicht vanuit een uitstelperiode
+# volledig overzicht vanuit een afstel
 # Verplichte input:
-#    - uitstelperiodeID
+#    - afstelID
 
-query Uitstelperiode (
-    $uitstelperiodeID: UUID!
+query Afstel (
+    $afstelID: UUID!
   )
   {
-    uitstelperiode(
+    afstel(
         where: {
-            uitstelperiodeID: { eq: $uitstelperiodeID}
+            afstelID: { eq: $afstelID}
         }
     ) {
-      uitstelperiodeID
-      ingangsdatum
+      afstelID
+      afsteldatum
       vaststellingMoment
       reden
-      leveringsstatus
-      leveringsstatusClassificatie
-      einddatum
+      aanbiederBestemming
       levering{
         leveringID
         bemiddelingspecificatieID
@@ -50,13 +48,7 @@ query Uitstelperiode (
           leveringsstatusClassificatie
           einddatum
         }
-        afstel{
-          afstelID
-          afsteldatum
-          vaststellingMoment
-          reden
-          aanbiederBestemming
-        }
+        # afstel hoeft niet extra opgevraagd te worden omdat we vanuit afstel al in de context zitten en er maar 1 afstel per levering kan zijn
         # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
       }
     }
