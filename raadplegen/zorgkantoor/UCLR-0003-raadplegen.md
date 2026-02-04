@@ -37,7 +37,7 @@ Een zorgkantoor wil de Levering raadplegen die hoort bij een bemiddelingspecific
 ## Query-template beschrijving
 |**Query ID** | **Beschrijving** | **Verplichte input** | **Resultaat**|
 | --- | :--- | :--- | :--- |
-QLR-0003-ZKu | Op basis van de bemiddelingspecificatieID, Levering, Client en onderliggende entiteiten raadplegen | `bemiddelingspecificatieID`| Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
+QLR-0003-ZK | Op basis van de bemiddelingspecificatieID, Levering, Client en onderliggende entiteiten raadplegen | `bemiddelingspecificatieID`| Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
 
 ## Proces raadplegen
 Het zorgkantoor is of verantwoordelijk voor de bemiddelingspecificatie of is door het verantwoordelijk zorgkantoor betrokken bij de levering. Op basis van de bemiddelingspecificatie mag het zorgkantoor de leveringen die horen bij deze bemiddelingspecificatie raadplegen. 
@@ -79,7 +79,7 @@ stateDiagram
 | --- | :--- |
 | 1. | *Start* |
 | 2. | Is het `bemiddelingspecificatieID` bekend? <br/> - **Ja** -> Ga verder naar stap 4 <br/> - **Nee** -> Raadpleeg Bemiddelingsregister 
-| 4. | Het zorgkantoor vult de verplichte `bemiddelingspecificatieID' in query-template [QLR-0003-ZKu](@@@) en initieert een raadpleging van de Levering in het Leveringsregister. |
+| 4. | Het zorgkantoor vult de verplichte `bemiddelingspecificatieID' in query-template [QLR-0003-ZK](@@@) en initieert een raadpleging van de Levering in het Leveringsregister. |
 | 4. | Het zorgkantoor stuurt Graphql-request + Acces-token naar het Policy Enforcement Point (PEP) |
 | 5. | De PEP voert de [toegangscontrole](@@@) uit en stuurt bij toegang het request door naar het leveringsregister.
 | 6. | De aanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
