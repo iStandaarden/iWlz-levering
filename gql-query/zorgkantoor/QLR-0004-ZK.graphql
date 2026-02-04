@@ -22,7 +22,7 @@ Query Verzoek(
         doelmatig
         toeslagreden
         verantwoord
-        verzoekAanbieder{
+        verzoekAanbieders{
             verzoekAanbiederID
             aanbieder
             toewijzingIngangsdatum

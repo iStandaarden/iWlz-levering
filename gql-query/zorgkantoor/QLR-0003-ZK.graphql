@@ -18,7 +18,7 @@ query Levering(
             clientID
             bsn
         }
-        leveringperiode{
+        leveringperiodes{
          leveringperiodeID
         ingangsdatum
         vaststellingMoment
@@ -26,13 +26,13 @@ query Levering(
         einddatum
         beeindigingReden
         aanbiederBestemming
-        behandelingperiode{
+        behandelingperiodes{
           behandelingperiodeID
           ingangsdatum
           einddatum
         }
       }
-      uitstelperiode{
+      uitstelperiodes{
         uitstelperiodeID
         ingangsdatum
         vaststellingMoment

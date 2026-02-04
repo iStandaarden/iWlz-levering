@@ -34,7 +34,7 @@ Query VerzoekAanbieder(
             doelmatig
             toeslagreden
             verantwoord
-            verzoekAanbieder{
+            verzoekAanbieders{
                 verzoekAanbiederID
                 aanbieder
                 toewijzingIngangsdatum
