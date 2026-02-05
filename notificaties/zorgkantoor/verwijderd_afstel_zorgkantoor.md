@@ -55,7 +55,7 @@ stateDiagram
 
 
 ## Documentatie
-Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel verwijdert.
+Notificatie aan het zorgkantoor wanneer de aanbieder een afstel verwijdert.
 
 Het zorgkantoor is daarmee geïnformeerd van de verwijdering van een afstel. 
 
@@ -67,8 +67,8 @@ De trigger voor het opstellen van de notificatie is:
 
 ## Instructie
 Stel de notificatie op voor: 
-> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de verwijderde `Afstel` was geregistreerd.
-> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de verwijderde `Afstel` was geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
+> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de verwijderde `Afstel` was geregistreerd.
+> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de verwijderde `Afstel` was geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
 
 ## Type
 Het type notificatie is:
@@ -77,17 +77,17 @@ Het type notificatie is:
 ## Inhoud notificatie
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
-| timestamp 	| {timestamp} 	| timestamp: "2024-07-02T00:00:00Z" 	|
-| afzenderIDType 	| AGBCODE 	| ontvangerIDType: "AGBCODE" 	|
-| afzenderID 	| {agb-code verzender} 	| ontvangerID: "12345678" 	|
-| ontvangerIDType 	| UZOVI 	| ontvangerIDType: "UZOVI" 	|
-| ontvangerID 	| {uzovi-code verzender} 	| ontvangerID: "5555" 	|
+| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
+| afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
+| afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
+| ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
+| ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
 | eventType 	| VERWIJDERD_AFSTEL_ZORGKANTOOR 	| eventType: "VERWIJDERD_AFSTEL_ZORGKANTOOR" 	|
 | subjectList 	|  	| subjectList: [{ 	|
 | ../subject 	| Levering/{bemiddelingspecificatieID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| Afstel/{AfstelID} 	| subject: "Afstel/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
-| | | }] |
+| | | `}]` |
 
 # Overige notificaties Leveringsregister
 De overige notificaties van het Leveringsregister staan [hier](/notificaties/README.md)

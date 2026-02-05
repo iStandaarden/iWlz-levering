@@ -55,7 +55,7 @@ opstellen:- dat verantwoordelijk is
 
 
 ## Documentatie
-Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert.
+Notificatie aan het verantwoordelijke zorgkantoor wanneer de aanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert.
 
 Het zorgkantoor is daarmee geïnformeerd van de registratie van een nieuw verzoek. 
 
@@ -67,7 +67,7 @@ De trigger voor het opstellen van de notificatie is:
 
 ## Instructie
 Stel de notificatie op voor: 
-> het zorgkantoor dat verantwoordelijk is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder het `Verzoek` is geregistreerd .
+> het zorgkantoor dat verantwoordelijk is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder het `Verzoek` is geregistreerd .
 
 ## Type
 Het type notificatie is:
@@ -76,17 +76,17 @@ Het type notificatie is:
 ## Inhoud notificatie
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
-| timestamp 	| {timestamp} 	| timestamp: "2024-07-02T00:00:00Z" 	|
-| afzenderIDType 	| AGBCODE 	| ontvangerIDType: "AGBCODE" 	|
-| afzenderID 	| {agb-code verzender} 	| ontvangerID: "12345678" 	|
-| ontvangerIDType 	| UZOVI 	| ontvangerIDType: "UZOVI" 	|
-| ontvangerID 	| {uzovi-code verzender} 	| ontvangerID: "5555" 	|
+| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
+| afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
+| afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
+| ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
+| ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
 | eventType 	| NIEUW_VERZOEK_ZORGKANTOOR 	| eventType: "NIEUW_VERZOEK_ZORGKANTOOR" 	|
 | subjectList 	|  	| subjectList: [{ 	|
 | ../subject 	| Levering/{bemiddelingspecificatieID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| Verzoek/{VerzoekID} 	| subject: "Verzoek/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
-| | | }] |
+| | | `}]` |
 
 # Overige notificaties Leveringsregister
 De overige notificaties van het Leveringsregister staan [hier](/notificaties/README.md)

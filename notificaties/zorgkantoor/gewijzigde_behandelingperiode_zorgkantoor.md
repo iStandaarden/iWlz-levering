@@ -27,8 +27,8 @@ stateDiagram
   verwerk --> [*]
   verzender: Aanbieder (bronhouder)
   trigger: Trigger
-  trigger: - Registratie van
-  trigger: - nieuwe Behandelingperiode
+  trigger: - Wijziging van
+  trigger: - Behandelingperiode
   opstellen: Stel notificatie
   opstellen: GEWIJZIGDE_BEHANDELINGPERIODE_ZORGKANTOOR
   opstellen: - voor het zorgkantoor
@@ -55,7 +55,7 @@ stateDiagram
 
 
 ## Documentatie
-Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode wijzigt.
+Notificatie aan het zorgkantoor wanneer de aanbieder een behandelingperiode wijzigt.
 
 Het zorgkantoor is daarmee geïnformeerd van de wijziging van een behandelingperiode. 
 
@@ -67,8 +67,8 @@ De trigger voor het opstellen van de notificatie is:
 
 ## Instructie
 Stel de notificatie op voor: 
-> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de gewijzigde `Behandelingperiode` is geregistreerd.
-> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `BemiddelingspecificatieID` in de `Levering` waaronder de gewijzigde `Behandelingperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
+> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de gewijzigde `Behandelingperiode` is geregistreerd.
+> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de gewijzigde `Behandelingperiode` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
 
 ## Type
 Het type notificatie is:
@@ -77,17 +77,17 @@ Het type notificatie is:
 ## Inhoud notificatie
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
-| timestamp 	| {timestamp} 	| timestamp: "2024-07-02T00:00:00Z" 	|
-| afzenderIDType 	| AGBCODE 	| ontvangerIDType: "AGBCODE" 	|
-| afzenderID 	| {agb-code verzender} 	| ontvangerID: "12345678" 	|
-| ontvangerIDType 	| UZOVI 	| ontvangerIDType: "UZOVI" 	|
-| ontvangerID 	| {uzovi-code verzender} 	| ontvangerID: "5555" 	|
+| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
+| afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
+| afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
+| ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
+| ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
 | eventType 	| GEWIJZIGDE_BEHANDELINGPERIODE_ZORGKANTOOR 	| eventType: "GEWIJZIGDE_BEHANDELINGPERIODE_ZORGKANTOOR" 	|
 | subjectList 	|  	| subjectList: [{ 	|
 | ../subject 	| Levering/{bemiddelingspecificatieID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| Behandelingperiode/{BehandelingperiodeID} 	| subject: "Behandelingperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
-| | | }] |
+| | | `}]` |
 
 # Overige notificaties Leveringsregister
 De overige notificaties van het Leveringsregister staan [hier](/notificaties/README.md)

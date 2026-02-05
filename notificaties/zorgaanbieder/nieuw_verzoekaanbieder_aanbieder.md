@@ -31,7 +31,7 @@ trigger:- Registratie van
 trigger:- nieuw VerzoekAanbieder
   opstellen:Stel notificatie
 opstellen:- NIEUW_VERZOEKAANBIEDER_AANBIEDER
-opstellen:- voor de zorgaanbieder
+opstellen:- voor de aanbieder
 opstellen:- in VerzoekAanbieder
   verstuur:Verstuur 
   verstuur: notificatie
@@ -76,17 +76,17 @@ Het type notificatie is:
 ## Inhoud notificatie
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
-| timestamp 	| {timestamp} 	| timestamp: "2024-07-02T00:00:00Z" 	|
-| afzenderIDType 	| AGBCODE 	| ontvangerIDType: "AGBCODE" 	|
-| afzenderID 	| {agb-code verzender} 	| ontvangerID: "12345678" 	|
-| ontvangerIDType 	| AGBCODE 	| ontvangerIDType: "AGBCODE" 	|
-| ontvangerID 	| {agb-code verzender} 	| ontvangerID: "87654321" 	|
+| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
+| afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
+| afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
+| ontvangerIDType 	| AGBCODE 	| `ontvangerIDType: "AGBCODE"` 	|
+| ontvangerID 	| {agb-code ontvanger} 	| `ontvangerID: "87654321"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
-| eventType 	| NIEUW_VERZOEKAANBIEDER_AANBIEDER 	| eventType: "NIEUW_VERZOEKAANBIEDER_AANBIEDER" 	|
-| subjectList 	|  	| subjectList: [{ 	|
+| eventType 	| NIEUW_VERZOEKAANBIEDER_AANBIEDER 	| `eventType: "NIEUW_VERZOEKAANBIEDER_AANBIEDER"` 	|
+| subjectList 	|  	| `subjectList: [{` 	|
 | ../subject 	| Verzoek/{VerzoekID} 	| subject: "Verzoek/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| VerzoekAanbieder/{verzoekAanbiederID} 	| recordID: "VerzoekAanbieder/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
-| | | }] |
+| | | `}]` |
 
 # Overige notificaties Leveringsregister
 De overige notificaties van het Leveringsregister staan [hier](/notificaties/README.md)
