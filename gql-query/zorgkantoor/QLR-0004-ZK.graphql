@@ -6,7 +6,7 @@
 Query Verzoek(
     $verzoekID: UUID!
 ){
-    Verzoek(
+    verzoek(
         where:{ 
             verzoekID: {eq: $verzoekID}
         }

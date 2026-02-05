@@ -5,9 +5,9 @@
 
 #Query
 query Levering(
-    $BemiddelingspecificatieID: UUID!
+    $bemiddelingspecificatieID: UUID!
 ){
-    Levering(
+    levering(
         Where: {
             bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}
         }
