@@ -74,7 +74,7 @@ type Levering {
   " Technische sleutel bemiddelingspecificatie waarbij deze levering hoort. "
   bemiddelingspecificatieID: UUID!
   " Lijst van leveringperiodes behorende bij deze levering. "
-  leveringperiodes: [Leveringperiode!]
+  leveringperiodes(where: LeveringperiodeFilterInput): [Leveringperiode!]
   " Lijst van uitstelperiodes behorende bij deze levering. "
   uitstelperiodes: [Uitstelperiode!]
   " Afstel behorende bij deze levering. "

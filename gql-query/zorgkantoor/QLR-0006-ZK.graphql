@@ -2,11 +2,13 @@
 # Query voor zorgkantoor op Leveringsregister
 # volledig overzicht vanuit een leveringperiode
 # Verplichte input:
-#    - leveringperiodeID
+#  - leveringperiodeID
+#  - leveringID
 
 
 query Leveringperiode (
     $leveringperiodeID: UUID!
+    $leveringID: UUID!
   )
   {
     leveringperiode(
@@ -26,7 +28,11 @@ query Leveringperiode (
         ingangsdatum
         einddatum
       }
-      levering{
+      levering(
+        where: {
+          leveringID: { eq: $leveringID}
+        }
+      ) {
         leveringID
         bemiddelingspecificatieID
         client{
