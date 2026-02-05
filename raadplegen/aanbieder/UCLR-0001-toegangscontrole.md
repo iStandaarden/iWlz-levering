@@ -12,7 +12,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Action
 - **Type:** `raadplegen` (read)
-- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0001-ZA.graphql]() op het Leveringsregister door een aanbieder. 
+- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0001-ZA.graphql](/iWlz-levering/gql-query/aanbieder/QLR-0001-ZA.graphql) op het Leveringsregister door een aanbieder. 
 
 ### Resource
 - **Type:** `Leveringsregister`
@@ -29,7 +29,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
     - Toegang geldt tot en met einddatumToewijzing + 31 mei van de eigen bemiddelingspecificatie die hoort bij dezelfde Bemiddeling als het `bemiddelingspecificatieID` aanwezig in de query  
 
  ### Resultaat
- > Toegang tot het Leveringsregister via query [QLR-0001-ZA]() is **alleen toegestaan** als:
+ > Toegang tot het Leveringsregister via query [QLR-0001-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001-ZA.graphql) is **alleen toegestaan** als:
  >- Parameter `bemiddelingspecificatieID` is meegegeven in de query
  >- In het Bemiddelingsregister is een match gevonden tussen:
  >      - De `agbcode` (uit de acces-token)
@@ -117,4 +117,4 @@ Moet nog gedaan worden
 ```
 ----
 
-Ga naar [UC beschrijving raadplegen](@@@) -- Terug naar [Raadplegen](@@@)
+Ga naar [UC beschrijving raadplegen](/iWlz-levering/raadplegen/aanbieder/UCLR-0001-raadplegen.md) -- Terug naar [Raadplegen](/iWlz-levering/raadplegen/README.md)

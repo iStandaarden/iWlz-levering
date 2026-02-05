@@ -17,11 +17,11 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 ### Resource
 - **Type:** `Leveringsregister`
 - **ID:** `bemiddelingspecificatieID`
-- **Beperking:** Alleen toegang tot gegevens over de Levering die horen bij een bemiddelingspecificatie waarvoor het verantwoordelijk is of waarvoor het zorgkantoor door het verantwoordelijk zorgkantoor betrokken is bij de levering.
+- **Beperking:** Alleen toegang tot gegevens over de Levering die horen bij een bemiddelingspecificatie waarvoor het zorgkantoor verantwoordelijk is of waarvoor het zorgkantoor door het verantwoordelijk zorgkantoor betrokken is bij de levering.
 - **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client. 
 
 ### Context
-- **Query-parameters vereist:** De `bemiddelingspecificatieID` moet aanwezig zijn in de query.
+- **Query-parameters vereist:** Het `bemiddelingspecificatieID` moet aanwezig zijn in de query.
 - **Toegangsvoorwaarde:** Er is alleen toegang als aan alle volgende voorwaarde is voldaan:
     - De parameter `bemiddelingspecificatieID` is meegegeven in de query
     - De acces-token bevat een geldige `uzovicode`
@@ -32,7 +32,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 > - Parameter `bemiddelingspecificatieID` is meegegeven in de query
 > - In het bemiddelingsregister een match is gevonden tussen:
 >   - De `uzovicode` (uit de acces-token)
->   - En een `Bemiddelingspecicatie` die hoort bij een `Bemiddeling` waar ook het `bemiddelingspecificatieID` uit de query bij hoort
+>   - En een `uitvoerendZorgkantoor` in `Bemiddelingspecificatie` die hoort bij het `bemiddelingspecificatieID`in de query **óf** een `verantwoordelijkZorgkantoor` in `Bemiddeling` die hoort bij dezelfde `Bemiddeling` als de `Bemiddelingspecificatie` waar het `bemiddelingspecificatieID` uit de query bij hoort
 >
 > Als aan deze voorwaarden is voldaan, mogen de volgende gegevens worden opgevraagd:
 > - De `Levering` met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperiode`, `Afstel` en `Client`.
