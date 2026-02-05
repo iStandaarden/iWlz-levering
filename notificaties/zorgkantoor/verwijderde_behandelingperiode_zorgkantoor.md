@@ -85,7 +85,7 @@ Het type notificatie is:
 | ontvangerKenmerk 	| NULL 	|  	|
 | eventType 	| VERWIJDERDE_BEHANDELINGPERIODE_ZORGKANTOOR 	| eventType: "VERWIJDERDE_BEHANDELINGPERIODE_ZORGKANTOOR" 	|
 | subjectList 	|  	| subjectList: [{ 	|
-| ../subject 	| Levering/{leveringID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
+| ../subject 	| Levering/{bemiddelingspecificatieID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
 | ../recordID 	| Behandelingperiode/{BehandelingperiodeID} 	| subject: "Behandelingperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
 | | | }] |
 
