@@ -40,7 +40,7 @@ Een zorgkantoor mag voor het toeleiden van een cliënt het Verzoek raadplegen di
 | QLR-0004-ZK | Op basis van de (ontvangen) verzoekID, het Verzoek, VerzoekAanbieder, Levering en Client raadplegen | `verzoekID` | Verzoek / VerzoekAanbieder / Levering / Client |
 
 ## Proces raadplegen
-Het zorgkantoor dat verantwoordelijk is voor de bemiddingspecificatie die hoort bij het Verzoek ontvangt de notificatie `NIEUW_VERZOEK_ZORGKANTOOR`. Nadat het zorgkantoor de notificatie heef tontvangen mag dat zorgkantoor een raadpleging uitvoeren. De notificatie bevat het `VerzoekID` om het Verzoek te raadplegen.
+Het zorgkantoor dat verantwoordelijk is voor de bemiddingspecificatie die hoort bij het Verzoek ontvangt de notificatie `NIEUW_VERZOEK_ZORGKANTOOR`. Nadat het zorgkantoor de notificatie heef tontvangen mag dat zorgkantoor een raadpleging uitvoeren. De notificatie bevat het `verzoekID` om het Verzoek te raadplegen.
 
 
 **Schematisch:**
