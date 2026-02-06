@@ -1,9 +1,7 @@
 name: GraphQL Inspector
 
 on:
-  pull_request:
-  push:
-    branches: [ main ]
+  [push, pull_request]
 
 jobs:
   check:
