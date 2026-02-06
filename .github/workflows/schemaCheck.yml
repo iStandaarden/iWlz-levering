@@ -17,6 +17,11 @@ jobs:
           rules: suppressRemovalOfDeprecatedField
           fail-on-breaking: true
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Validate queries (fail on deprecated usage)
         run: |
           npx graphql-inspector validate \
