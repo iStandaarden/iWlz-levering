@@ -24,7 +24,7 @@ jobs:
 
       - name: Validate queries (fail on deprecated usage)
         run: |
-          npx graphql-inspector validate \
+          npx graphql-inspector@master validate \
             "./gql-query/**/*.graphql" \
             "./gql-specificatie/Leveringsregister.graphql" \
             --rules suppressRemovalOfDeprecatedField
