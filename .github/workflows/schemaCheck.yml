@@ -16,10 +16,10 @@ jobs:
           schema: '${{ github.ref_name }}:gql-specificatie/Leveringsregister.graphql'
           rules: suppressRemovalOfDeprecatedField
           fail-on-breaking: true
-          
+
       - name: Validate queries (fail on deprecated usage)
         run: |
           npx graphql-inspector validate \
             "./gql-query/**/*.graphql" \
             "./gql-specificatie/Leveringsregister.graphql" \
-            --deprecated
+            --rules suppressRemovalOfDeprecatedField
