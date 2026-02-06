@@ -83,10 +83,10 @@ Het type notificatie is:
 | ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
 | ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
-| eventType 	| GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR 	| `eventType: "GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR"` 	|
+| `eventType 	| GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR 	| `eventType: "GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR"` 	|
 | subjectList 	|  	| `subjectList: [{` 	|
-| ../subject 	| Levering/{leveringID}	| subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6" 	|
-| ../recordID 	| Leveringperiode/{LeveringperiodeID} 	| subject: "Leveringperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30" 	|
+| ../subject 	| Levering/{bemiddelingspecificatieID}	| `subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6"` 	|
+| ../recordID 	| Leveringperiode/{LeveringperiodeID} 	| `subject: "Leveringperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30"` 	|
 | | | `}]` |
 
 # Overige notificaties Leveringsregister
