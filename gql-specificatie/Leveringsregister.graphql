@@ -225,6 +225,12 @@ input LeveringperiodeFilterInput {
   aanbiederBestemming: StringOperationFilterInput
 }
 
+" for filtering BehandelingPeriode queries "
+input BehandelingPeriodeFilterInput {
+  behandelingperiodeID: UuidOperationFilterInput
+  leveringperiodeID: UuidOperationFilterInput
+}
+
 " for filtering Uitstelperiode queries "
 input UitstelperiodeFilterInput {
   uitstelperiodeID: UuidOperationFilterInput
