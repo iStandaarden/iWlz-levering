@@ -3,7 +3,7 @@
 # Verplichte input:
 #   - verzoekID
 
-Query Verzoek(
+query Verzoek(
     $verzoekID: UUID!
 ){
     verzoek(
