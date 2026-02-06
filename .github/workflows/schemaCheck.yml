@@ -1,10 +1,10 @@
 name: GraphQL Inspector
 
-on:
-  [push, pull_request]
+on: [push, pull_request]
 
 jobs:
   check:
+    name: Check GraphQL Schema
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,11 +16,9 @@ jobs:
         with:
           # vergelijkt PR branch met base (via ref:path notatie)
           schema: '${{ github.base_ref || github.ref_name }}:gql-specificatie/Leveringsregister.graphql'
+          # schema: '${{ github.ref_name }}:gql-specificatie/Leveringsregister.graphql'
+          rules: suppressRemovalOfDeprecatedField
           fail-on-breaking: true
-          # rules input is bedoeld voor diff-regels (multiline YAML)
-          # voorbeeld (pas aan naar jouw gewenste regels):
-          rules: |
-            - suppressRemovalOfDeprecatedField
 
       # (B) Validate queries/documents tegen het schema (CLI)
       - name: Setup Node
