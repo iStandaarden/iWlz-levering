@@ -1,5 +1,6 @@
 # name: Graphql Schemadefinitie voor het Leveringsregister
 # version: leveringsregister 1
+# description: Graphql Schemadefinitie voor het Leveringsregister
 
 schema {
   query: Query
@@ -76,11 +77,11 @@ type Levering {
   " Lijst van leveringperiodes behorende bij deze levering. "
   leveringperiodes(where: LeveringperiodeFilterInput): [Leveringperiode!]
   " Lijst van uitstelperiodes behorende bij deze levering. "
-  uitstelperiodes: [Uitstelperiode!]
+  uitstelperiodes(where: UitstelperiodeFilterInput): [Uitstelperiode!]
   " Afstel behorende bij deze levering. "
-  afstel: Afstel
+  afstel(where: AfstelFilterInput): Afstel
   " Lijst van verzoeken behorende bij deze levering. "
-  verzoeken: [Verzoek!]
+  verzoeken(where: VerzoekFilterInput): [Verzoek!]
 }
 
 " Periode waarin de toegewezen zorg of ondersteuning geleverd wordt aan de cliënt."
@@ -103,7 +104,7 @@ type Leveringperiode {
   behandelingperiodes: [BehandelingPeriode!]
   " Levering behorende bij deze leveringperiode. "
   levering: Levering!
-}
+} 
 
 " Periode waarin behandeling wordt geleverd door de aanbieder waarbij de cliënt is opgenomen."
 type BehandelingPeriode {
