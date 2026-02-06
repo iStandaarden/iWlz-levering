@@ -101,9 +101,9 @@ type Leveringperiode {
   " Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen. "
   aanbiederBestemming: String
   " Lijst van behandelingperiodes behorende bij deze leveringperiode. "
-  behandelingperiodes: [BehandelingPeriode!]
+  behandelingperiodes(where: BehandelingPeriodeFilterInput): [BehandelingPeriode!]
   " Levering behorende bij deze leveringperiode. "
-  levering: Levering!
+  levering(where: LeveringFilterInput): Levering!
 } 
 
 " Periode waarin behandeling wordt geleverd door de aanbieder waarbij de cliënt is opgenomen."
@@ -115,7 +115,7 @@ type BehandelingPeriode {
   " Laatste datum van de behandelingperiode. "
   einddatum: Date
   " Leveringperiode behorende bij deze behandelingperiode. "
-  leveringperiode: Leveringperiode!
+  leveringperiode(where: LeveringperiodeFilterInput): Leveringperiode!
 }
 
 " Periode waarin levering van de toegewezen zorg of ondersteuning is uitgesteld en de cliënt op levering wacht."
@@ -135,7 +135,7 @@ type Uitstelperiode {
   " Laatste datum van de uitstelperiode. "
   einddatum: Date
   " Levering behorende bij deze uitstelperiode. "
-  levering: Levering!
+  levering(where: LeveringFilterInput): Levering!
 }
 
 " Gegevens over het definitief niet doorgaan van de levering van de toegewezen zorg of ondersteuning."
@@ -151,7 +151,7 @@ type Afstel {
   " Aanduiding van de aanbieder van wie de cliënt de zorg of ondersteuning gaat ontvangen. "
   aanbiederBestemming: String
   " Levering behorende bij dit afstel. "
-  levering: Levering!
+  levering(where: LeveringFilterInput): Levering!
 }
 
 " Gegevens over een verzoek (aanvraag) voor een of meer nieuwe of aangepaste toewijzingen."
@@ -181,7 +181,7 @@ type Verzoek {
   " Lijst van verzoekaanbieders behorende bij dit verzoek. "
   verzoekAanbieders: [VerzoekAanbieder!]!
   " Levering behorende bij dit verzoek. "
-  levering: Levering!
+  levering(where: LeveringFilterInput): Levering!
 }
 
 " Gegevens over de aangevraagde toewijzing gespecificeerd per aanbieder."
@@ -201,7 +201,7 @@ type VerzoekAanbieder {
   " Aanduiding of de aanbieder regiehouder is of wordt. "
   regiehouder: String!
   " Verzoek behorende bij deze verzoekaanbieder. "
-  verzoek: Verzoek!
+  verzoek(where: VerzoekFilterInput): Verzoek!
 }
 
 # Filter input types "
