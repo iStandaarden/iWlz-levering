@@ -104,7 +104,7 @@ type Leveringperiode {
   behandelingperiodes(where: BehandelingPeriodeFilterInput): [BehandelingPeriode!]
   " Levering behorende bij deze leveringperiode. "
   levering(where: LeveringFilterInput): Levering!
-} 
+}
 
 " Periode waarin behandeling wordt geleverd door de aanbieder waarbij de cliënt is opgenomen."
 type BehandelingPeriode {
