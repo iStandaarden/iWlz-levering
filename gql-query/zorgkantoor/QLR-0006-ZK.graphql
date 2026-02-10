@@ -2,8 +2,8 @@
 # Query voor zorgkantoor op Leveringsregister
 # volledig overzicht vanuit een leveringperiode
 # Verplichte input:
-#  - leveringperiodeID
-#  - leveringID
+#  - leveringperiodeID (uit notificatie)
+#  - bemiddelingspecificatieID (uit notificatie)
 
 
 query Leveringperiode (
