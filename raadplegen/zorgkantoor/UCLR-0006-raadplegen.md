@@ -40,7 +40,7 @@ Het zorgkantoor mag de Leveringperiode (en overige gegevens) raadplegen.
 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
-| [**QLR-0006-ZK**](/gql-query/zorgkantoor/QLR-0006-ZK.graphql) | Op basis van de (ontvangen) leveringperiodeID en eigen identificatie, de Leveringperiode en overig toegestane informatie raadplegen raadplegen | `leveringperiodeID` | Leveringperiode /  Levering /  Client / Uitstelperiode / Afstel |
+| [**QLR-0006-ZK**](/gql-query/zorgkantoor/QLR-0006-ZK.graphql) | Op basis van de (ontvangen) leveringperiodeID en eigen identificatie, de Leveringperiode en overig toegestane informatie raadplegen raadplegen | `leveringperiodeID`; `bemiddelingspecificatieID` | Leveringperiode / Behandelingperiode /  Levering /  Client / Uitstelperiode / Afstel |
 
 ## **Proces raadplegen**
 
@@ -70,9 +70,9 @@ stateDiagram
   resource --> [*]
   raadplegen --> idAvailable
   raadplegen:Raadplegen Leveringsregister voor (actuele) status leveringperiode
-  idAvailable:leveringperiodeID bekend?
+  idAvailable:leveringperiodeID en bemiddelingspecificatieID bekend?
   notifyWait:Wacht op notificatie
-  QBR0001ZAiq:Gebruik leveringperiodeID
+  QBR0001ZAiq:Gebruik leveringperiodeID en bemiddelingspecificatieID
   notifyReceive:notificatie NIEUWE_LEVERINGPERIODE_ZORGKANTOOR of GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR ontvangen
   QBR0001ZA:Gebruik template QLR-0006-ZK
   PEP:Toegangscontrole PEP
@@ -87,10 +87,10 @@ stateDiagram
 | # | Toelichting |
 | --: | :-- |
 | 1. | *Start* raadplegen Leveringsregister | 
-| 2. | Is de **`leveringperiodeID`** bekend? <br/> - **Ja** →  Ga verder naar stap 6 <br/> - **Nee** → Wacht op notificatie [**`NIEUWE_LEVERINGPERIODE_ZORGKANTOOR`** of **`GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR`**](/notificaties/)  | 
+| 2. | Zijn het **`leveringperiodeID`** en **`bemiddelingspecificatieID`** bekend? <br/><ol><li> - **Ja** →  Ga verder naar stap 6 <br/><li> - **Nee** → Wacht op notificatie [**`NIEUWE_LEVERINGPERIODE_ZORGKANTOOR`** of **`GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR`**](/notificaties/)  | 
 | 4. | Notificatie is ontvangen | 
 | 5. | Gebruik de informatie uit de notificatie voor het raadplegen van het leveringsregister |
-| 6. | Het zorgkantoor vult de verplichte **`leveringperiodeID`** in query-template [QLR-0006-ZK.graphql](/gql-query/zorgkantoor/QLR-0006-ZK.graphql) en initieert een raadpleging van de leveringperiode in het Leveringsregister. | 
+| 6. | Het zorgkantoor vult de verplichte **`leveringperiodeID`** en **`bemiddelingspecificatieID`** in query-template [QLR-0006-ZK.graphql](/gql-query/zorgkantoor/QLR-0006-ZK.graphql) en initieert een raadpleging van de leveringperiode in het Leveringsregister. | 
 | 7. | Het zorgkantoor stuurt Graphql-request + Access-token naar het Policy Enforcement Point (PEP) |
 | 8. | De PEP voert de [toegangscontrole](UCLR-0006-toegangscontrole.md) uit en stuurt bij toegang het request door naar het Leveringsregister. |
 | 9. | Het zorgkantoor ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource) |

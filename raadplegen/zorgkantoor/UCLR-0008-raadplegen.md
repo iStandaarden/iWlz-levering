@@ -40,7 +40,7 @@ Het zorgkantoor mag het Afstel (en overige gegevens) raadplegen.
 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
-| [**QLR-0008-ZK**](/gql-query/zorgkantoor/QLR-0008-ZK.graphql) | Op basis van de (ontvangen) afstelID en eigen identificatie, het Afstel en overig toegestane informatie raadplegen raadplegen | `afstelID` |  Afstel /  Levering /  Client / Uitstelperiode / Leveringperiode  |
+| [**QLR-0008-ZK**](/gql-query/zorgkantoor/QLR-0008-ZK.graphql) | Op basis van de (ontvangen) afstelID en eigen identificatie, het Afstel en overig toegestane informatie raadplegen raadplegen | `afstelID`, `bemiddelingspecificatieID` |  Afstel /  Levering /  Client / Uitstelperiode / Leveringperiode / Behandelingperiode |
 
 ## **Proces raadplegen**
 
@@ -70,9 +70,9 @@ stateDiagram
   resource --> [*]
   raadplegen --> idAvailable
   raadplegen:Raadplegen Leveringsregister voor (actuele) status afstel
-  idAvailable:afstelID bekend?
+  idAvailable:afstelID en bemiddelingspecificatieID bekend?
   notifyWait:Wacht op notificatie
-  QBR0001ZAiq:Gebruik afstelID
+  QBR0001ZAiq:Gebruik afstelID en bemiddelingspecificatieID
   notifyReceive:notificatie NIEUWE_AFSTEL_ZORGKANTOOR of GEWIJZIGDE_AFSTEL_ZORGKANTOOR ontvangen
   QBR0001ZA:Gebruik template QLR-0008-ZK
   PEP:Toegangscontrole PEP
@@ -87,10 +87,10 @@ stateDiagram
 | # | Toelichting |
 | --: | :-- |
 | 1. | *Start* raadplegen Leveringsregister | 
-| 2. | Is de **`afstelID`** bekend? <br/> - **Ja** →  Ga verder naar stap 6 <br/> - **Nee** → Wacht op notificatie [**`NIEUWE_AFSTEL_ZORGKANTOOR`** of **`GEWIJZIGDE_AFSTEL_ZORGKANTOOR`**](/notificaties/)  | 
+| 2. | Zijn het **`afstelID`** en **`bemiddelingspecificatieID`** bekend? <br/><ol><li> - **Ja** →  Ga verder naar stap 6 <br/><li> - **Nee** → Wacht op notificatie [**`NIEUWE_AFSTEL_ZORGKANTOOR`** of **`GEWIJZIGDE_AFSTEL_ZORGKANTOOR`**](/notificaties/)  | 
 | 4. | Notificatie is ontvangen | 
 | 5. | Gebruik de informatie uit de notificatie voor het raadplegen van het leveringsregister |
-| 6. | Het zorgkantoor vult de verplichte **`afstelID`** in query-template [QLR-0008-ZK.graphql](/gql-query/zorgkantoor/QLR-0008-ZK.graphql) en initieert een raadpleging van het afstel in het Leveringsregister. | 
+| 6. | Het zorgkantoor vult het verplichte **`afstelID`** en **`bemiddelingspecificatieID`** in query-template [QLR-0008-ZK.graphql](/gql-query/zorgkantoor/QLR-0008-ZK.graphql) en initieert een raadpleging van het afstel in het Leveringsregister. | 
 | 7. | Het zorgkantoor stuurt Graphql-request + Access-token naar het Policy Enforcement Point (PEP) |
 | 8. | De PEP voert de [toegangscontrole](UCLR-0008-toegangscontrole.md) uit en stuurt bij toegang het request door naar het Leveringsregister. |
 | 9. | Het zorgkantoor ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource) |
