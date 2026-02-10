@@ -4,49 +4,45 @@
 #   - bemiddelingspecificatieID
 
 #Query
-query Levering(
-    $bemiddelingspecificatieID: UUID!
-){
-    levering(
-        Where: {
-            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}
-        }
-    ) {
-        leveringID
-        bemiddelingspecificatieID
-        client{
-            clientID
-            bsn
-        }
-        leveringperiodes{
-         leveringperiodeID
-        ingangsdatum
-        vaststellingMoment
-        sleuteldatum
-        einddatum
-        beeindigingReden
-        aanbiederBestemming
-        behandelingperiodes{
-          behandelingperiodeID
-          ingangsdatum
-          einddatum
-        }
-      }
-      uitstelperiodes{
-        uitstelperiodeID
-        ingangsdatum
-        vaststellingMoment
-        reden
-        leveringsstatus
-        leveringsstatusClassificatie
-        einddatum
-       }
-       afstel{
-        afstelID
-        afsteldatum
-        vaststellingMoment
-        reden
-        aanbiederBestemming
-        }   
-        }
+query Levering($bemiddelingspecificatieID: UUID!) {
+  levering(
+    where: { bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID } }
+  ) {
+    leveringID
+    bemiddelingspecificatieID
+    client {
+      clientID
+      bsn
     }
+    leveringperiodes {
+      leveringperiodeID
+      ingangsdatum
+      vaststellingMoment
+      sleuteldatum
+      einddatum
+      beeindigingReden
+      aanbiederBestemming
+      behandelingperiodes {
+        behandelingperiodeID
+        ingangsdatum
+        einddatum
+      }
+    }
+    uitstelperiodes {
+      uitstelperiodeID
+      ingangsdatum
+      vaststellingMoment
+      reden
+      leveringsstatus
+      leveringsstatusClassificatie
+      einddatum
+    }
+    afstel {
+      afstelID
+      afsteldatum
+      vaststellingMoment
+      reden
+      aanbiederBestemming
+    }
+  }
+}

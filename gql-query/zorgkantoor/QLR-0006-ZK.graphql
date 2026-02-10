@@ -8,7 +8,7 @@
 
 query Leveringperiode (
     $leveringperiodeID: UUID!
-    $leveringID: UUID!
+    $bemiddelingspecificatieID: UUID!
   )
   {
     leveringperiode(
@@ -30,7 +30,7 @@ query Leveringperiode (
       }
       levering(
         where: {
-          leveringID: { eq: $leveringID}
+          bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID}
         }
       ) {
         leveringID

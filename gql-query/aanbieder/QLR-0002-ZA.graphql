@@ -5,7 +5,7 @@
 #   - agbcode aanbieder
 
 
-Query VerzoekAanbieder(
+query VerzoekAanbieder(
     $verzoekAanbiederID: UUID!
     $aanbieder: String!
 ){
