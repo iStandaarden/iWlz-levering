@@ -67,10 +67,10 @@ stateDiagram
   PEP --> resource:toegang
   resource --> [*]
   Raadplegen:(1) Raadplegen Verzoek
-  idAvailable:(2) VerzoekID bekend?
+  idAvailable:(2) verzoekID en bemiddelingspecificatieID bekend?
   notifyWait:(3) Wacht op notificatie
   notifyReceive:notificatie NIEUW_VERZOEK_ZORGKANTOOR ontvangen
-  inputQuery:(4) Gebruik verzoekID
+  inputQuery:(4) Gebruik verzoekID en bemiddelingspecificatieID
   Query:(5) Gebruik query QLR-0004-ZK
   resource:Leveringsregister
   style Raadplegen fill:#BBDEFB,color:none
@@ -82,8 +82,8 @@ stateDiagram
 | **#** | **Toelichting** |
 | --- | :--- |
 | 1. | *Start* |
-| 2. | Is het `verzoekID` bekend? <br/> - **Ja** -> Ga verder naar stap 4 <br/> - **Nee** -> Wacht op notificatie [NIEUW_VERZOEK_ZORGKANTOOR](/iWlz-levering/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md) 
-| 4. | Het zorgkantoor vult het verplichte `verzoekID` in query-template [QLR-0004-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0004-ZK.graphql) en initieert een raadpleging van het Verzoek in het Leveringsregister. |
+| 2. | Zijn het `verzoekID` en `bemiddelingspecificatieID` bekend? <br/><ol><li> - **Ja** -> Ga verder naar stap 4 <br/><li> - **Nee** -> Wacht op notificatie [NIEUW_VERZOEK_ZORGKANTOOR](/iWlz-levering/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md) 
+| 4. | Het zorgkantoor vult het verplichte `verzoekID` en `bemiddelingspecificatieID` in query-template [QLR-0004-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0004-ZK.graphql) en initieert een raadpleging van het Verzoek in het Leveringsregister. |
 | 4. | Het zorgkantoor stuurt Graphql-request + Acces-token naar het Policy Enforcement Point (PEP) |
 | 5. | De PEP voert de [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0004-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister.
 | 6. | De aanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
