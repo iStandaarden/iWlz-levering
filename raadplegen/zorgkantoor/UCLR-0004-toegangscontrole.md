@@ -1,8 +1,7 @@
 # Toegangscontrole: Raadpleeg Verzoek door verantwoordelijk zorgkantoor (UCLR-0004-ZK)
 
-> [!CAUTION]
-> Beschrijving is nog niet juist
-> 
+> [!CAUTION] 
+> Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
 
 Beschrijving van de **toegangscontrole** door de Policy Decision Point (DPD) en indien van toepassing Policy Information Point (PIP).
 
@@ -118,7 +117,7 @@ stateDiagram
 
 **Controle query PIP:**
 ```gql
-query PIPValidatie0004(
+query PIPValidatie(
   $bemiddelingspecificatieID: UUID! # afkomstig uit query
   $uzovicodeZorgkantoor: String! # afkomstig uit Access-token
 ){
