@@ -1,0 +1,55 @@
+# QLR-0002-ZA.graphql
+# Query voor aanbieders op Leveringsregister 
+# Verplichte input:
+#   - verzoekAanbiederID
+#   - agbcode aanbieder
+
+
+query VerzoekAanbieder(
+    $verzoekAanbiederID: UUID!
+    $aanbieder: String!
+){
+    verzoekAanbieder(
+        where:{
+            verzoekAanbiederID: {eq: $verzoekAanbiederID}
+            aanbieder: {eq: $aanbieder}
+        }
+    ){
+        verzoekAanbiederID
+        aanbieder
+        toewijzingIngangsdatum
+        toewijzingEinddatum
+        toewijzingPercentage
+        opname
+        regiehouder
+        verzoek{
+            verzoekID
+            verzoekdatum
+            product
+            toewijzingSoort
+            leveringsvorm
+            volume
+            eenheid
+            frequentie
+            doelmatig
+            toeslagreden
+            verantwoord
+            verzoekAanbieders{
+                verzoekAanbiederID
+                aanbieder
+                toewijzingIngangsdatum
+                toewijzingEinddatum
+                toewijzingPercentage
+                opname
+                regiehouder
+            }
+            levering{
+                leveringID
+                client{
+                    clientID
+                    bsn 
+                }
+            }
+        }
+    }
+}

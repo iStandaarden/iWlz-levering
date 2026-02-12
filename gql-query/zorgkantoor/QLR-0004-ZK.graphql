@@ -1,0 +1,43 @@
+# QLR-0004-ZK.graphql
+# Query voor zorgkantoor op Leveringsregister
+# Verplichte input:
+#   - verzoekID
+
+query Verzoek(
+    $verzoekID: UUID!
+){
+    verzoek(
+        where:{ 
+            verzoekID: {eq: $verzoekID}
+        }
+    ){
+        verzoekID
+        verzoekdatum
+        product
+        toewijzingSoort
+        leveringsvorm
+        volume
+        eenheid
+        frequentie
+        doelmatig
+        toeslagreden
+        verantwoord
+        verzoekAanbieders{
+            verzoekAanbiederID
+            aanbieder
+            toewijzingIngangsdatum
+            toewijzingEinddatum
+            toewijzingPercentage
+            opname
+            regiehouder
+        }
+        levering{
+            leveringID
+            bemiddelingspecificatieID
+            client{
+                clientID
+                bsn
+            }
+        }
+    }
+}
