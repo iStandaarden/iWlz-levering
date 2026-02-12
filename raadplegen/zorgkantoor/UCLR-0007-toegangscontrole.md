@@ -1,8 +1,8 @@
 # Toegangscontrole: Raadplegen van de Uitstelperiode door het zorgkantoor (UCLR-0007)  
+> [!CAUTION] 
+> Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
 
-> [!CAUTION]
-> Beschrijving is nog niet juist
-> 
+
 
 Beschrijving van de **toegangscontrole** door de Policy Decision Point (PDP) en indien van toepassing Policy Information Point (PIP).
 

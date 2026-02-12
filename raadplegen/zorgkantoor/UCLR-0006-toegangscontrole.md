@@ -1,8 +1,7 @@
 # Toegangscontrole: Raadplegen van de Leveringperiode door het zorgkantoor (UCLR-0006)  
 
-> [!CAUTION]
-> Beschrijving is nog niet juist
-> 
+> [!CAUTION] 
+> Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
 
 Beschrijving van de **toegangscontrole** door de Policy Decision Point (PDP) en indien van toepassing Policy Information Point (PIP).
 

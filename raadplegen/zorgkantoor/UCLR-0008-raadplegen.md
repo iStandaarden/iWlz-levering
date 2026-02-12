@@ -1,5 +1,8 @@
 # Raadplegen van het Afstel door het zorgkantoor (UCLR-0008) 
 
+> [!CAUTION] 
+> Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
+
 ```mermaid
 ---
 config:
