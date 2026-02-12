@@ -29,7 +29,7 @@ flowchart LR
 ### Autorisaties:
 Het (verantwoordelijk en uitvoerend) zorgkantoor mag de Levering raadplegen.
 - Volledige autorisatieregel: [LRA0001](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/lra0001/) / [LRA0002](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/lra0002/)
-- Autorisatiematrix: [LRA0001](/iWlz-levering/raadplegen/autorisatiematrix_leveringsregister.md) / [LRA0002](/iWlz-levering/raadplegen/autorisatiematrix_leveringsregister.md)
+- Autorisatiematrix: [LRA0001](/raadplegen/autorisatiematrix_leveringsregister.md) / [LRA0002](/raadplegen/autorisatiematrix_leveringsregister.md)
 
 ### Trigger:
 Een zorgkantoor wil de Levering raadplegen die hoort bij een bemiddelingspecificatie waarvoor het zorgkantoor verantwoordelijk is of waarvoor het zorgkantoor betrokken is bij de levering.
@@ -79,11 +79,11 @@ stateDiagram
 | --- | :--- |
 | 1. | *Start* |
 | 2. | Is het `bemiddelingspecificatieID` bekend? <br/> - **Ja** -> Ga verder naar stap 4 <br/> - **Nee** -> Raadpleeg Bemiddelingsregister 
-| 4. | Het zorgkantoor vult de verplichte `bemiddelingspecificatieID' in query-template [QLR-0003-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0003-ZK.graphql) en initieert een raadpleging van de Levering in het Leveringsregister. |
+| 4. | Het zorgkantoor vult de verplichte `bemiddelingspecificatieID' in query-template [QLR-0003-ZK](/gql-query/zorgkantoor/QLR-0003-ZK.graphql) en initieert een raadpleging van de Levering in het Leveringsregister. |
 | 4. | Het zorgkantoor stuurt Graphql-request + Acces-token naar het Policy Enforcement Point (PEP) |
-| 5. | De PEP voert de [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0003-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister.
+| 5. | De PEP voert de [toegangscontrole](/raadplegen/zorgkantoor/UCLR-0003-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister.
 | 6. | De aanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
 | 7. | *Einde proces* | 
 
 ---
-Ga naar beschrijving van de bijbehorende [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0003-toegangscontrole.md) | Terug naar [Raadplegen](/iWlz-levering/raadplegen/README.md)
+Ga naar beschrijving van de bijbehorende [toegangscontrole](/raadplegen/zorgkantoor/UCLR-0003-toegangscontrole.md) | Terug naar [Raadplegen](/raadplegen/README.md)

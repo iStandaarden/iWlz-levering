@@ -27,9 +27,9 @@ flowchart LR
 - Het zorgkantoor is verantwoordelijk voor de bemiddelingspecificatie waar het Verzoek bij hoort.
 
 ### Autorisatie:
-Een zorgkantoor mag voor het toeleiden van een cliënt het Verzoek raadplegen die hoort bij een bemiddelingspecificatie waarvoor het zorgkantoor veranntwoordelijk is. 
+Een zorgkantoor mag voor het toeleiden van een cliënt het Verzoek raadplegen die hoort bij een bemiddelingspecificatie waarvoor het zorgkantoor verantwoordelijk is. 
 - Volledige autorisatieregel: [LRA0003](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/lra0003/)
-- Autorisatiematix: [LRA0003](/iWlz-levering/raadplegen/autorisatiematrix_leveringsregister.md)
+- Autorisatiematix: [LRA0003](/raadplegen/autorisatiematrix_leveringsregister.md)
 
 ### Trigger: 
 - Het zorgkantoor wil het Verzoek raadplegen te ondersteuning van het toeleidingsproces van een cliënt.
@@ -82,12 +82,12 @@ stateDiagram
 | **#** | **Toelichting** |
 | --- | :--- |
 | 1. | *Start* |
-| 2. | Zijn het `verzoekID` en `bemiddelingspecificatieID` bekend? <br/><ol><li> - **Ja** -> Ga verder naar stap 4 <br/><li> - **Nee** -> Wacht op notificatie [NIEUW_VERZOEK_ZORGKANTOOR](/iWlz-levering/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md) 
-| 4. | Het zorgkantoor vult het verplichte `verzoekID` en `bemiddelingspecificatieID` in query-template [QLR-0004-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0004-ZK.graphql) en initieert een raadpleging van het Verzoek in het Leveringsregister. |
+| 2. | Zijn het `verzoekID` en `bemiddelingspecificatieID` bekend? <br/><ol><li> - **Ja** -> Ga verder naar stap 4 <br/><li> - **Nee** -> Wacht op notificatie [NIEUW_VERZOEK_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md) 
+| 4. | Het zorgkantoor vult het verplichte `verzoekID` en `bemiddelingspecificatieID` in query-template [QLR-0004-ZK](/gql-query/zorgkantoor/QLR-0004-ZK.graphql) en initieert een raadpleging van het Verzoek in het Leveringsregister. |
 | 4. | Het zorgkantoor stuurt Graphql-request + Acces-token naar het Policy Enforcement Point (PEP) |
-| 5. | De PEP voert de [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0004-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister.
+| 5. | De PEP voert de [toegangscontrole](/raadplegen/zorgkantoor/UCLR-0004-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister.
 | 6. | De aanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
 | 7. | *Einde proces* | 
 
 ---
-Ga naar beschrijving van de bijbehorende [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0004-toegangscontrole.md) | Terug naar [Raadplegen](/iWlz-levering/raadplegen/README.md)
+Ga naar beschrijving van de bijbehorende [toegangscontrole](/raadplegen/zorgkantoor/UCLR-0004-toegangscontrole.md) | Terug naar [Raadplegen](/raadplegen/README.md)
