@@ -12,7 +12,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Acion
 - **Type:** `raadplegen` (read)
-- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0003-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0003-ZK.graphql) op het Leveringsregister door een zorgkantoor.
+- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0003-ZK](/gql-query/zorgkantoor/QLR-0003-ZK.graphql) op het Leveringsregister door een zorgkantoor.
 
 ### Resource
 - **Type:** `Leveringsregister`
@@ -28,7 +28,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
     - De `uzovicode` in de acces-token komt overeen met `uitvoerendZorgkantoor` in `Bemiddelingspecificatie` die hoort bij het `bemiddelingspecificatieID` aanwezig in de query of in `verantwoordelijkZorgkantoor` in `Bemiddeling` die hoort bij de `bemiddelingspecificatie` die hoort bij het `bemiddelingspecificatieID` aanwezig in de query.
 
 ### Resultaat
-> Toegang tot het Leveringsregister via query [QLR-0003-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0003-ZK.graphql) is alleen toegestaan als:
+> Toegang tot het Leveringsregister via query [QLR-0003-ZK](/gql-query/zorgkantoor/QLR-0003-ZK.graphql) is alleen toegestaan als:
 > - Parameter `bemiddelingspecificatieID` is meegegeven in de query
 > - In het bemiddelingsregister een match is gevonden tussen:
 >   - De `uzovicode` (uit de acces-token)
@@ -113,4 +113,4 @@ Moet nog gedaan worden
 ```
 ----
 
-Ga naar [UC beschrijving raadplegen](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0003-raadplegen.md) -- Terug naar [Raadplegen](/iWlz-levering/raadplegen/README.md)
+Ga naar [UC beschrijving raadplegen](/raadplegen/zorgkantoor/UCLR-0003-raadplegen.md) -- Terug naar [Raadplegen](/raadplegen/README.md)
