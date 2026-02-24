@@ -16,7 +16,7 @@ Ga direct naar: - [Autorisatie Zorgaanbieder](#ZA) - [Autorisatie Zorgkantoor](#
 |  	|  	|  	|  	|  	|  	|  	|
 | **Levering** 	|  	|  	|  	|  	|  	|  	|
 | leveringID 	| R 	| R 	| R 	| R 	| R 	| R 	|
-| bemiddelingspecificatieID 	| R 	| R 	| R 	| R 	| R 	| R 	|
+| bemiddelingspecificatieID 	| R 	| R 	| R 	| R 	| R 	|  	|
 |  	|  	|  	|  	|  	|  	|  	|
 | **Leveringperiode** 	|  	|  	|  	|  	|  	|  	|
 | leveringperiodeID 	| R 	| R 	|  	| R 	| R 	|  	|
