@@ -46,8 +46,8 @@ query VerzoekAanbieder(
             levering{
                 leveringID
                 client{
-                   clientID
-                   bsn 
+                    clientID
+                    bsn 
                 }
             }
         }

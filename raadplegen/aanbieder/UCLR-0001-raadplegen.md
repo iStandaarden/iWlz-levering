@@ -1,5 +1,7 @@
 # Raadplegen van de Levering die horen bij overlappende Bemiddelingspecificatie(s) door de Aanbieder (UCLR-0001)
 
+> [!CAUTION] 
+> Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
 
 ```mermaid
 ---
@@ -39,7 +41,7 @@ Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de 
 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
-| [QLR-0001-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001-ZA.graphql) | Op basis van de bemiddelingspecificatieID van de overlappende toewijzing en eigen identificatie, de Levering, Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client raadplegen |  `bemiddelingspecificatieID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
+| [QLR-0001-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) | Op basis van de bemiddelingspecificatieID van de overlappende toewijzing en eigen identificatie, de Levering, Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client raadplegen |  `bemiddelingspecificatieID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
 
 ## **Proces raadplegen**
 
@@ -95,13 +97,13 @@ stateDiagram
 | 1. | *start* raadplegen. |
 | 2. | Is **`bemiddelingspecificatieID`** bekend?<br/> - **Ja** -> ga verder naar stap 4. <br/> - **Nee** -> Ga naar stap 3. |
 | 3. | Gebruik eerst query-template `QBR-0002_3` (zie beschrijving [UCBR-0002_3-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgaanbieder/UCBR-0002_3-raadplegen.md)). |
-| 4. | Gebruik query-template [QLR-0001-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001-ZA.graphql) en vul verplichte parameter: <br/> - `bemiddelingspecificatie`.|
+| 4. | Gebruik query-template [QLR-0001-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) en vul verplichte parameter: <br/> - `bemiddelingspecificatie`.|
 | 5. | De **aanbieder** stuurt Graphql-request + Acces-token naar het Policy Enforcement Point (PEP). |
-| 6. | De PEP voert de [toegangscontrole](/iWlz-levering/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister. |
+| 6. | De PEP voert de [toegangscontrole](/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister. |
 | 7. | De aanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
 | 8. | *Einde proces* | 
 
 
 ---
 
-Ga naar beschrijving van de bijbehorende [toegangscontrole](/iWlz-levering/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) | Terug naar [Raadplegen](/iWlz-levering/raadplegen/README.md)
+Ga naar beschrijving van de bijbehorende [toegangscontrole](/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) | Terug naar [Raadplegen](/raadplegen/README.md)

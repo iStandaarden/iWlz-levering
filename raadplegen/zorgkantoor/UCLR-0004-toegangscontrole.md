@@ -1,8 +1,7 @@
 # Toegangscontrole: Raadpleeg Verzoek door verantwoordelijk zorgkantoor (UCLR-0004-ZK)
 
-> [!CAUTION]
-> Beschrijving is nog niet juist
-> 
+> [!CAUTION] 
+> Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
 
 Beschrijving van de **toegangscontrole** door de Policy Decision Point (DPD) en indien van toepassing Policy Information Point (PIP).
 
@@ -16,7 +15,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Action
 - **Type:** `raadplegen` (read)
-- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0004-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0004-ZK.graphql) op het Leveringsregister door een zorgkantoor.
+- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0004-ZK](/gql-query/zorgkantoor/QLR-0004-ZK.graphql) op het Leveringsregister door een zorgkantoor.
 
 ### Resource 
 - **Type:** `Leveringsregister`
@@ -118,7 +117,7 @@ stateDiagram
 
 **Controle query PIP:**
 ```gql
-query PIPValidatie0004(
+query PIPValidatie(
   $bemiddelingspecificatieID: UUID! # afkomstig uit query
   $uzovicodeZorgkantoor: String! # afkomstig uit Access-token
 ){
@@ -138,7 +137,7 @@ query PIPValidatie0004(
 ```
 
 ---
-Ga naar [UC beschrijving raadplegen](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0006-raadplegen.md) -- Terug naar [Raadplegen](/iWlz-levering/raadplegen/README.md)
+Ga naar [UC beschrijving raadplegen](/raadplegen/zorgkantoor/UCLR-0006-raadplegen.md) -- Terug naar [Raadplegen](/raadplegen/README.md)
 
  
 
