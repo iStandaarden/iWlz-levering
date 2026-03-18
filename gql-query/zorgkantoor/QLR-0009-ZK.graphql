@@ -1,0 +1,63 @@
+# QLR-0009-ZK.graphql
+# Query voor uitvoerend zorgkantoor op Leveringsregister, raadplegen status Levering informatieve bemiddelingspecificatie
+# Verplichte input:
+# - bemiddelingspecificatieIDEigen
+# - bemiddelingspecificatieIDInformatief
+# - uzovicode zorgkantoor
+# - toewijzing ingangsdatum bijv. 2020-02-19
+# - vaststelling moment bijv. 2020-02-09T13:47:16.000+01:00
+# - dag vaststelling moment bijv. 2020-02-09
+# - toewijzing einddatum bijv. 2024-03-17
+
+Query Levering(
+    $uitvoerendzorgkantoor: String!
+    $bemiddelingspecificatieIDInformatief: UUID!
+    $bemiddelingspecificatieIDEigen: UUID!
+    $vaststellingMoment: DateTime!
+    $dagVaststellingMoment: Date!
+    $toewijzingEinddatum: Date!
+) {
+    levering(
+        where: {
+            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDInformatief}
+        }
+    ){
+        leveringID
+        clientID
+        bemiddelingspecificatieID
+        client{
+            clientID
+            bsn
+         }
+        leveringperiodes{
+            leveringperiodeID
+            ingangsdatum
+            vaststellingMoment
+            sleuteldatum
+            einddatum
+            beeindigingReden
+            aanbiederBestemming
+            behandelingperiodes{
+                behandelingperiodeID
+                ingangsdatum
+                einddatum
+            }
+          }
+        uitstelperiodes{
+            uitstelperiodeID
+            ingangsdatum
+            vaststellingMoment
+            reden
+            leveringsstatus
+            leveringsstatusClassificatie
+            einddatum
+          }
+        afstel{
+            afstelID
+            afsteldatum
+            vaststellingMoment
+            reden
+            aanbiederBestemming
+          }
+      }
+}
