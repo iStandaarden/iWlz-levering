@@ -21,7 +21,6 @@ query Levering(
         }
     ){
         leveringID
-        clientID
         bemiddelingspecificatieID
         client{
             clientID
