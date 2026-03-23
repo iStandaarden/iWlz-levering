@@ -142,6 +142,7 @@ Voor QLR-0009-ZK
     $vaststellingMoment: DateTime! # afkomstig uit query
     $dagVaststellingMoment: Date! # afkomstig uit query
     $toewijzingEinddatum: Date! # afkomstig uit query
+    $bemiddelingID: UUID! # afkomstig uit query
   ) {
     bemiddelingspecificatie(
         where: {
@@ -149,21 +150,22 @@ Voor QLR-0009-ZK
             uitvoerendZorgkantoor: {eq: $uitvoerendZorgkantoor}
             toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
             vaststellingMoment: {eq: $vaststellingMoment}
-            toewijzingEinddatum: {eq: toewijzingEinddatum}
+            toewijzingEinddatum: {eq: $toewijzingEinddatum}
+            and: [ {
+                bemiddeling: {
+                    and: {
+                        bemiddelingID: {eq: $bemiddelingID}
+                    }
+                }
+            }]
          }
     ) {
         bemiddelingspecificatieID
-        bemiddeling(
-            where: : {
-                bemiddelingID: {eq: $bemiddelingID}
-            }
-        ) {
+        bemiddeling{
             bemiddelingID
-           }
-        }
-        bemiddelingspecificatie(
-            where: {
-                and: [
+            bemiddelingspecificatie(
+                where: {
+                    and: [
                     {
                        or: [{ toewijzingEinddatum: { eq: null } }, 
                        { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
@@ -173,11 +175,60 @@ Voor QLR-0009-ZK
                 ]
             }
         ){
-            bemiddelingspecificatieID
+                bemiddelingspecificatieID
         }
     }
+   }
+  }
+  ```
 
+Voor QLR-0010-ZK
+```gql
 
+ query Bemiddelingspecificatie(
+    $bemiddelingspecificatieIDEigen: UUID! # afkomstig uit query
+    $uitvoerendZorgkantoor: String! # afkomstig uit acces-token
+    $toewijzingIngangsdatum: Date! # afkomstig uit query
+    $vaststellingMoment: DateTime! # afkomstig uit query
+    $dagVaststellingMoment: Date! # afkomstig uit query
+    $bemiddelingID: UUID! # afkomstig uit query
+  ) {
+    bemiddelingspecificatie(
+        where: {
+            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDEigen}
+            uitvoerendZorgkantoor: {eq: $uitvoerendZorgkantoor}
+            toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
+            vaststellingMoment: {eq: $vaststellingMoment}
+            toewijzingEinddatum: {eq: null}
+            and: [ {
+                bemiddeling: {
+                    and: {
+                        bemiddelingID: {eq: $bemiddelingID}
+                    }
+                }
+            }]
+         }
+    ) {
+        bemiddelingspecificatieID
+        bemiddeling{
+            bemiddelingID
+            bemiddelingspecificatie(
+                where: {
+                    and: [
+                    {
+                       or: [{ toewijzingEinddatum: { eq: null } }, 
+                       { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
+                       { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
+                    }
+                    { toewijzingIngangsdatum: { ngt: $toewijzingEinddatum } }
+                ]
+            }
+        ){
+                bemiddelingspecificatieID
+        }
+    }
+   }
+  }
 
 
 
