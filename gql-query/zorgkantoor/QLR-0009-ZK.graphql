@@ -10,12 +10,12 @@
 # - toewijzing einddatum bijv. 2024-03-17
 
 query Levering(
-    $uitvoerendzorgkantoor: String!
+    # $uitvoerendzorgkantoor: String! (nodig voor de PIP controle)
     $bemiddelingspecificatieIDInformatief: UUID!
-    $bemiddelingspecificatieIDEigen: UUID!
-    $vaststellingMoment: DateTime!
-    $dagVaststellingMoment: Date!
-    $toewijzingEinddatum: Date!
+    # $bemiddelingspecificatieIDEigen: UUID! (nodig voor de PIP controle)
+    # $vaststellingMoment: DateTime! (nodig voor de PIP controle)
+    # $dagVaststellingMoment: Date! (nodig voor de PIP controle)
+    # $toewijzingEinddatum: Date! (nodig voor de PIP controle)
 ) {
     levering(
         where: {

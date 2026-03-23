@@ -48,7 +48,24 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Resultaat 
 
-   
+> Toegang tot het Leveringsregister via query [QLR-0009-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0009-ZK.graphql) of [QLR-0010-ZK](/iWlz-levering/ gql-query/zorgkantoor/QLR-0010-ZK.graphql) is **alleen toegestaan** als:
+>- De relevante parameters aanwezig zijn per query;
+>- De acces-token bevat een geldige `uzovicode`;
+>- De in de query meegegeven `uzovicode` in `uitvoerendZorgkantoor` komt overeen met de `uzovicode` in de acces-token;
+>- In het Bemiddelingsregister is een match gevonden tussen:
+>    - de uzovicode (uit de acces-token) én;
+>   - een `bemiddelingspecificatie` die hoort bij dezelfde `Bemiddeling` als de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd is én;
+>    - de `toewijzingEinddatum` is leeg of de `toewijzingEinddatum` + 31 mei is  groter dan of gelijk aan het opvraagmoment én;
+>    - de `bemiddelingspecificaties` overlappen. 
+>
+>Indien aan deze voorwaarden is voldaan, mogen alle bijbehorende GraphQL-nodes worden opgevraagd conform de structuur van de query-template. 
+
+
+## Toegangscontrole-flows Zorgkantoor:"QLR-0009-ZK of QLR-0010-ZK
+Beschrijving van het autorisatieproces door de PEP.
+
+**Schematisch:**
+
     
     
   

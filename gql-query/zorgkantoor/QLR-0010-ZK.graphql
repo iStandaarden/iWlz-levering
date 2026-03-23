@@ -9,11 +9,11 @@
 # - dag vaststelling moment bijv. 2020-02-09
 
 query Levering(
-    $uitvoerendzorgkantoor: String!
+    # $uitvoerendzorgkantoor: String! (nodig voor de PIP controle)
     $bemiddelingspecificatieIDInformatief: UUID!
-    $bemiddelingspecificatieIDEigen: UUID!
-    $vaststellingMoment: DateTime!
-    $dagVaststellingMoment: Date!
+    # $bemiddelingspecificatieIDEigen: UUID! (nodig voor de PIP controle)
+    # $vaststellingMoment: DateTime! (nodig voor de PIP controle)
+    # $dagVaststellingMoment: Date! (nodig voor de PIP controle)
   ) {
     levering(
         where: {
