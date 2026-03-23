@@ -11,7 +11,9 @@
 query Levering(
     # $uitvoerendzorgkantoor: String! (nodig voor de PIP controle)
     $bemiddelingspecificatieIDInformatief: UUID!
+    # bemiddelingID: UUID! (nodig voor de PIP controle)
     # $bemiddelingspecificatieIDEigen: UUID! (nodig voor de PIP controle)
+    # $toewijzingIngangsdatum: Date! (nodig voor de PIP controle)
     # $vaststellingMoment: DateTime! (nodig voor de PIP controle)
     # $dagVaststellingMoment: Date! (nodig voor de PIP controle)
   ) {

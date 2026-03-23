@@ -66,6 +66,120 @@ Beschrijving van het autorisatieproces door de PEP.
 
 **Schematisch:**
 
-    
-    
+```mermaid
+---
+config:
+  theme: neutral
+  look: classic
+---
+stateDiagram
+  direction TB
+  state PEP {
+    direction TB
+    validerenT
+    state PDP {
+      direction TB
+      validerenR --> checkInput01
+      state check01 <<choice>>
+
+      checkInput01 --> check01
+      check01 --> error:nee
+      state PIP {
+        direction TB
+        state check02 <<choice>>
+
+        checkInput02 --> check02
+        check02
+        checkInput02
+      }
+      access
+    }
+  }
+  [*] --> indienen
+  indienen --> validerenT
+  validerenT --> validerenR:access-token is geldig
+  check01 --> checkInput02:ja
+  check02 --> error:nee
+  check02 --> access:ja
+  error --> [*]
+  access --> resource
+  resource --> [*]
+  PEP:Autorisatie controle PEP
+  validerenT:Valideer access token
+  PDP:Toegangscontrole PDP
+  validerenR:Valideer Request
+  checkInput01:Check verplichte input aanwezig?
+  error:geen toegang tot Resource
+  PIP:Contextinformatie controle PIP
+  checkInput02:Heeft het zorgkantoor volgens Bemiddelingsregister een overlappende Bemiddelingspecificatie met de Bemiddelingspecificatie waarvoor de Levering wordt opgevraagd?
+  access:toegang tot Resource
+  indienen:Ontvang QLR-0009-ZK of QLR-0010-ZK + Access token
+  resource:Query mag door naar Leveringsregister
+  style validerenR,checkInput01,checkInput02 fill:#FFD600
+  style error fill:#D50000
+  style access,resource fill:#00C853
+  style indienen fill:#BBDEFB,color:none
+  ```
+
+  | # | Toelichting |
+  |:--- | :--- |
+  | 1. | Ontvangst GraphQL-request + acces-token door **PEP**. |
+  | 2. | De **PEP** valideert de acces-token en geeft na goedkeur het request door aan de PDP. |
+  |3. | De **PDP** controleert op: <ol><li> Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd; <li> Aanwezigheid van de verplichte parameters in het request. </ol> Is aan alle voorwaarden voldaan? <br/> - **Ja** -> Controle context-informatie door **PIP**: stap 4. <br/> - **Nee** -> geen toegang tot de resource - *Einde proces (geen toegang)*. |
+  | 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij: <ol><li> Het `uitvoerendZorgkantoor` overeenkomt met de `uzovicode` uit de acces-token **én** <li> De `bemiddelingspecificatie` hoort tot een `Bemiddeling` waarook de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd is bij hoort **én** <li> De `bemiddelingspecificatie` een `toewijzingEinddatum` heeft die leeg is óf de `toewijzingEinddatum` + 31 mei is groter dan of gelijk aan het opvraagmoment **én** <li> Er overlap is tussen de beide `bemiddelingspecificaties`. </ol> Is aan de voorwaarde voldaan? <br/> - **Ja** -> Toegang tot de resource: stap 5. <br/> - **Nee** -> geen toegnag tot de resource - *Einde proces (geen toegang)*. |
+  | 5. | het zorgkantoor krijgt toegang tot alle entiteiten die bij de Wlz-indicatie horen. |
+  | 6. | *Einde* | 
+
+  ## Toegangscontrole PIP
+
+Voor QLR-0009-ZK
+
+  ```gql
+  query Bemiddelingspecificatie(
+    $bemiddelingspecificatieIDEigen: UUID! # afkomstig uit query
+    $uitvoerendZorgkantoor: String! # afkomstig uit acces-token
+    $toewijzingIngangsdatum: Date! # afkomstig uit query
+    $vaststellingMoment: DateTime! # afkomstig uit query
+    $dagVaststellingMoment: Date! # afkomstig uit query
+    $toewijzingEinddatum: Date! # afkomstig uit query
+  ) {
+    bemiddelingspecificatie(
+        where: {
+            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDEigen}
+            uitvoerendZorgkantoor: {eq: $uitvoerendZorgkantoor}
+            toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
+            vaststellingMoment: {eq: $vaststellingMoment}
+            toewijzingEinddatum: {eq: toewijzingEinddatum}
+         }
+    ) {
+        bemiddelingspecificatieID
+        bemiddeling(
+            where: : {
+                bemiddelingID: {eq: $bemiddelingID}
+            }
+        ) {
+            bemiddelingID
+           }
+        }
+        bemiddelingspecificatie(
+            where: {
+                and: [
+                    {
+                       or: [{ toewijzingEinddatum: { eq: null } }, 
+                       { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
+                       { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
+                    }
+                    { toewijzingIngangsdatum: { ngt: $toewijzingEinddatum } }
+                ]
+            }
+        ){
+            bemiddelingspecificatieID
+        }
+    }
+
+
+
+
+
+
   
