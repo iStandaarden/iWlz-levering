@@ -9,7 +9,7 @@
 # - dag vaststelling moment bijv. 2020-02-09
 # - toewijzing einddatum bijv. 2024-03-17
 
-Query Levering(
+query Levering(
     $uitvoerendzorgkantoor: String!
     $bemiddelingspecificatieIDInformatief: UUID!
     $bemiddelingspecificatieIDEigen: UUID!

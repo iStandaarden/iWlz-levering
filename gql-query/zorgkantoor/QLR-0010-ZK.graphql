@@ -8,7 +8,7 @@
 # - vaststelling moment bijv. 2020-02-09T13:47:16.000+01:00
 # - dag vaststelling moment bijv. 2020-02-09
 
-Query Levering(
+query Levering(
     $uitvoerendzorgkantoor: String!
     $bemiddelingspecificatieIDInformatief: UUID!
     $bemiddelingspecificatieIDEigen: UUID!
