@@ -1,4 +1,4 @@
-## Toegangscontrole: Raadplegen Levering van een informatieve bemiddelingspecificaties (UCLR-0009)
+## Toegangscontrole: Raadplegen Levering van een informatieve bemiddelingspecificaties (UCLR-0009_10)
 
 > [!Caution]
 Voor de controle op toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema.
@@ -48,7 +48,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Resultaat 
 
-> Toegang tot het Leveringsregister via query [QLR-0009-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0009-ZK.graphql) of [QLR-0010-ZK](/iWlz-levering/ gql-query/zorgkantoor/QLR-0010-ZK.graphql) is **alleen toegestaan** als:
+> Toegang tot het Leveringsregister via query [QLR-0009-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0009-ZK.graphql) of [QLR-0010-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0010-ZK.graphql) is **alleen toegestaan** als:
 >- De relevante parameters aanwezig zijn per query;
 >- De acces-token bevat een geldige `uzovicode`;
 >- De in de query meegegeven `uzovicode` in `uitvoerendZorgkantoor` komt overeen met de `uzovicode` in de acces-token;

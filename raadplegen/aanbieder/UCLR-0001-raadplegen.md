@@ -32,16 +32,16 @@ flowchart LR
 ### Autorisatie
 Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de gegevens over de status van de levering van de zorg of ondersteuning raadplegen die horen bij overlappende bemiddelingspecificaties.
 - Volledige autorisatieregel: [LRA005](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/)
-- Autorisatiematrix: [LRA0005]() 
+- Autorisatiematrix: [LRA0005](@@@) 
 
 **Trigger:**
-- Een aanbieder wil de levering die horen bij de overlappende bemiddelingspecificaties raadplegen.
+- Een aanbieder wil voor het leveren van zorg of ondersteuning aan een cliënt de levering die horen bij de overlappende bemiddelingspecificaties raadplegen.
 
 ## Query-template beschrijving
 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
-| [QLR-0001-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) | Op basis van de bemiddelingspecificatieID van de overlappende toewijzing en eigen identificatie, de Levering, Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client raadplegen |  `bemiddelingspecificatieID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
+| [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) | Op basis van de bemiddelingspecificatieID van de overlappende toewijzing en eigen identificatie, de Levering, Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client raadplegen |  `bemiddelingspecificatieID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
 
 ## **Proces raadplegen**
 

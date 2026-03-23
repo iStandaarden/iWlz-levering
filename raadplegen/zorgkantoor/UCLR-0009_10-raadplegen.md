@@ -1,4 +1,4 @@
-# Use cases raadplegen Levering van een informatieve bemiddelingspecificaties (UCLR-0009-ZK)
+# Use cases raadplegen Levering van een informatieve bemiddelingspecificaties (UCLR-0009_10-ZK)
 
 > [!CAUTION] 
 > Voor de controle op de toegang van deze query is er een PIP controle nodig. De toets of dit mogelijk met de huidige informatie mogelijk is, is moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema. 
@@ -41,8 +41,8 @@ Een zorgkantoor mag de Levering (en de overige gegevens) raadplegen.
 
 |Query ID | Beschrijving | Verplichte input | Resultaat |
 | :--- | :--- | :--- | :--- |
-| QLR-0009-ZK | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum, vaststellingMoment en toewijzingEinddatum de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
-| QLR-0010-ZK | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
+| QLR-0009-ZK | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum, vaststellingMoment en toewijzingEinddatum de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
+| QLR-0010-ZK | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `bemiddelingID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
 
 ## Proces raadplegen
 
@@ -97,8 +97,8 @@ s4_1:UCBR-0005_6-raadplegen
 
   s6:Status Levering en overige gegevens raadplegen
   s6_1:(4) Heeft eigen bemiddelingspecificatie een toewijzingEinddatum?
-  s9:(5) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment
-  s10:(6) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment + toewijzingEinddatum
+  s9:(5) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment + toewijzingEinddatum
+  s10:(6) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment 
   s11:Gebruik template QLR-0009-ZK
   s12:Gebruik template QLR-0010-ZK
   s1:(1) Raadplegen Leveringsregister voor status Levering
@@ -115,8 +115,8 @@ s4_1:UCBR-0005_6-raadplegen
 | 2. | Zijn de informatieve- en eigen `bemiddelingsspecificatieID` en toewijzingIngangsdatum bekend?<br> - **Ja** -> Ga verder naar stap 4. <br> - **Nee** -> Ga verder naar stap 3 |
 | 3. | Gebruik eerst query-template `QBR-0005_6-ZK` (zie beschrijving [UCBR-0005_6-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgkantoor/UCBR-0005_6-raadplegen.md)) |
 | 4. | Heeft de eigen `bemiddelingspecificatie` (inmiddels) een `toewijzingEinddatum`?<br> - **Ja** -> Ga verder naar stap 6 <br> - **Nee** -> Ga verder naar stap 5. |
-| 5. | Gebruik query-template `QLR-00009-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`;<br> - `dagVaststellingMoment`. |
-| 6. | Gebruik query-template `QLR-0010-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`; <br> - `dagVaststellingMoment`; <br> - `toewijzingEinddatum`. |
+| 5. | Gebruik query-template `QLR-00009-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`;<br> - `dagVaststellingMoment`; <br> - `toewijzingEinddatum` . |
+| 6. | Gebruik query-template `QLR-0010-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`; <br> - `dagVaststellingMoment`. |
 | 7. | Het zorgkantoor stuurt GraphQL-request + Acces-token naar het Policy Enforcement Point (PEP). |
 | 8. | De PEP voert de [toegangscontrole](@@@) uit en stuurt bij toegang het request door naar het Leveringsgregister. |
 | 9. | Het zorgkantoor ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource).
