@@ -97,8 +97,8 @@ s4_1:UCBR-0005_6-raadplegen
 
   s6:Status Levering en overige gegevens raadplegen
   s6_1:(4) Heeft eigen bemiddelingspecificatie een toewijzingEinddatum?
-  s9:(5) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment + toewijzingEinddatum
-  s10:(6) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment 
+  s9:(5) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + bemiddelingID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment + toewijzingEinddatum
+  s10:(6) Gebruik informatieve bemiddelingspecificatieID + Uzovicode + eigen bemiddelingspecificatieID + bemiddelingID + toewijzingIngangsdatum + vaststellingMoment + dagvaststellingMoment 
   s11:Gebruik template QLR-0009-ZK
   s12:Gebruik template QLR-0010-ZK
   s1:(1) Raadplegen Leveringsregister voor status Levering
@@ -114,7 +114,7 @@ s4_1:UCBR-0005_6-raadplegen
 | 1. | Start raadplegen Leveringsregister | 
 | 2. | Zijn de informatieve- en eigen `bemiddelingsspecificatieID` en toewijzingIngangsdatum bekend?<br> - **Ja** -> Ga verder naar stap 4. <br> - **Nee** -> Ga verder naar stap 3 |
 | 3. | Gebruik eerst query-template `QBR-0005_6-ZK` (zie beschrijving [UCBR-0005_6-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgkantoor/UCBR-0005_6-raadplegen.md)) |
-| 4. | Heeft de eigen `bemiddelingspecificatie` (inmiddels) een `toewijzingEinddatum`?<br> - **Ja** -> Ga verder naar stap 6 <br> - **Nee** -> Ga verder naar stap 5. |
+| 4. | Heeft de eigen `bemiddelingspecificatie` (inmiddels) een `toewijzingEinddatum`?<br> - **Ja** -> Ga verder naar stap 5 <br> - **Nee** -> Ga verder naar stap 6. |
 | 5. | Gebruik query-template `QLR-00009-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`;<br> - `dagVaststellingMoment`; <br> - `toewijzingEinddatum` . |
 | 6. | Gebruik query-template `QLR-0010-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`; <br> - `dagVaststellingMoment`. |
 | 7. | Het zorgkantoor stuurt GraphQL-request + Acces-token naar het Policy Enforcement Point (PEP). |
