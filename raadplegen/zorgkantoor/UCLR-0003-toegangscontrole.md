@@ -18,7 +18,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 - **Type:** `Leveringsregister`
 - **ID:** `bemiddelingspecificatieID`
 - **Beperking:** Alleen toegang tot gegevens over de Levering die horen bij een bemiddelingspecificatie waarvoor het zorgkantoor verantwoordelijk is of waarvoor het zorgkantoor door het verantwoordelijk zorgkantoor betrokken is bij de levering.
-- **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client. 
+- **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelingperiode, Uitstelperiode, Afstel en Client. 
 
 ### Context
 - **Query-parameters vereist:** Het `bemiddelingspecificatieID` moet aanwezig zijn in de query.
@@ -35,7 +35,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 >   - En een `uitvoerendZorgkantoor` in `Bemiddelingspecificatie` die hoort bij het `bemiddelingspecificatieID`in de query **óf** een `verantwoordelijkZorgkantoor` in `Bemiddeling` die hoort bij dezelfde `Bemiddeling` als de `Bemiddelingspecificatie` waar het `bemiddelingspecificatieID` uit de query bij hoort
 >
 > Als aan deze voorwaarden is voldaan, mogen de volgende gegevens worden opgevraagd:
-> - De `Levering` met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperiode`, `Afstel` en `Client`.
+> - De `Levering` met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode`, `Afstel` en `Client`.
 
 ## Toegangscontrole-flows Zorgkantoor: QLR-0003-ZK
 
@@ -104,7 +104,7 @@ stateDiagram
 | 2. | De PEP valideert de acces-token en geeft na goedkeur het request door aan de PDP. |
 | 3. | De PDP controleert op: <br/><ol><li> Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd; <br/> <li> Aanwezigheid van verplichte parameters in het request. <br/></ol> Is aan alle voorwaarde voldaan? <br/> - **Ja** -> Controle context-informatie door PIP (stap 4). <br/> - **Nee** -> Geen toegang tot resource (einde proces (geen toegang)). |
 | 4. | De PIP controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij: <br/><ol><li> Het `zorgkantoor` overeenkomt met de `uzovicode` uit de acces-token, **én** <br/><li> De `Bemiddelingspecificatie` behoort tot een `Bemiddeling` waarvoor het `bemiddelingspecificatieID` overeenkomt met de `bemiddelingspecificatieID` in de query. |
-| 5. | Het zorgkantoor krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperidoe', `Afstel` en `Client`. |
+| 5. | Het zorgkantoor krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperidoe', `Afstel` en `Client`. |
 | 6. | *Einde* | 
 
 ## Toegangscontrole PIP:

@@ -41,7 +41,7 @@ Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de 
 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
-| [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) | Op basis van de bemiddelingspecificatieID van de overlappende toewijzing en eigen identificatie, de Levering, Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client raadplegen |  `bemiddelingspecificatieID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
+| [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) | Op basis van de bemiddelingspecificatieID van de overlappende toewijzing en eigen identificatie, de Levering, Leveringperiode, Behandelingperiode, Uitstelperiode, Afstel en Client raadplegen |  `bemiddelingspecificatieID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
 
 ## **Proces raadplegen**
 

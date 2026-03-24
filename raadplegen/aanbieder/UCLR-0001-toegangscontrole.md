@@ -18,7 +18,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 - **Type:** `Leveringsregister`
 - **ID:** `bemiddelingspecificatieID`
 - **Beperking:** Alleen toegang tot gegevens die horen bij een bemiddelingspecificatie die overlap heeft met de eigen bemiddelingspecificatie van de aanbieder.
-- **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelperiode, Uitstelperiode, Afstel en Client mogen worden opgevraagd.
+- **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelingperiode, Uitstelperiode, Afstel en Client mogen worden opgevraagd.
 
 ### Context
 - **Query-parameters vereist:** De `bemiddelingspecificatieID` moet aanwezig zijn in de query.
@@ -37,7 +37,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
  >- En toegang geldt tot de einddatumToewijzing + 31 mei van deze bemiddelingspecificatie 
 >
 > Als aan deze voorwaarden is voldaan, mogen de volgende gegevens worden opgevraagd:
->- De `Levering`, met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperiode` en `Afstel`.
+>- De `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`.
 
 
 ## Toegangscontrole-flows Aanbieder: QLR-0001-ZA
@@ -108,7 +108,7 @@ stateDiagram
 | 2. |De **PEP** valideert de access-token en geeft na goedkeur het request door aan de PDP |
 | 3. |De **PDP** controleert op:<ol><li>Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd.<li> Aanwezigheid van de verplichte parameters in het request;</ol>Is aan alle voorwaarden voldaan?<br/> - **Ja** →  Controle context-informatie door **PIP**: stap 4<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)* |  
 | 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij:<br/><ol><li>De `aanbieder` overeenkomt met de `agbcode` uit de access-token, **én** <li>Deze `Bemiddelingspecificatie` behoort tot een `Bemiddeling` waarvoor de `bemiddelingspecificatieID` overeenkomt met de opgevraagde waarde.</ol> Is aan de voorwaarde voldaan?<br/> - **Ja** →  Toegang tot de resource: stap 5<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)*  |
-| 5. | De aanbieder krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelperiode`, `Uitstelperiode` en `Afstel`.
+| 5. | De aanbieder krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`.
 | 6. | *Einde*
 
 ## Toegangscontrole PIP:
