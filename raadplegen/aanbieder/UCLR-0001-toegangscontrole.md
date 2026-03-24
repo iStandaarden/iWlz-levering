@@ -1,5 +1,9 @@
 # Toegangscontrole: Raadplegen van de Levering die horen bij overlappende Bemiddelingspecificatie(s) door de Aanbieder (UCLR-0001)
 
+> [!Caution]
+> Voor de controle op toegang van deze query is er een PIP controle nodig. De toets of dit met de huidige informatie mogelijk is, moet nog plaatsvinden. De query kan nog wijzigen, wat effect kan hebben op het schema.
+
+
 Beschrijving van de **toegangscontrole** door de Policy Decision Point (PDP) en indien van toepassing Policy Information Point (PIP).
 
 N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze beschrijving. Zie daarvoor het [Afsprakenstelsel iWlz - nID netwerkstelsel - 5. policy Enforcement Point](https://wlz.atlassian.net/wiki/spaces/IWLZAS/pages/229441537/nID+netwerkstelsel#5.-Policy-Enforcement-Point-(PEP)).
@@ -12,20 +16,33 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Action
 - **Type:** `raadplegen` (read)
-- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0001-ZA.graphql](/gql-query/aanbieder/QLR-0001-ZA.graphql) op het Leveringsregister door een aanbieder. 
+- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) Of [QLR-0001_2-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001_2_ZA.graphql) op het Leveringsregister door een aanbieder. 
 
 ### Resource
 - **Type:** `Leveringsregister`
-- **ID:** `bemiddelingspecificatieID`
-- **Beperking:** Alleen toegang tot gegevens die horen bij een bemiddelingspecificatie die overlap heeft met de eigen bemiddelingspecificatie van de aanbieder.
+- **ID:** `bemiddelingspecificatieID` van de informatieve bemiddelingspecificatie
+- **Beperking:** Toegang tot de gegevens over de Levering van de informatieve toewijzing, indien deze toewijzing periode-overlap heeft met de eigen bemiddelingspecificatie. 
 - **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelingperiode, Uitstelperiode, Afstel en Client mogen worden opgevraagd.
 
 ### Context
-- **Query-parameters vereist:** De `bemiddelingspecificatieID` moet aanwezig zijn in de query.
+- **Query-parameters vereist:** <br>
+
+| QLR-0001_1-ZA | QLR-0001_2-ZA |
+| :--- | :--- |
+| - informatieve `bemiddelingspecificatieID` | - informatieve `bemiddelingspecificatieID` |
+| - eigen `bemiddelingspecificatieID` | - eigen `bemiddelingspecificatieID` |
+| - `bemiddelingID` | - `bemiddelingID` |  
+| - `instelling` | - `instelling` |
+| - `vaststellingMoment` | - `vaststellingMoment`|
+| - `dagVaststellingMoment` | - `dagVaststellingMoment` |
+| - `toewijzingEindatum` |  |
+
 - **Toegangsvoorwaarde:** Er is alleen toegang als aan alle volgende voorwaarde is voldaan:
-    - De parameter `bemiddelingspecificatieID` is meegegeven in de query
-    - De acces-token bevat een geldige `agbcode`
-    - De `agbcode`in de acces-token komt overeen met de `agbcode` in `instelling` in `Bemiddelingspecificatie` die hoort bij dezelfde `Bemiddeling` als het `bemiddelingspecificatieID` aanwezig in de query 
+    - De parameters zoals hierboven aanwezig zijn; 
+    - De acces-token bevat een geldige `agbcode` van de aanbieder
+    - De `agbcode` van de in de query meegegeven `instelling` komt overeen met de `agbcode`in de acces-token;
+    - In het **Bemiddelingregister** bestaat er een `Bemiddelingspecificatie` waarbij:
+     die hoort bij dezelfde `Bemiddeling` als het `bemiddelingspecificatieID` aanwezig in de query 
     - Toegang geldt tot en met einddatumToewijzing + 31 mei van de eigen bemiddelingspecificatie die hoort bij dezelfde Bemiddeling als het `bemiddelingspecificatieID` aanwezig in de query  
 
  ### Resultaat

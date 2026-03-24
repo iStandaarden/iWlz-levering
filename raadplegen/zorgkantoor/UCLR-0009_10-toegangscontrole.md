@@ -28,8 +28,9 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 | QLR-0009-ZK | QLR-0010-ZK |
 | :--- | :--- |
-| - eigen `bemiddelingspecificatieID` | - eigen `bemiddelingspecificatieID` |
-| - informatieve `bemiddelingspecificatieID` | - informatieve `bemiddelingspecificatieID` | 
+| - informatieve `bemiddelingspecificatieID` | - informatieve `bemiddelingspecificatieID` |
+| - eigen `bemiddelingspecificatieID` | - eigen `bemiddelingspecificatieID` | 
+| - `bemiddelingID` | - `bemiddelingID` | 
 | - `uitvoerendZorgkantoor` | - `uitvoerendZorgkantoor` |
 | - `vaststellingMoment` | - `vaststellingMoment`|
 | - `dagVaststellingMoment` | - `dagVaststellingMoment` |
