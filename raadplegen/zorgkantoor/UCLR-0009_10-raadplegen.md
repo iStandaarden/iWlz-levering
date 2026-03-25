@@ -41,8 +41,8 @@ Een zorgkantoor mag de Levering (en de overige gegevens) raadplegen.
 
 |Query ID | Beschrijving | Verplichte input | Resultaat |
 | :--- | :--- | :--- | :--- |
-| QLR-0009-ZK | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum, vaststellingMoment en toewijzingEinddatum de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
-| QLR-0010-ZK | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `bemiddelingID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
+| [QLR-0009-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0009-ZK.graphql) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum, vaststellingMoment en toewijzingEinddatum de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
+| [QLR-0010-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0010-ZK.graphql) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `uitvoerendZorgkantoor`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `bemiddelingID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
 
 ## Proces raadplegen
 
@@ -118,10 +118,10 @@ s4_1:UCBR-0005_6-raadplegen
 | 5. | Gebruik query-template `QLR-00009-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`;<br> - `dagVaststellingMoment`; <br> - `toewijzingEinddatum` . |
 | 6. | Gebruik query-template `QLR-0010-ZK` en vul de verplichte parameters: <br> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `uitvoerendZorgkantoor`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`; <br> - `dagVaststellingMoment`. |
 | 7. | Het zorgkantoor stuurt GraphQL-request + Acces-token naar het Policy Enforcement Point (PEP). |
-| 8. | De PEP voert de [toegangscontrole](@@@) uit en stuurt bij toegang het request door naar het Leveringsgregister. |
+| 8. | De PEP voert de [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0009_10-toegangscontrole.md) uit en stuurt bij toegang het request door naar het Leveringsgregister. |
 | 9. | Het zorgkantoor ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource).
 | 10. | *Einde proces* | 
 
  ---
 
-Ga naar beschrijving van de bijbehorende [toegangscontrole](@@@)  |  Terug naar [Raadplegen](/raadplegen/README.md)
+Ga naar beschrijving van de bijbehorende [toegangscontrole](/iWlz-levering/raadplegen/zorgkantoor/UCLR-0009_10-toegangscontrole.md)  |  Terug naar [Raadplegen](/raadplegen/README.md)

@@ -32,7 +32,7 @@ flowchart LR
 ### Autorisatie
 Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de gegevens over de status van de levering van de zorg of ondersteuning raadplegen die horen bij overlappende bemiddelingspecificaties.
 - Volledige autorisatieregel: [LRA005](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/)
-- Autorisatiematrix: [LRA0005](@@@) 
+- Autorisatiematrix: [LRA0005](/iWlz-levering/raadplegen/autorisatiematrix_leveringsregister.md) 
 
 **Trigger:**
 - Een aanbieder wil voor het leveren van zorg of ondersteuning aan een cliënt de levering die horen bij de overlappende bemiddelingspecificaties raadplegen.
@@ -42,7 +42,7 @@ Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
 | [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) |Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingingangsdatum, vaststellingMoment, en toewijzingEinddatum de Levering (en overige toegestane informatie) raadplegen, die hoort bij de informatieve toewijzing. |  `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `instelling`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
-| [QLR-0001_2](@@@) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie) raadplegen, die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `instelling`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client |
+| [QLR-0001_2](/iWlz-levering/gql-query/aanbieder/QLR-0001_2_ZA.graphql) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie) raadplegen, die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `instelling`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client |
 
 
 ## **Proces raadplegen**
