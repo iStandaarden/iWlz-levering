@@ -137,7 +137,99 @@ stateDiagram
 Voor QLR-0001_1-ZA
 
 ```gql
-Moet nog gedaan worden
+query Bemiddelingspecificatie(
+    $bemiddelingspecificatieIDEigen: UUID! # afkomstig uit query
+    $instelling: String! # afkomstig uit acces-token
+    $toewijzingIngangsdatum: Date! # afkomstig uit query
+    $vaststellingMoment: DateTime! # afkomstig uit query
+    $dagVaststellingMoment: Date! # afkomstig uit query
+    $toewijzingEinddatum: Date! # afkomstig uit query
+    $bemiddelingID: UUID! # afkomstig uit query
+  ) {
+    bemiddelingspecificatie(
+        where: {
+            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDEigen}
+            instelling: {eq: $instelling}
+            toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
+            vaststellingMoment: {eq: $vaststellingMoment}
+            toewijzingEinddatum: {eq: $toewijzingEinddatum}
+            and: [ {
+                bemiddeling: {
+                    and: {
+                        bemiddelingID: {eq: $bemiddelingID}
+                    }
+                }
+            }]
+         }
+    ) {
+        bemiddelingspecificatieID
+        bemiddeling{
+            bemiddelingID
+            bemiddelingspecificatie(
+                where: {
+                    and: [
+                    {
+                       or: [{ toewijzingEinddatum: { eq: null } }, 
+                       { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
+                       { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
+                    }
+                    { toewijzingIngangsdatum: { ngt: $toewijzingEinddatum } }
+                ]
+            }
+        ){
+                bemiddelingspecificatieID
+        }
+    }
+   }
+  }
+  ```
+
+Voor QLR-0001_2-ZA
+```gql
+
+ query Bemiddelingspecificatie(
+     $bemiddelingspecificatieIDEigen: UUID! # afkomstig uit query
+    $instelling: String! # afkomstig uit acces-token
+    $toewijzingIngangsdatum: Date! # afkomstig uit query
+    $vaststellingMoment: DateTime! # afkomstig uit query
+    $dagVaststellingMoment: Date! # afkomstig uit query
+    $bemiddelingID: UUID! # afkomstig uit query
+  ) {
+    bemiddelingspecificatie(
+        where: {
+            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDEigen}
+            instelling: {eq: $instelling}
+            toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
+            vaststellingMoment: {eq: $vaststellingMoment}
+            toewijzingEinddatum: {eq: null}
+            and: [ {
+                bemiddeling: {
+                    and: {
+                        bemiddelingID: {eq: $bemiddelingID}
+                    }
+                }
+            }]
+         }
+    ) {
+        bemiddelingspecificatieID
+        bemiddeling{
+            bemiddelingID
+            bemiddelingspecificatie(
+                where: {
+                    and: [
+                    {
+                       or: [{ toewijzingEinddatum: { eq: null } }, 
+                       { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
+                       { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
+                    }
+                ]
+            }
+        ){
+                bemiddelingspecificatieID
+        }
+    }
+   }
+  }
 ```
 ----
 

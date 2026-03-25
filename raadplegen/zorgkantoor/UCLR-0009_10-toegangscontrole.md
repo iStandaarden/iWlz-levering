@@ -221,8 +221,7 @@ Voor QLR-0010-ZK
                        { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
                        { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
                     }
-                    { toewijzingIngangsdatum: { ngt: $toewijzingEinddatum } }
-                ]
+             ]
             }
         ){
                 bemiddelingspecificatieID
