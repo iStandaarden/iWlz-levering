@@ -128,7 +128,7 @@ stateDiagram
   | 2. | De **PEP** valideert de acces-token en geeft na goedkeur het request door aan de PDP. |
   |3. | De **PDP** controleert op: <ol><li> Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd; <li> Aanwezigheid van de verplichte parameters in het request. </ol> Is aan alle voorwaarden voldaan? <br/> - **Ja** -> Controle context-informatie door **PIP**: stap 4. <br/> - **Nee** -> geen toegang tot de resource - *Einde proces (geen toegang)*. |
   | 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij: <ol><li> Het `uitvoerendZorgkantoor` overeenkomt met de `uzovicode` uit de acces-token **én** <li> De `bemiddelingspecificatie` hoort tot een `Bemiddeling` waarook de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd is bij hoort **én** <li> De `bemiddelingspecificatie` een `toewijzingEinddatum` heeft die leeg is óf de `toewijzingEinddatum` + 31 mei is groter dan of gelijk aan het opvraagmoment **én** <li> Er overlap is tussen de beide `bemiddelingspecificaties`. </ol> Is aan de voorwaarde voldaan? <br/> - **Ja** -> Toegang tot de resource: stap 5. <br/> - **Nee** -> geen toegnag tot de resource - *Einde proces (geen toegang)*. |
-  | 5. | het zorgkantoor krijgt toegang tot alle entiteiten die bij de Wlz-indicatie horen. |
+  | 5. | het zorgkantoor krijgt toegang tot `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`. |
   | 6. | *Einde* | 
 
   ## Toegangscontrole PIP

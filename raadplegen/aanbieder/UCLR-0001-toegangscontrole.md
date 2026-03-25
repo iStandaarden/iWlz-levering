@@ -41,20 +41,25 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
     - De parameters zoals hierboven aanwezig zijn; 
     - De acces-token bevat een geldige `agbcode` van de aanbieder
     - De `agbcode` van de in de query meegegeven `instelling` komt overeen met de `agbcode`in de acces-token;
-    - In het **Bemiddelingregister** bestaat er een `Bemiddelingspecificatie` waarbij:
-     die hoort bij dezelfde `Bemiddeling` als het `bemiddelingspecificatieID` aanwezig in de query 
-    - Toegang geldt tot en met einddatumToewijzing + 31 mei van de eigen bemiddelingspecificatie die hoort bij dezelfde Bemiddeling als het `bemiddelingspecificatieID` aanwezig in de query  
+    - In het **Bemiddelingregister** bestaat er een `Bemiddelingspecificatie` waarbij: <ol><li>
+        de `instelling` overeenkomt met de `agbcode` uit de acces-token **én**;<li>
+        deze `bemiddelingspecificatie` hoort bij dezelfde `Bemiddeling` als waar de `bemiddelingspecificatie` waarvoor de `Levering` opgevraagd wordt ook bij hoort **én**;<li>
+        deze bemiddelingspeciifcaties overlappen in periode met elkaar **én**;<li>
+        de `toewijzingEinddatum` is leeg of de `toewijzingEinddatum` + 31 mei is groter dan of gelijk aan het opvraagmoment.</ol>  
+    
 
  ### Resultaat
- > Toegang tot het Leveringsregister via query [QLR-0001-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) is **alleen toegestaan** als:
- >- Parameter `bemiddelingspecificatieID` is meegegeven in de query
+ > Toegang tot het Leveringsregister via query [QLR-0001_1-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001_1-ZA.graphql) of [QLR-0001_2-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001_2_ZA.graphql) is **alleen toegestaan** als:
+ >- De relevante parameters aanwezig zijn in de query;
+ >- De acces-token bevat een geldige `agbcode`;
+ >- De in de query meegegeven `agbcode` in `instelling` komt overeen met de `agbcode` in de acces-token;
  >- In het Bemiddelingsregister is een match gevonden tussen:
- >      - De `agbcode` (uit de acces-token)
- >      - En een `bemiddelingspecificatie` die hoort bij een `Bemiddeling` waar ook het `bemiddelingspecificatieID` uit de query bijhoort 
- >- En toegang geldt tot de einddatumToewijzing + 31 mei van deze bemiddelingspecificatie 
->
-> Als aan deze voorwaarden is voldaan, mogen de volgende gegevens worden opgevraagd:
->- De `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`.
+ >      - De `agbcode` (uit de acces-token) én;
+ >      - En een `bemiddelingspecificatie` die hoort bij een `Bemiddeling` als de `bemiddelingspecificatie` waarvoor de Levering opgevraagd is én; 
+ >      - de `toewizjingEinddatum` is leeg of de `toewizingEinddatum` + 31 mei is groter dan of gelijk aan het opvraagmoment én;
+ >      - de bemiddelingspecificaties overlappen.
+ >
+ > Indien aan deze voorwaarden is voldaan, mogen alle graphQl-nodes worden opgevraagd confrom de structuur van de query-template. 
 
 
 ## Toegangscontrole-flows Aanbieder: QLR-0001-ZA
@@ -102,11 +107,11 @@ stateDiagram
   PEP:Autorisatie controle PEP
   PDP:Toegangscontrole PDP
   PIP:Contextinformatie controle PIP
-  indienen: Ontvang QLR-0001-ZA + Access token
+  indienen: Ontvang QLR-0001_1-ZA of QLR_0001_2-ZA + Access token
   validerenT: Valideer access token
   validerenR: Valideer Request
-  checkInput01:bemiddelingspecificatieID aanwezig?
-  checkInput02:Is de aanbieder volgens Bemiddelingsregister betrokken bij bemiddelingspecificatie?
+  checkInput01:Check verplichte input aanwezig?
+  checkInput02:Heeft de aanbieder volgens Bemiddelingsregister een overlappende Bemiddelingspecificatie met de Bemiddelingspecificatie waarvoor de Levering wordt opgevraagd?
   error:geen toegang tot Resource
 
   access:toegang tot Resource
@@ -124,11 +129,13 @@ stateDiagram
 | 1. |Ontvangst GraphQL-request + access-token door **PEP** |
 | 2. |De **PEP** valideert de access-token en geeft na goedkeur het request door aan de PDP |
 | 3. |De **PDP** controleert op:<ol><li>Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd.<li> Aanwezigheid van de verplichte parameters in het request;</ol>Is aan alle voorwaarden voldaan?<br/> - **Ja** →  Controle context-informatie door **PIP**: stap 4<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)* |  
-| 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij:<br/><ol><li>De `aanbieder` overeenkomt met de `agbcode` uit de access-token, **én** <li>Deze `Bemiddelingspecificatie` behoort tot een `Bemiddeling` waarvoor de `bemiddelingspecificatieID` overeenkomt met de opgevraagde waarde.</ol> Is aan de voorwaarde voldaan?<br/> - **Ja** →  Toegang tot de resource: stap 5<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)*  |
+| 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij:<br/><ol><li>De `aanbieder` overeenkomt met de `agbcode` uit de access-token, **én** <li>Deze `Bemiddelingspecificatie` behoort tot een `Bemiddeling` waarook de `bemiddelingspecificatie` waarvoor de Levering opgevraagd is bij hoort **én** <li> De `bemiddelingspecificatie` een `toewijzingEinddatum` heeft die leeg is óf de `toewijzingEinddatum`+ 31 mei is groter dan of gelijk aan het opvraagmoment **én**<li> Er overlap is tussen de beide `bemiddelingspecificaties`.</ol><br> Is aan de voorwaarde voldaan: <br> - **Ja** →  Toegang tot de resource: stap 5<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)*  |
 | 5. | De aanbieder krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`.
 | 6. | *Einde*
 
 ## Toegangscontrole PIP:
+Voor QLR-0001_1-ZA
+
 ```gql
 Moet nog gedaan worden
 ```
