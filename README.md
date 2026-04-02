@@ -26,6 +26,10 @@ Het leveringsregister is in beheer bij de zorgaanbieder en is de bronhouder. Het
     - [Open Agent Policy](#open-agent-policy)
     - [Notificaties](#notificaties)
   - [**Raadplegen Leveringsregister**](#raadplegen-leveringsregister)
+    - [Scopes - Leveringsregister](#scopes---leveringsregister)
+      - [Raadplegen van het indicatieregister](#raadplegen-van-het-indicatieregister)
+      - [Notificeren](#notificeren)
+      - [Melden aan het zorgkantoor](#melden-aan-het-zorgkantoor)
   - [Autorisatieregels en autorisatiematrix](#autorisatieregels-en-autorisatiematrix)
   - [Versies en Status](#versies-en-status)
   - [Meer informatie](#meer-informatie)
@@ -89,6 +93,31 @@ Use-cases beschrijven hoe een deelnemer het register correct raadpleegt.
 > De functionele beschrijving beschikbare raadpleging per deelnemer is beschikbaar in de folder **[/raadplegen](/raadplegen/)**
 
 Meer informatie over de structuur van het raadplegen en het valideren ervan is te lezen in het [Afsprakenstelsel iWlz - Raadplegen](https://wlz.atlassian.net/wiki/x/KgpgAQ)
+
+### Scopes - Leveringsregister
+Het Access-token bevat specifieke gegevens die worden gebruikt om de toegang tot resources te autoriseren en te valideren. Een van de gegevens is de scope. Voor het Leveringsregister zijn er momenteel de volgende scopes actief.
+
+####  Raadplegen van het indicatieregister
+
+Voor het mogen raadplegen van het indicatieregister moet de volgende scope worden meegegeven:
+
+>   `registers/leveringsregister/leveringen:read`
+
+#### Notificeren 
+
+Voor het mogen notificeren door een aanbieder aan een zorgkantoor of een andere aanbieder moet er respectievelijk een van de volgende scopes worden meegegeven:
+
+> `organisaties/zorgkantoor/notificaties/notificatie:create`
+
+of
+
+> `organisaties/zorgaanbieder/notificaties/notificatie:create`
+
+#### Melden aan het zorgkantoor
+
+Voor het mogen versturen van meldingen aan de aanbieder moet de volgende scope worden meegegeven:
+
+> `organisaties/aanbieder/meldingen/melding:create`
 
 ## Autorisatieregels en autorisatiematrix
 De toegang tot gegevens is vastgelegd doormiddel van **Autorisatieregels** en de **Autorisatiematrix**. De [autorisatieregels](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/) zijn te vinden in het Informatiemodel Leveringsregister (via [hier](https://informatiemodel.istandaarden.nl/informatiemodel/iwlz/netwerk/leveringsregister-1/regels/autorisatieregel/)) en de [autorisatiematrix](/raadplegen/autorisatiematrix_leveringsregister.md) is [hier](/raadplegen/autorisatiematrix_leveringsregister.md) te vinden.
