@@ -1,8 +1,6 @@
 # Raadplegen Leveringsregister 
 
-> [!Caution] 
-> **Release Candidate 1 - 29-01-2029**
-> 
+> [!Caution] - Release Candidate 1 - 29-01-2029
 > Hieronder staan de eerste beschrijvingen van de basis raadplegingen op het Leveringsregister.
 > 
 > De raadplegingen volgen in de basis de [notificaties](/notificaties/README.md) omdat het uitgangspunt is dat de ontvanger van een notificatie op basis daarvan een raadpleging wil (kunnen) uitvoeren. 
