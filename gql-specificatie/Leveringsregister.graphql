@@ -142,7 +142,7 @@ type Uitstelperiode {
 type Afstel {
   " Technische sleutel afstel. "
   afstelID: UUID!
-  " Datum waarop is vastgesteld dat de levering van zorg of ondersteuning definitief niet doorgaat. "
+  " Datum met ingang waarvan de levering van zorg of ondersteuning is afgesteld. "
   afsteldatum: Date!
   " Datum en tijdstip waarop de aanbieder  de nieuwe of gewijzigde gegevens over het Afstel heeft vastgesteld. "
   vaststellingMoment: DateTime!
