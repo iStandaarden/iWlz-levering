@@ -16,22 +16,22 @@ Hieronder de notificaties vanuit het Leveringsregister.
 
 | Notificatie | Documentatie | Type |
 | :-- | :-- | :-- |
-| [NIEUW_VERZOEKAANBIEDER_AANBIEDER](/notificaties/zorgaanbieder/nieuw_verzoekaanbieder_aanbieder.md) | Notificatie aan de aanbieder die in VerzoekAanbieder is opgenomen van een nieuw Verzoek dat is geregistreerd. | VERPLICHT |
+| [NIEUW_VERZOEKAANBIEDER_AANBIEDER](/notificaties/nieuw_verzoekaanbieder_aanbieder.md) | Notificatie aan de aanbieder die in VerzoekAanbieder is opgenomen van een nieuw Verzoek dat is geregistreerd. | VERPLICHT |
 
 ### Notificaties aan het zorgkantoor
 
 | Notificatie | Documentatie | Type |
 | :-- | :-- | :-- |
-| [NIEUWE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode registreert. | VERPLICHT |
-| [GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode wijzigt. | VERPLICHT |
-| [VERWIJDERDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een leveringperiode verwijdert | VERPLICHT |
-| [NIEUWE_BEHANDELINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe behandelingperiode registreert. | VERPLICHT |
-| [GEWIJZIGDE_BEHANDELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode wijzigt. | VERPLICHT |
-| [VERWIJDERDE_BEHANDELINGPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderde_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode verwijdert. | VERPLICHT |
-| [NIEUWE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/nieuwe_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe uitstelperiode registreert. | VERPLICHT |
-| [GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigde_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode wijzigt. | VERPLICHT |
-| [VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderde_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode verwijdert. | VERPLICHT |
-| [NIEUW_AFSTEL_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuw afstel registreert. | VERPLICHT |
-| [GEWIJZIGD_AFSTEL_ZORGKANTOOR](/notificaties/zorgkantoor/gewijzigd_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel wijzigt. | VERPLICHT |
-| [VERWIJDERD_AFSTEL_ZORGKANTOOR](/notificaties/zorgkantoor/verwijderd_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel verwijdert. | VERPLICHT |
-| [NIEUW_VERZOEK_ZORGKANTOOR](/notificaties/zorgkantoor/nieuw_verzoek_zorgkantoor.md)|Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert. | VERPLICHT |
+| [NIEUWE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/nieuwe_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode registreert. | VERPLICHT |
+| [GEWIJZIGDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/gewijzigde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe leveringperiode wijzigt. | VERPLICHT |
+| [VERWIJDERDE_LEVERINGPERIODE_ZORGKANTOOR](/notificaties/verwijderde_leveringperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een leveringperiode verwijdert | VERPLICHT |
+| [NIEUWE_BEHANDELINGPERIODE_ZORGKANTOOR](/notificaties/nieuwe_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe behandelingperiode registreert. | VERPLICHT |
+| [GEWIJZIGDE_BEHANDELPERIODE_ZORGKANTOOR](/notificaties/gewijzigde_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode wijzigt. | VERPLICHT |
+| [VERWIJDERDE_BEHANDELINGPERIODE_ZORGKANTOOR](/notificaties/verwijderde_behandelingperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een behandelingperiode verwijdert. | VERPLICHT |
+| [NIEUWE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/nieuwe_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuwe uitstelperiode registreert. | VERPLICHT |
+| [GEWIJZIGDE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/gewijzigde_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode wijzigt. | VERPLICHT |
+| [VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR](/notificaties/verwijderde_uitstelperiode_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een uitstelperiode verwijdert. | VERPLICHT |
+| [NIEUW_AFSTEL_ZORGKANTOOR](/notificaties/nieuw_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een nieuw afstel registreert. | VERPLICHT |
+| [GEWIJZIGD_AFSTEL_ZORGKANTOOR](/notificaties/gewijzigd_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel wijzigt. | VERPLICHT |
+| [VERWIJDERD_AFSTEL_ZORGKANTOOR](/notificaties/verwijderd_afstel_zorgkantoor.md) | Notificatie aan het zorgkantoor wanneer de zorgaanbieder een afstel verwijdert. | VERPLICHT |
+| [NIEUW_VERZOEK_ZORGKANTOOR](/notificaties/nieuw_verzoek_zorgkantoor.md)|Notificatie aan het verantwoordelijke zorgkantoor wanneer de zorgaanbieder – die van dit zorgkantoor een Bemiddelingsspecificatie heeft ontvangen – een nieuw verzoek registreert. | VERPLICHT |

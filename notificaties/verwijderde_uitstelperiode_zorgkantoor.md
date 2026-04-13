@@ -1,4 +1,4 @@
-# NIEUW_AFSTEL_ZORGKANTOOR
+# VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR
 
 ```mermaid
 ---
@@ -27,10 +27,10 @@ stateDiagram
   verwerk --> [*]
   verzender: Aanbieder (bronhouder)
   trigger: Trigger
-  trigger: - Registratie van
-  trigger: - nieuw Afstel
+  trigger: - Verwijdering van
+  trigger: - een Uitstelperiode
   opstellen: Stel notificatie
-  opstellen: NIEUW_AFSTEL_ZORGKANTOOR
+  opstellen: VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR
   opstellen: - voor het zorgkantoor
   opstellen: - dat verantwoordelijk of uitvoerend is
   verstuur: Verstuur 
@@ -45,7 +45,7 @@ stateDiagram
 
 **Inhoud**
 
-- [NIEUW\_AFSTEL\_ZORGKANTOOR](#nieuw_afstel_zorgkantoor)
+- [VERWIJDERDE\_UITSTELPERIODE\_ZORGKANTOOR](#verwijderde_uitstelperiode_zorgkantoor)
   - [Documentatie](#documentatie)
   - [Trigger](#trigger)
   - [Instructie](#instructie)
@@ -55,20 +55,20 @@ stateDiagram
 
 
 ## Documentatie
-Notificatie aan het zorgkantoor wanneer de aanbieder een nieuw afstel registreert.
+Notificatie aan het zorgkantoor wanneer de aanbieder een uitstelperiode verwijdert.
 
-Het zorgkantoor is daarmee geïnformeerd van de registratie van een nieuw afstel. 
+Het zorgkantoor is daarmee geïnformeerd van de verwijdering van een uitstelperiode. 
 
-De notificatie bevat informatie waarmee het zorgkantoor het afstel kan raadplegen.
+De notificatie bevat informatie waarmee het zorgkantoor op de hoogte is van de verwijdering van een uitstelperiode.
 
 ## Trigger
 De trigger voor het opstellen van de notificatie is: 
- > De registratie van een `Afstel` in het Leveringsregister
+ > De verwijdering van een `Uitstelperiode` in het Leveringsregister
 
 ## Instructie
 Stel de notificatie op voor: 
-> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder het `Afstel` is geregistreerd.
-> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder het `Afstel` is geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
+> 1. het zorgkantoor dat **verantwoordelijk** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de verwijderde `Uitstelperiode` was geregistreerd.
+> 2. het zorgkantoor dat **uitvoerend** is voor de bemiddelingspecificatie waarnaar is verwezen met `bemiddelingspecificatieID` in de `Levering` waaronder de verwijderde `Uitstelperiode` was geregistreerd, indien deze afwijkend is aan het verantwoordelijk zorgkantoor.
 
 ## Type
 Het type notificatie is:
@@ -77,16 +77,16 @@ Het type notificatie is:
 ## Inhoud notificatie
 | **Variabele** 	| **Waarde** 	| **Voorbeeld** 	|
 |---	|---	|---	|
-| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00Z"` 	|
+| timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00.000Z"` 	|
 | afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
 | afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
 | ontvangerIDType 	| UZOVI 	| `ontvangerIDType: "UZOVI"` 	|
 | ontvangerID 	| {uzovi-code ontvanger} 	| `ontvangerID: "5555"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
-| eventType 	| NIEUW_AFSTEL_ZORGKANTOOR 	| `eventType:"NIEUW_AFSTEL_ZORGKANTOOR"` 	|
+| eventType 	| VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR 	| `eventType: "VERWIJDERDE_UITSTELPERIODE_ZORGKANTOOR"`	|
 | subjectList 	|  	| `subjectList: [{` 	|
-| ../subject 	| Levering/{bemiddelingspecificatieID}	| `subject:"Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6"` 	|
-| ../recordID 	| Afstel/{AfstelID} 	| `subject:"Afstel/76f17bb6-31b3-4042-9417-6e6bb101ce30"` 	|
+| ../subject 	| Levering/{bemiddelingspecificatieID}	| `subject: "Levering/ef88ce35-58fa-4e6d-ac7a-6e298dd211d6"` 	|
+| ../recordID 	| Uitstelperiode/{UitstelperiodeID} 	| `subject: "Uitstelperiode/76f17bb6-31b3-4042-9417-6e6bb101ce30"` 	|
 | | | `}]` |
 
 # Overige notificaties Leveringsregister
