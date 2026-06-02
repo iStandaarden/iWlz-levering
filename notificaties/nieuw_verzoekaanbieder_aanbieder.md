@@ -78,7 +78,7 @@ Het type notificatie is:
 |---	|---	|---	|
 | timestamp 	| {timestamp} 	| `timestamp: "2024-07-02T00:00:00.000Z"` 	|
 | afzenderIDType 	| AGBCODE 	| `afzenderIDType: "AGBCODE"` 	|
-| afzenderID 	| {agb-code verzender} 	| `afzenderID: "12345678"` 	|
+| afzenderID 	| {agb-code afzender} 	| `afzenderID: "12345678"` 	|
 | ontvangerIDType 	| AGBCODE 	| `ontvangerIDType: "AGBCODE"` 	|
 | ontvangerID 	| {agb-code ontvanger} 	| `ontvangerID: "87654321"` 	|
 | ontvangerKenmerk 	| NULL 	|  	|
