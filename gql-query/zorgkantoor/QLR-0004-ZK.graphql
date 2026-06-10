@@ -5,6 +5,7 @@
 
 query Verzoek(
     $verzoekID: UUID!
+    $bemiddelingspecificatieID: UUID!
 ){
     verzoek(
         where:{ 
@@ -31,9 +32,14 @@ query Verzoek(
             opname
             regiehouder
         }
-        levering{
+        levering(
+                where: {
+                    bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}
+                }
+            )
+        {
             leveringID
-            bemiddelingspecificatieID
+            bemiddelingspecificatieID 
             client{
                 clientID
                 bsn
