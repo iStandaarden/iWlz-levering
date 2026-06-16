@@ -5,71 +5,63 @@
 #  - leveringperiodeID (uit notificatie)
 #  - bemiddelingspecificatieID (uit notificatie)
 
-
-query Leveringperiode (
-    $leveringperiodeID: UUID!
-    $bemiddelingspecificatieID: UUID!
-  )
-  {
-    leveringperiode(
-        where: {
-            leveringperiodeID: { eq: $leveringperiodeID}
-        }
-    ) {
-      leveringperiodeID
+query Leveringperiode(
+  $leveringperiodeID: UUID!
+  $bemiddelingspecificatieID: UUID!
+) {
+  leveringperiode(where: { leveringperiodeID: { eq: $leveringperiodeID } }) {
+    leveringperiodeID
+    ingangsdatum
+    vaststellingMoment
+    sleuteldatum
+    einddatum
+    beeindigingReden
+    aanbiederBestemming
+    behandelingperiodes {
+      behandelingperiodeID
       ingangsdatum
-      vaststellingMoment
-      sleuteldatum
       einddatum
-      beeindigingReden
-      aanbiederBestemming
-      behandelingperiodes{
-        behandelingperiodeID
+    }
+    levering(
+      where: { bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID } }
+    ) {
+      leveringID
+      bemiddelingspecificatieID
+      client {
+        clientID
+        bsn
+      }
+      leveringperiodes {
+        leveringperiodeID
         ingangsdatum
+        vaststellingMoment
+        sleuteldatum
+        einddatum
+        beeindigingReden
+        aanbiederBestemming
+        behandelingperiodes {
+          behandelingperiodeID
+          ingangsdatum
+          einddatum
+        }
+      }
+      uitstelperiodes {
+        uitstelperiodeID
+        ingangsdatum
+        vaststellingMoment
+        reden
+        leveringsstatus
+        leveringsstatusClassificatie
         einddatum
       }
-      levering(
-        where: {
-          bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID}
-        }
-      ) {
-        leveringID
-        bemiddelingspecificatieID
-        client{
-          clientID
-          bsn
-        }
-        leveringperiodes{
-          leveringperiodeID
-          ingangsdatum
-          vaststellingMoment
-          sleuteldatum
-          einddatum
-          beeindigingReden
-          aanbiederBestemming
-          behandelingperiodes{
-            behandelingperiodeID
-            ingangsdatum
-            einddatum
-          }
-        }
-        uitstelperiodes{
-          uitstelperiodeID
-          ingangsdatum
-          vaststellingMoment
-          reden
-          leveringsstatus
-          leveringsstatusClassificatie
-          einddatum
-        }
-        afstel{
-          afstelID
-          afsteldatum
-          vaststellingMoment
-          reden
-          aanbiederBestemming
-        }
-        # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
+      afstel {
+        afstelID
+        afsteldatum
+        vaststellingMoment
+        reden
+        aanbiederBestemming
       }
+      # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
     }
   }
+}

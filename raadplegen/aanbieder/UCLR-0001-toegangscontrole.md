@@ -108,13 +108,12 @@ stateDiagram
   PEP:Autorisatie controle PEP
   PDP:Toegangscontrole PDP
   PIP:Contextinformatie controle PIP
-  indienen: Ontvang QLR-0001_1-ZA of QLR_0001_2-ZA + Access token
+  indienen: Ontvang QLR-0001-ZA + Access token
   validerenT: Valideer access token
   validerenR: Valideer Request
   checkInput01:Check verplichte input aanwezig?
-  checkInput02:Heeft de aanbieder volgens Bemiddelingsregister een overlappende Bemiddelingspecificatie met de Bemiddelingspecificatie waarvoor de Levering wordt opgevraagd?
+  checkInput02:Heeft de aanbieder een Bemiddelingspecificatie met overlap met de Bemiddelingspecificatie waarvoor de Levering wordt opgevraagd?
   error:geen toegang tot Resource
-
   access:toegang tot Resource
   resource: Query mag door naar Leveringsregister
   style validerenR,checkInput01,checkInput02 fill:#FFD600

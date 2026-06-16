@@ -2,54 +2,50 @@
 # Query voor zorgkantoor op Leveringsregister
 # volledig overzicht vanuit een afstel
 # Verplichte input:
-#    - afstelID
+#   - afstelID (uit notificatie)
+#   - bemiddelingspecificatieID (uit notificatie)
 
-query Afstel (
-    $afstelID: UUID!
-  )
-  {
-    afstel(
-        where: {
-            afstelID: { eq: $afstelID}
-        }
+query Afstel($afstelID: UUID!, $bemiddelingspecificatieID: UUID!) {
+  afstel(where: { afstelID: { eq: $afstelID } }) {
+    afstelID
+    afsteldatum
+    vaststellingMoment
+    reden
+    aanbiederBestemming
+    levering(
+      where: { bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID } }
     ) {
-      afstelID
-      afsteldatum
-      vaststellingMoment
-      reden
-      aanbiederBestemming
-      levering{
-        leveringID
-        bemiddelingspecificatieID
-        client{
-          clientID
-          bsn
-        }
-        leveringperiodes{
-          leveringperiodeID
-          ingangsdatum
-          vaststellingMoment
-          sleuteldatum
-          einddatum
-          beeindigingReden
-          aanbiederBestemming
-          behandelingperiodes{
-            behandelingperiodeID
-            ingangsdatum
-            einddatum
-          }
-        }
-        uitstelperiodes{
-          uitstelperiodeID
-          ingangsdatum
-          vaststellingMoment
-          reden
-          leveringsstatus
-          leveringsstatusClassificatie
-          einddatum
-        }
-        # afstel hoeft niet extra opgevraagd te worden omdat we vanuit afstel al in de context zitten en er maar 1 afstel per levering kan zijn
-        # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
+      leveringID
+      bemiddelingspecificatieID
+      client {
+        clientID
+        bsn
       }
+      leveringperiodes {
+        leveringperiodeID
+        ingangsdatum
+        vaststellingMoment
+        sleuteldatum
+        einddatum
+        beeindigingReden
+        aanbiederBestemming
+        behandelingperiodes {
+          behandelingperiodeID
+          ingangsdatum
+          einddatum
+        }
+      }
+      uitstelperiodes {
+        uitstelperiodeID
+        ingangsdatum
+        vaststellingMoment
+        reden
+        leveringsstatus
+        leveringsstatusClassificatie
+        einddatum
+      }
+      # afstel hoeft niet extra opgevraagd te worden omdat we vanuit afstel al in de context zitten en er maar 1 afstel per levering kan zijn
+      # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
     }
   }
+}

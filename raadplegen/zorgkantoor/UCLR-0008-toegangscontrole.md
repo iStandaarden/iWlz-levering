@@ -131,23 +131,23 @@ query PIPValidatie (
   $bemiddelingspecificatieID: UUID! # afkomstig uit query
   $uzovicodeZorgkantoor: String! # afkomstig uit Access-token
 ) {
-  PIPValidatie(filter: {
-    and: [
-        {
-          or: [
-            {bemiddelingspecificatie: { uitvoerendZorgkantoor: {eq: $uzovicodeZorgkantoor}}}
-            {bemiddeling: { verantwoordelijkZorgkantoor: {eq: $uzovicodeZorgkantoor}}}
-          ]
-        },
-        {bemiddelingspecificatie: { bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID }}}
-    ]
-  }
-  ){
-      bemiddelingspecificatie {
-        bemiddelingspecificatieID
-      }
+  bemiddelingspecificatie(
+    where: {
+      bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID }
+      or: [
+        { uitvoerendZorgkantoor: { eq: $uzovicodeZorgkantoor } }
+        { bemiddeling: { verantwoordelijkZorgkantoor: { eq: $uzovicodeZorgkantoor } } }
+      ]
+    }
+  ) {
+    bemiddelingspecificatieID
+    uitvoerendZorgkantoor
+    bemiddeling {
+      bemiddelingID
+      verantwoordelijkZorgkantoor
     }
   }
+}
 ```
 
 ---

@@ -2,62 +2,61 @@
 # Query voor zorgkantoor op Leveringsregister
 # volledig overzicht vanuit een uitstelperiode
 # Verplichte input:
-#    - uitstelperiodeID
+#  - uitstelperiodeID (uit notificatie)
+#  - bemiddelingspecificatieID (uit notificatie)
 
-query Uitstelperiode (
-    $uitstelperiodeID: UUID!
-  )
-  {
-    uitstelperiode(
-        where: {
-            uitstelperiodeID: { eq: $uitstelperiodeID}
-        }
+query Uitstelperiode(
+  $uitstelperiodeID: UUID!
+  $bemiddelingspecificatieID: UUID!
+) {
+  uitstelperiode(where: { uitstelperiodeID: { eq: $uitstelperiodeID } }) {
+    uitstelperiodeID
+    ingangsdatum
+    vaststellingMoment
+    reden
+    leveringsstatus
+    leveringsstatusClassificatie
+    einddatum
+    levering(
+      where: { bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID } }
     ) {
-      uitstelperiodeID
-      ingangsdatum
-      vaststellingMoment
-      reden
-      leveringsstatus
-      leveringsstatusClassificatie
-      einddatum
-      levering{
-        leveringID
-        bemiddelingspecificatieID
-        client{
-          clientID
-          bsn
-        }
-        leveringperiodes{
-          leveringperiodeID
-          ingangsdatum
-          vaststellingMoment
-          sleuteldatum
-          einddatum
-          beeindigingReden
-          aanbiederBestemming
-          behandelingperiodes{
-            behandelingperiodeID
-            ingangsdatum
-            einddatum
-          }
-        }
-        uitstelperiodes{
-          uitstelperiodeID
-          ingangsdatum
-          vaststellingMoment
-          reden
-          leveringsstatus
-          leveringsstatusClassificatie
-          einddatum
-        }
-        afstel{
-          afstelID
-          afsteldatum
-          vaststellingMoment
-          reden
-          aanbiederBestemming
-        }
-        # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
+      leveringID
+      bemiddelingspecificatieID
+      client {
+        clientID
+        bsn
       }
+      leveringperiodes {
+        leveringperiodeID
+        ingangsdatum
+        vaststellingMoment
+        sleuteldatum
+        einddatum
+        beeindigingReden
+        aanbiederBestemming
+        behandelingperiodes {
+          behandelingperiodeID
+          ingangsdatum
+          einddatum
+        }
+      }
+      uitstelperiodes {
+        uitstelperiodeID
+        ingangsdatum
+        vaststellingMoment
+        reden
+        leveringsstatus
+        leveringsstatusClassificatie
+        einddatum
+      }
+      afstel {
+        afstelID
+        afsteldatum
+        vaststellingMoment
+        reden
+        aanbiederBestemming
+      }
+      # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
     }
   }
+}
