@@ -17,7 +17,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 
 ### Action
 - **Type:** `raadplegen` (read)
-- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) Of [QLR-0001_2-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001_2_ZA.graphql) op het Leveringsregister door een aanbieder. 
+- **Omschrijving:** Uitvoeren van GraphQL-query [QLR-0001-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql)  op het Leveringsregister door een aanbieder. 
 
 ### Resource
 - **Type:** `Leveringsregister`
@@ -26,41 +26,30 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 - **Inhoud:** De nodes Levering en de gerelateerde Leveringperiode, Behandelingperiode, Uitstelperiode, Afstel en Client mogen worden opgevraagd.
 
 ### Context
-- **Query-parameters vereist:** <br>
-
-| QLR-0001_1-ZA | QLR-0001_2-ZA |
-| :--- | :--- |
-| - informatieve `bemiddelingspecificatieID` | - informatieve `bemiddelingspecificatieID` |
-| - eigen `bemiddelingspecificatieID` | - eigen `bemiddelingspecificatieID` |
-| - `bemiddelingID` | - `bemiddelingID` |  
-| - `instelling` | - `instelling` |
-| - `vaststellingMoment` | - `vaststellingMoment`|
-| - `dagVaststellingMoment` | - `dagVaststellingMoment` |
-| - `toewijzingEindatum` |  |
+- **Query-parameters vereist:
+  - informatieve `bemiddelingspecificatieID` 
 
 - **Toegangsvoorwaarde:** Er is alleen toegang als aan alle volgende voorwaarde is voldaan:
     - De parameters zoals hierboven aanwezig zijn; 
-    - De acces-token bevat een geldige `agbcode` van de aanbieder
-    - De `agbcode` van de in de query meegegeven `instelling` komt overeen met de `agbcode`in de acces-token;
-    - In het **Bemiddelingregister** bestaat er een `Bemiddelingspecificatie` waarbij: <ol><li>
-        de `instelling` overeenkomt met de `agbcode` uit de acces-token **én**;<li>
-        deze `bemiddelingspecificatie` hoort bij dezelfde `Bemiddeling` als waar de `bemiddelingspecificatie` waarvoor de `Levering` opgevraagd wordt ook bij hoort **én**;<li>
-        deze bemiddelingspeciifcaties overlappen in periode met elkaar **én**;<li>
-        de `toewijzingEinddatum` is leeg of de `toewijzingEinddatum` + 31 mei is groter dan of gelijk aan het opvraagmoment.</ol>  
+    - De acces-token bevat een geldige `agbcode` van de aanbieder;
+
+    - In het **Bemiddelingsregister** bestaat er een `Bemiddelingspecificatie` waarbij:<br>
+        1. de `instelling` overeenkomt met de `agbcode` uit de acces-token **én**;<br>
+        2. deze `bemiddelingspecificatie` behoort tot dezelfde `Bemiddeling` als waar de `bemiddelingspecificatie` waarvoor de `Levering` opgevraagd wordt ook bij hoort **én;**<br>
+        3. deze `bemiddelingspecificaties` overlappen in periode met elkaar **én;**<br> 
+
     
 
  ### Resultaat
- > Toegang tot het Leveringsregister via query [QLR-0001_1-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001_1-ZA.graphql) of [QLR-0001_2-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001_2_ZA.graphql) is **alleen toegestaan** als:
- >- De relevante parameters aanwezig zijn in de query;
- >- De acces-token bevat een geldige `agbcode`;
- >- De in de query meegegeven `agbcode` in `instelling` komt overeen met de `agbcode` in de acces-token;
- >- In het Bemiddelingsregister is een match gevonden tussen:
- >      - De `agbcode` (uit de acces-token) én;
- >      - En een `bemiddelingspecificatie` die hoort bij een `Bemiddeling` als de `bemiddelingspecificatie` waarvoor de Levering opgevraagd is én; 
- >      - de `toewizjingEinddatum` is leeg of de `toewizingEinddatum` + 31 mei is groter dan of gelijk aan het opvraagmoment én;
- >      - de bemiddelingspecificaties overlappen.
- >
- > Indien aan deze voorwaarden is voldaan, mogen alle graphQl-nodes worden opgevraagd confrom de structuur van de query-template. 
+ > Toegang tot het Leveringsregister via query [QLR-0001-ZA](/iWlz-levering/gql-query/aanbieder/QLR-0001-ZA.graphql) is **alleen toegestaan** als:
+ > - De relevante parameters aanwezig zijn in de query;
+ > - De acces-token bevat een geldige `agbcode`;
+ > - Er een `Bemiddelingspecificatie is voor:
+ >   - De `agbcode` (uit de access-token) én;
+ >   - die hoort bij dezelfde `Bemiddeling` als de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd wordt én;
+>   - die overlapt met de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd wordt
+>
+> Indien aan deze voorwaarden is voldaan, mogen alle bijbehorende GraphQL-nodes worden opgevraagd conform de structuur van de query-template. 
 
 
 ## Toegangscontrole-flows Aanbieder: QLR-0001-ZA
@@ -125,111 +114,92 @@ stateDiagram
 ```
 
 | # | Toelichting |
-| --: | :-- |
-| 1. |Ontvangst GraphQL-request + access-token door **PEP** |
-| 2. |De **PEP** valideert de access-token en geeft na goedkeur het request door aan de PDP |
-| 3. |De **PDP** controleert op:<ol><li>Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd.<li> Aanwezigheid van de verplichte parameters in het request;</ol>Is aan alle voorwaarden voldaan?<br/> - **Ja** →  Controle context-informatie door **PIP**: stap 4<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)* |  
-| 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` waarbij:<br/><ol><li>De `aanbieder` overeenkomt met de `agbcode` uit de access-token, **én** <li>Deze `Bemiddelingspecificatie` behoort tot een `Bemiddeling` waarook de `bemiddelingspecificatie` waarvoor de Levering opgevraagd is bij hoort **én** <li> De `bemiddelingspecificatie` een `toewijzingEinddatum` heeft die leeg is óf de `toewijzingEinddatum`+ 31 mei is groter dan of gelijk aan het opvraagmoment **én**<li> Er overlap is tussen de beide `bemiddelingspecificaties`.</ol><br> Is aan de voorwaarde voldaan: <br> - **Ja** →  Toegang tot de resource: stap 5<br/>- **Nee** → geen toegang tot de resource - *Einde proces (geen toegang.)*  |
+|:--- | :--- |
+| 1. | Ontvangst GraphQL-request + acces-token door **PEP**. |
+| 2. | De **PEP** valideert de acces-token en geeft na goedkeur het request door aan de PDP. |
+| 3. | De **PDP** controleert op: <ol><li> Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd; <li> Aanwezigheid van de verplichte parameters in het request. </ol> Is aan alle voorwaarden voldaan? <br/> - **Ja** -> Controle context-informatie door **PIP**: stap 4. <br/> - **Nee** -> geen toegang tot de resource - *Einde proces (geen toegang)*. |
+| 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` voor het raadplegende zorgkantoor dat overlap heeft met de `Bemiddelingspecificatie` waarvoor de Levering(status) wordt geraadpleegd:<BR/>Hiervoor zijn er twee PIP-requests nodig:<BR/><ol><BR/><li> PIP-context data: Haal context-informatie op van de `Bemiddelingspecificatie` waarvoor de Levering(status) geraadpleegd wordt;<BR/><li> PIP-context validatie: Gebruik de context-informatie uit het PIP-request onder 1 en voeg deze toe aan het PIP-request om te bepalen of er een `Bemiddelingspecificatie is voor het raadplegende zorgkantoor met overlap.<BR/></ol><BR/> Is er (minimaal) één `Bemiddelingspecificatie` voor het raadplegende zorgkantoor aanwezig? <BR/><BR/>- **Ja**  -> Toegang tot de resource: stap 5. <BR/>- **Nee** -> Geen toegang tot de resource - *Einde proces (geen toegang)*. |
 | 5. | De aanbieder krijgt toegang tot de `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`.
 | 6. | *Einde*
 
-## Toegangscontrole PIP:
-Voor QLR-0001_1-ZA
+## Toegangscontrole PIP
 
+### 1. Ophalen Context data Bemiddelingspecificatie
 ```gql
-query Bemiddelingspecificatie(
-    $bemiddelingspecificatieIDEigen: UUID! # afkomstig uit query
-    $instelling: String! # afkomstig uit acces-token
-    $toewijzingIngangsdatum: Date! # afkomstig uit query
-    $vaststellingMoment: DateTime! # afkomstig uit query
-    $dagVaststellingMoment: Date! # afkomstig uit query
-    $toewijzingEinddatum: Date! # afkomstig uit query
-    $bemiddelingID: UUID! # afkomstig uit query
-  ) {
+# Raadplegen PIP contextdata
+# Haal context data op voor de Bemiddelingspecificatie waar inzage in de levering gewenst is.
+# Gebruik deze context data in de toegangscontrole "PIPcontextBSvalidatie"
+
+    query PIPcontextBSdata(
+    $bemiddelingspecificatieID: UUID! # bemiddelingspecificatieID uit initiele raadpleging
+    ) {
     bemiddelingspecificatie(
-        where: {
-            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDEigen}
-            instelling: {eq: $instelling}
-            toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
-            vaststellingMoment: {eq: $vaststellingMoment}
-            toewijzingEinddatum: {eq: $toewijzingEinddatum}
-            and: [ {
-                bemiddeling: {
-                    and: {
-                        bemiddelingID: {eq: $bemiddelingID}
-                    }
-                }
-            }]
-         }
+        where: {bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}}
     ) {
         bemiddelingspecificatieID
-        bemiddeling{
-            bemiddelingID
-            bemiddelingspecificatie(
-                where: {
-                    and: [
-                    {
-                       or: [{ toewijzingEinddatum: { eq: null } }, 
-                       { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
-                       { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
-                    }
-                    { toewijzingIngangsdatum: { ngt: $toewijzingEinddatum } }
-                ]
-            }
-        ){
-                bemiddelingspecificatieID
-        }
+        toewijzingIngangsdatum
+        toewijzingEinddatum
+        vaststellingMoment
     }
-   }
-  }
-  ```
+    }
 
-Voor QLR-0001_2-ZA
+```
+
+### 2. PIP context validatie
+Validatie aanwezigheid *Eigen* Bemiddelingspecificatie met overlap op te vragen Bemiddelingspecificatie (Informatieve)
+
 ```gql
+    # Op basis van de gegevens van de bemiddelingsspecificatie waarvan de leveringstatus geraadpleegd wordt,
+    # controleren of er voor het raadplegende zorgaanbieder een bemiddelingspecifcatie is dat overlapt heeft.
+    # Als het resultaat leeg is, bestaat er geen geldige Bemiddelingspecificatie met overlap
+    # voor het raadplegende zorgaanbieder.
 
- query Bemiddelingspecificatie(
-     $bemiddelingspecificatieIDEigen: UUID! # afkomstig uit query
-    $instelling: String! # afkomstig uit acces-token
-    $toewijzingIngangsdatum: Date! # afkomstig uit query
-    $vaststellingMoment: DateTime! # afkomstig uit query
-    $dagVaststellingMoment: Date! # afkomstig uit query
-    $bemiddelingID: UUID! # afkomstig uit query
-  ) {
-    bemiddelingspecificatie(
-        where: {
-            bemiddelingspecificatieID: {eq: $bemiddelingspecificatieIDEigen}
-            instelling: {eq: $instelling}
-            toewijzingIngangsdatum: {eq: $toewijzingIngangsdatum}
-            vaststellingMoment: {eq: $vaststellingMoment}
-            toewijzingEinddatum: {eq: null}
-            and: [ {
-                bemiddeling: {
-                    and: {
-                        bemiddelingID: {eq: $bemiddelingID}
-                    }
-                }
-            }]
-         }
+    query PIPcontextBSvalidatie(
+    $bemiddelingspecificatieID: UUID! # bemiddelingspecificatieID uit initiele query
+    $agbcodeToken: String! # afkomstig uit token
+    $toewijzingIngangsdatum: Date! # toewijzingIngangsdatum uit PIPcontextdata
+    $toewijzingEinddatum: Date # eventueel toewijzingEinddatum uit PIPcontextdata
+    $toewijzingEinddatumMoment: DateTime # als er een einddatum is + T00:00:00.000+01:00
+    $datumvaststellingMoment: Date! # datumdeel vaststellingsmoment
     ) {
-        bemiddelingspecificatieID
-        bemiddeling{
-            bemiddelingID
-            bemiddelingspecificatie(
-                where: {
-                    and: [
-                    {
-                       or: [{ toewijzingEinddatum: { eq: null } }, 
-                       { toewijzingEinddatum: { gte: $toewijzingIngangsdatum } },
-                       { toewijzingEinddatum: { gte: $dagVaststellingMoment } }]
-                    }
+    bemiddelingspecificatie(
+        where: {bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}}
+    ) {
+        # bemiddelingspecificatieID
+        bemiddeling {
+        # bemiddelingID
+        bemiddelingspecificatie(
+            where: {
+            and: [
+                # Er moet een eigen.bemiddelingspecificatie zijn voor opvragende zorgaanbieder
+                {instelling: {eq: $agbcodeToken}}
+                # eigen.bspec.toewijzingIngangsdatum lte opgevraagde.Bspec.toewijzingEinddatum of
+                # eigen.bspec.vaststellingsmoment lte opgevraagde.bspec.toewijzingeinddatum
+                {
+                or: [
+                    {toewijzingIngangsdatum: {lte: $toewijzingEinddatum}}
+                    {vaststellingMoment: {lte: $toewijzingEinddatumMoment}}
                 ]
+                }
+                # eigen.bspec.toewijzingEinddatum is null of
+                # eigen.bspec.toewijzingEinddatum gte opgevraagde.bspec.toewijzingIngangsdatum of
+                # eigen.bspec.toewijzingEinddatum gte opgevraagde.bspec.vaststellingMoment
+                {
+                or: [
+                    {toewijzingEinddatum: {eq: null}}
+                    {toewijzingEinddatum: {gte: $toewijzingIngangsdatum}}
+                    {toewijzingEinddatum: {gte: $datumvaststellingMoment}}
+                ]
+                }
+                # die toegang geldt t/m 31 mei van het jaar dat volgt op de einddatum van de eigen Bemiddelingspecificatie.
+            ]
             }
-        ){
-                bemiddelingspecificatieID
+        ) {
+            bemiddelingspecificatieID
+        }
         }
     }
-   }
-  }
+    }
 ```
 ----
 
