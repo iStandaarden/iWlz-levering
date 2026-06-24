@@ -1,11 +1,12 @@
 name: Publish new version of Leveringsregister
+
 on:
   workflow_dispatch:
   push:
     branches:
       - Leveringsregister-*
-    paths:
-      - 'gql-specificaties/Leveringsregister.graphql'
+    # paths:
+    #   - 'gql-specificaties/**'
 
 jobs:
   publish:
@@ -29,6 +30,7 @@ jobs:
           files: gql-specificaties/Leveringsregister.graphql
           generate_release_notes: true
           body: |
-            Automatisch gegenereerde release van de  Koppelvlakspecificatie ${GITHUB_REF_NAME}. Version: ${{ steps.version.outputs.version }}.
+            Automatisch gegenereerde release van de Koppelvlakspecificatie voor branch `${{ github.ref_name }}`.
+            Version: ${{ steps.version.outputs.version }}.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
