@@ -41,17 +41,17 @@ Een aanbieder mag voor het leveren van zorg en ondersteuning aan een cliënt de 
 
 | **Query ID** | **Beschrijving** | **Verplichte input** | **resultaat** |
 |---|---|---|---|
-| [QLR-0001_1-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) |Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingingangsdatum, vaststellingMoment, en toewijzingEinddatum de Levering (en overige toegestane informatie) raadplegen, die hoort bij de informatieve toewijzing. |  `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `instelling`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
-| [QLR-0001_2](/iWlz-levering/gql-query/aanbieder/QLR-0001_2_ZA.graphql) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing, de eigen bemiddelingspecificatieID, eigen identificatie, toewijzingingangsdatum en vaststellingMoment, de Levering (en overige toegestane informatie) raadplegen, die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDEigen`, `bemiddelingspecificatieIDInformatieve`, `instelling`, `toewijzingIngangsdatum`, `vaststellingMoment`, `dagVaststellingMoment`, `toewijzingEinddatum`, `bemiddelingID` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client |
+| [QLR-0001-ZA](/gql-query/aanbieder/QLR-0001-ZA.graphql) |Op basis van de bemiddelingspecificatieID van de informatieve toewijzing de Levering (en overige toegestane informatie) raadplegen, die hoort bij de informatieve toewijzing. |   `bemiddelingspecificatieIDInformatieve` | Levering / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel / Client | 
+
 
 
 ## **Proces raadplegen**
 
-Een aanbieder is bij de zorg van een cliënt betrokken door het zorgkantoor. Met aanvullende informatie uit de overlappende bemiddelingspecificatie en de aanvullende informatie van de eigen bemiddelingspecificatie (zie ook [UCBR-0002_3](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgaanbieder/UCBR-0002_3-raadplegen.md)) kan de aanbieder de status van de levering zien die horen bij de informatieve toewijzing (bemiddelingspecificatie). 
-Hiervoor zijn naast de informatieve `bemiddelingspecificatieID` ook de eigen `bemiddelingspecificatieID` en de eigen `agbcode` nodig. Tevens is van de eigen bemiddelingspecificatie ook de`bemiddelingID`, `toewijzingsIngangsdatum`, het `vaststellingMoment` en de `toewijzingEinddatum` nodig. De toewijzingEinddatum is allen nodig zodra de eigen bemiddelingspecificatie een toewijzingEinddatum heeft.
+Een aanbieder is bij de zorg van een cliënt betrokken door het zorgkantoor. Met aanvullende informatie uit de overlappende bemiddelingspecificatie  (zie ook [UCBR-0002_3](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgaanbieder/UCBR-0002_3-raadplegen.md)) kan de aanbieder de status van de levering zien die bij de informatieve toewijzing (bemiddelingspecificatie) https://github.com/iStandaarden?view_as=public.  
+
+Hiervoor is de informatieve `bemiddelingspecificatieID` nodig. 
 
 ### Schematisch:
-
 ```mermaid
 ---
 config:
@@ -60,65 +60,49 @@ config:
 ---
 stateDiagram
   direction TB
-  state bemiddelingspecificatie {
+  state s4 {
     direction TB
-    notifyWait
+    s4_1
   }
-  state s3 {
-    direction TB
-    s6 --> raadplegen1:Ja
-    s6 --> s4:Nee
-    raadplegen1 --> query
-    s4 --> s7
-    s6
-    raadplegen1
-    s4
-    query
-    s7
-  }
-  [*] --> raadplegen
-  raadplegen --> idAvailable
-  idAvailable --> notifyWait:nee
-  notifyWait --> [*]
-  query --> SENT
-  SENT --> PEP
-  PEP --> [*]:geen toegang
-  PEP --> resource:toegang
-  resource --> [*]
-  idAvailable --> s3
-  s7 --> SENT
-  bemiddelingspecificatie:overlappende bemiddelingspecificaties
-  notifyWait:(3) Ga naar de andere beschrijving
-notifyWait:UCBR-0002_3-raadplegen
 
-  s3:Status Levering en overige gegevens raadplegen
-  s6:(4) heeft eigen bemiddelingspecificatie een toewizjingEInddatum?
-  raadplegen1:(5) Gebruik infomatieve bemiddelingspecificatieID + agbcode + eigen bemiddelingspecificatieID + bemiddelingID + toewijzingIngangsdatum + vaststellingMoment + dagVaststellingMoment + toewijzingEinddatum
-  s4:(6) Gebruik informatieve bemiddelingspecificatieID + agbcode + eigen bemiddelingspecificatieID + bemiddelingID + toewijzingIngangsdatum + vaststellingMoment + dagVaststellingMoment
-  query:Gebruik template <br>QLR-0001_1-ZA
-  s7:Gebruik template <br>QLR-0001_2-ZA
-  raadplegen:(1) raadplegen Leveringsregister voor status Levering(en)
-  idAvailable:(2) informatieve bemiddelingspecificatieID, eigen bemiddelingspecificatieID en toewijzingIngangsdatum bekend?
-  SENT:(7) Insturen Query
-  PEP:(8) Toegangscontrole PEP
-  style notifyWait fill:#FFD600
-  style query,s7 fill:#00C853
+  s1 --> s2
+  s2 --> s4:Nee
+  [*] --> s1
+  s4_1 --> [*]
+  s2 --> s6:Ja
+  s6 --> s13
+  s13 --> s14
+  s14 --> s15:Toegang
+  s14 --> [*]:Geen toegang
+  s15 --> [*]
+
+    s1:(1) Raadplegen Leveringsregister voor status Levering
+    s2:(2) informatieve bemiddelingspecificatieID bekend?
+    s4:Eigen- en overlappende toewijzingen raadplegen
+    s4_1:(3) Ga naar de andere beschrijving
+    s4_1: UCBR-0002_3-raadplegen
+
+    s6: (4) Gebruik template QLR-0001-ZA
+
+
+  s13:(5) Insturen Query
+  s14:(6) Toegangscontrole PEP
+  s15:Resource
+  style s4_1 fill:#FFD600
+  style s6 fill:#00C853
+
 ```
 
-| # | Toelichting |
-| ---: | :--- |
-| 1. | Start raadplegen Leveringsregister. |
-| 2. | Zijn de informatieve- en eigen `bemiddelingspecificatieID` en `toewijzingIngangsdatum` bekend?<br/> - **Ja** -> ga verder naar stap 4. <br/> - **Nee** -> Ga naar stap 3. |
-| 3. | Gebruik eerst query-template `QBR-0002_3-ZA` (zie beschrijving [UCBR-0002_3-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgaanbieder/UCBR-0002_3-raadplegen.md)). |
-| 4. | Heeft de eigen `bemiddelingspecificatie` (inmiddels) een`toewijzingEinddatum`? <br/> - **Ja** -> ga verder naar stap 5 <br/> - **Nee** -> Ga verder naar stap 6 |
-| 5. | Gebruik query-template `QLR-0001_1-ZA` en vul de verplichte parameters: <br/> - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `instelling`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`;<br> - `dagVaststellingMoment`; <br> - `toewijzingEinddatum`. |
-| 6. | Gebruik query-template `QLR-0001_2-ZA` en vul de verplichte parameters: <br/>  - `bemiddelingspecificatieIDEigen`; <br> - `bemiddelingspecificatieIDInformatieve`; <br> - `instelling`; <br> - `toewijzingIngangsdatum`; <br> - `vaststellingMoment`; <br> - `dagVaststellingMoment`.
-| 7. | De **aanbieder** stuurt Graphql-request + Acces-token naar het Policy Enforcement Point (PEP). |
-| 8. | De PEP voert de [toegangscontrole](/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) uit en stuurt bij toegang het request door naar het leveringsregister. |
-| 9. | De aanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
-| 10. | *Einde proces* | 
-
-
+| #    | Toelichting |
+| :--- | :----- |
+| 1.   | Start raadplegen Leveringsregister   |
+| 2.   | Is de informatieve `bemiddelingsspecificatieID` bekend?<br> - **Ja** -> Ga verder naar stap 4. <br> - **Nee** -> Ga verder naar stap 3  |
+| 3.   | Gebruik eerst query-template `QBR-0002_3-ZA` (zie beschrijving [UCBR-0002_3-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgaanbieder/UCBR-0002_3-raadplegen.md)). |
+| 4.   |  Gebruik query-template `QLR-0001-ZA` en vul de verplichte parameters:  <br> - `bemiddelingspecificatieIDInformatieve`;   |
+| 5.   | De zorgaanbieder stuurt GraphQL-request + Acces-token naar het Policy Enforcement Point (PEP). |
+| 6.   | De PEP voert de [toegangscontrole](/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) uit en stuurt bij toegang het request door naar het Leveringsgregister.  |
+| 7.   | De zorgaanbieder ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource). |
+| 8.   | *Einde proces*  |
 ---
 
 Ga naar beschrijving van de bijbehorende [toegangscontrole](/raadplegen/aanbieder/UCLR-0001-toegangscontrole.md) | Terug naar [Raadplegen](/raadplegen/README.md)

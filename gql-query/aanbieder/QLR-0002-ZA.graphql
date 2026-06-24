@@ -50,6 +50,7 @@ query VerzoekAanbieder(
                     bsn 
                 }
             }
+            # De overige nodes mogen niet worden opgevraagd, via dit verzoek.
         }
     }
 }
