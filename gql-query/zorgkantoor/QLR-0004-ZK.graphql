@@ -1,7 +1,8 @@
 # QLR-0004-ZK.graphql
 # Query voor zorgkantoor op Leveringsregister
 # Verplichte input:
-#   - verzoekID
+#   - verzoekID (uit notificatie)
+#   - bemiddelingspecificatieID (uit notificatie)
 
 query Verzoek(
     $verzoekID: UUID!
