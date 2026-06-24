@@ -27,7 +27,7 @@ jobs:
         with:
           tag_name: v.${{ steps.version.outputs.version }}
           name: Release ${{ steps.version.outputs.version }}
-          files: gql-specificaties/Leveringsregister.graphql
+          files: gql-specificatie/Leveringsregister.graphql
           generate_release_notes: true
           body: |
             Automatisch gegenereerde release van de Koppelvlakspecificatie voor branch `${{ github.ref_name }}`.
