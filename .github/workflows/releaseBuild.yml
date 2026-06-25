@@ -70,5 +70,7 @@ jobs:
             - Querytemplate-wijziging (in gql-query/): ${{ steps.changes.outputs.gql_query }}
             - Notificaties (in notificaties/): ${{ steps.changes.outputs.notificaties }}
             - Raadpleeg en controle usecases (in raadplegen/): ${{ steps.changes.outputs.raadplegen }}
+
+            Voor meer informatie over de wijzigingen, zie hieronder.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
