@@ -5,8 +5,9 @@ on:
   push:
     branches:
       - Leveringsregister-*
+    # alleen als het schema is gewijzigd voeg paths toe.  
     # paths:
-    #   - 'gql-specificaties/**'
+    #   - 'gql-specificatie/**'
 
 jobs:
   publish:
@@ -50,9 +51,6 @@ jobs:
           echo "gql_query=$(check_dir 'gql-query/')" >> "$GITHUB_OUTPUT"
           echo "notificaties=$(check_dir 'notificaties/')" >> "$GITHUB_OUTPUT"
           echo "raadplegen=$(check_dir 'raadplegen/')" >> "$GITHUB_OUTPUT"
-
-      - name: Prepare schema.graphql copy
-        run: cp gql-specificaties/Leveringsregister.graphql gql-specificaties/schema.graphql
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
