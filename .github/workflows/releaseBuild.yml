@@ -5,8 +5,9 @@ on:
   push:
     branches:
       - Leveringsregister-*
+    # alleen als het schema is gewijzigd voeg paths toe.  
     # paths:
-    #   - 'gql-specificaties/**'
+    #   - 'gql-specificatie/**'
 
 jobs:
   publish:
@@ -51,9 +52,6 @@ jobs:
           echo "notificaties=$(check_dir 'notificaties/')" >> "$GITHUB_OUTPUT"
           echo "raadplegen=$(check_dir 'raadplegen/')" >> "$GITHUB_OUTPUT"
 
-      - name: Prepare schema.graphql copy
-        run: cp gql-specificaties/Leveringsregister.graphql gql-specificaties/schema.graphql
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -66,10 +64,12 @@ jobs:
             Version: ${{ steps.version.outputs.version }}.
 
             **Release bevat de volgende wijzigingen in de volgende onderdelen:**
-            - Schema-wijziging (in gql-specificaties/): ${{ steps.changes.outputs.gql_specificaties }}
-            - Querytemplate-wijziging (in gql-query/): ${{ steps.changes.outputs.gql_query }}
-            - Notificaties (in notificaties/): ${{ steps.changes.outputs.notificaties }}
-            - Raadpleeg en controle usecases (in raadplegen/): ${{ steps.changes.outputs.raadplegen }}
+            | Onderdeel | Wijziging |
+            |-----------|-----------|
+            | Schema-wijziging (in gql-specificaties/): | ${{ steps.changes.outputs.gql_specificaties }} |
+            | Querytemplate-wijziging (in gql-query/): | ${{ steps.changes.outputs.gql_query }} |
+            | Notificaties (in notificaties/): | ${{ steps.changes.outputs.notificaties }} |
+            | Raadpleeg en toegangs usecases (in raadplegen/): | ${{ steps.changes.outputs.raadplegen }} |
 
             Voor meer informatie over de wijzigingen, zie hieronder.
         env:
