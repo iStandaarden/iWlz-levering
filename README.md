@@ -15,6 +15,10 @@
 
 Het leveringsregister is in beheer bij de zorgaanbieder en is de bronhouder. Het leveringsregister is onderdeel van het iWlz-netwerkmodel.
 
+> [!NOTE] 
+> [![Latest Release](https://img.shields.io/github/v/release/iStandaarden/iWlz-Levering?label=latest%20release&style=flat-square)](https://github.com/iStandaarden/iWlz-levering/releases)
+> ![Release Date](https://img.shields.io/github/release-date/iSTandaarden/iWlz-Levering?style=flat-square)
+
 ---
 **Inhoud**
 - [iWlz-levering 1](#iwlz-levering-1)
