@@ -27,7 +27,7 @@ Het leveringsregister is in beheer bij de zorgaanbieder en is de bronhouder. Het
     - [Notificaties](#notificaties)
   - [**Raadplegen Leveringsregister**](#raadplegen-leveringsregister)
     - [Scopes - Leveringsregister](#scopes---leveringsregister)
-      - [Raadplegen van het indicatieregister](#raadplegen-van-het-indicatieregister)
+      - [Raadplegen van het Leveringsregister](#raadplegen-van-het-leveringsregister)
       - [Notificeren](#notificeren)
       - [Melden aan het zorgkantoor](#melden-aan-het-zorgkantoor)
   - [Autorisatieregels en autorisatiematrix](#autorisatieregels-en-autorisatiematrix)
@@ -97,9 +97,9 @@ Meer informatie over de structuur van het raadplegen en het valideren ervan is t
 ### Scopes - Leveringsregister
 Het Access-token bevat specifieke gegevens die worden gebruikt om de toegang tot resources te autoriseren en te valideren. Een van de gegevens is de scope. Voor het Leveringsregister zijn er momenteel de volgende scopes actief.
 
-####  Raadplegen van het indicatieregister
+####  Raadplegen van het Leveringsregister
 
-Voor het mogen raadplegen van het indicatieregister moet de volgende scope worden meegegeven:
+Voor het mogen raadplegen van het leveringsregister moet de volgende scope worden meegegeven:
 
 >   `registers/leveringsregister/leveringen:read`
 
