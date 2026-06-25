@@ -64,10 +64,12 @@ jobs:
             Version: ${{ steps.version.outputs.version }}.
 
             **Release bevat de volgende wijzigingen in de volgende onderdelen:**
-            - Schema-wijziging (in gql-specificaties/): ${{ steps.changes.outputs.gql_specificaties }}
-            - Querytemplate-wijziging (in gql-query/): ${{ steps.changes.outputs.gql_query }}
-            - Notificaties (in notificaties/): ${{ steps.changes.outputs.notificaties }}
-            - Raadpleeg en controle usecases (in raadplegen/): ${{ steps.changes.outputs.raadplegen }}
+            | Onderdeel | Wijziging |
+            |-----------|-----------|
+            | Schema-wijziging (in gql-specificaties/): | ${{ steps.changes.outputs.gql_specificaties }} |
+            | Querytemplate-wijziging (in gql-query/): | ${{ steps.changes.outputs.gql_query }} |
+            | Notificaties (in notificaties/): | ${{ steps.changes.outputs.notificaties }} |
+            | Raadpleeg en toegangs usecases (in raadplegen/): | ${{ steps.changes.outputs.raadplegen }} |
 
             Voor meer informatie over de wijzigingen, zie hieronder.
         env:
