@@ -105,7 +105,7 @@ Het Access-token bevat specifieke gegevens die worden gebruikt om de toegang tot
 
 Voor het mogen raadplegen van het leveringsregister moet de volgende scope worden meegegeven:
 
->   `registers/leveringsregister/leveringen:read`
+>   `registers/leveringsregister/leveringen/levering:read`
 
 #### Notificeren 
 
@@ -117,7 +117,7 @@ of
 
 > `organisaties/zorgaanbieder/notificaties/notificatie:create`
 
-#### Melden aan het zorgkantoor
+#### Melden aan de zorgaanbieder
 
 Voor het mogen versturen van meldingen aan de aanbieder moet de volgende scope worden meegegeven:
 
