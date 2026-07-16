@@ -41,6 +41,9 @@ type Query {
   " voor het opvragen van leveringperiodes "
   leveringperiode(where: LeveringperiodeFilterInput): [Leveringperiode!]
 
+  "voor het opvragen van behandelingperiodes"
+  behandelingperiode(where: BehandelingPeriodeFilterInput): [BehandelingPeriode!]
+
   "voor het opvragen van uitstelperiodes"
   uitstelperiode(where: UitstelperiodeFilterInput): [Uitstelperiode!]
 
