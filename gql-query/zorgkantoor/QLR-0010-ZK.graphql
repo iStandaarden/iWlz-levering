@@ -1,0 +1,74 @@
+# QLR-0010-ZK.graphql
+# Query voor zorgkantoor op Leveringsregister
+# volledig overzicht vanuit een behandelingperiode
+# Verplichte input:
+#  - behandelingperiodeID (uit notificatie)
+#  - bemiddelingspecificatieID (uit notificatie)
+
+query Behandelingperiode(
+  $behandelingperiodeID: UUID!
+  $bemiddelingspecificatieID: UUID!
+) {
+  behandelingperiode(
+    where: { behandelingperiodeID: { eq: $behandelingperiodeID } }
+  ) {
+    behandelingperiodeID
+    ingangsdatum
+    einddatum
+    leveringperiode {
+      leveringperiodeID
+      ingangsdatum
+      vaststellingMoment
+      sleuteldatum
+      einddatum
+      beeindigingReden
+      aanbiederBestemming
+      behandelingperiodes {
+        behandelingperiodeID
+        ingangsdatum
+        einddatum
+      }
+      levering(
+        where: { bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID } }
+      ) {
+        leveringID
+        client {
+          clientID
+          bsn
+        }
+        bemiddelingspecificatieID
+        leveringperiodes {
+          leveringperiodeID
+          ingangsdatum
+          vaststellingMoment
+          sleuteldatum
+          einddatum
+          beeindigingReden
+          aanbiederBestemming
+          behandelingperiodes {
+            behandelingperiodeID
+            ingangsdatum
+            einddatum
+          }
+        }
+        uitstelperiodes {
+          uitstelperiodeID
+          ingangsdatum
+          vaststellingMoment
+          reden
+          leveringsstatus
+          leveringsstatusClassificatie
+          einddatum
+        }
+        afstel {
+          afstelID
+          afsteldatum
+          vaststellingMoment
+          reden
+          aanbiederBestemming
+        }
+        # Verzoek mag hier (nog) niet worden opgevraagd omdat deze query ook voor een uitvoerend zorgkantoor van toepassing is
+      }
+    }
+  }
+}
