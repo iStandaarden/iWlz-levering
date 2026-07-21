@@ -22,7 +22,7 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van de ze be
 - **Type:** `Wlz Leveringsregister`
 - **ID:** `behandelingperiodeID`; `bemiddelingspecificatieID`
 - **Beperking:** Alleen toegang tot gegevens van de behandelingperiode (en overige informatie) waarvoor het zorgkantoor:
-  1. Aan te merken is als het uitvoerend zorgkantoor voor de Bemiddelingspecificatie waaraan de Behandelingperiode via Leveringperiode en Levering is gekoppeld;
+  1. Aan te merken is als het uitvoerend zorgkantoor voor de Bemiddelingspecificatie waaraan de Behandelingperiode via Leveringperiode en Levering is gekoppeld; **óf** 
   2. Aan te merken is als een verantwoordelijk zorgkantoor, die betrokken is bij dezelfde Bemiddeling waaronder de Bemiddelingspecificatie valt waaraan de Behandelingperiode via Leveringsperiode en Levering is gekoppeld. 
 - **Inhoud:** Alle nodes, behalve `Verzoek` en `VerzoekAanbieder`, in het GraphQL-schema die horen bij deze `behandelingperiode` mogen direct worden opgevraagd
 
