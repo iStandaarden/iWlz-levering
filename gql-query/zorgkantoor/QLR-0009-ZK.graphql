@@ -1,12 +1,12 @@
 # QLR-0009-ZK.graphql
 # Query voor uitvoerend zorgkantoor op Leveringsregister, raadplegen status Levering informatieve bemiddelingspecificatie
 # Verplichte input:
-# - bemiddelingspecificatieIDInformatief
+# - bemiddelingspecificatieID
 
-query Levering($bemiddelingspecificatieIDInformatief: UUID!) {
+query Levering($bemiddelingspecificatieID: UUID!) {
   levering(
     where: {
-      bemiddelingspecificatieID: { eq: $bemiddelingspecificatieIDInformatief }
+      bemiddelingspecificatieID: { eq: $bemiddelingspecificatieID }
     }
   ) {
     leveringID

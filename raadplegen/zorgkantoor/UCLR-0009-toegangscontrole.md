@@ -10,8 +10,8 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
 ## Toegangscontrole PDP
 
 ### Subject
-* **Entiteit:** Uitvoerend zorgkantoor
-* **Kenmerk:** In bezit van een access-token met daarin de eigen uzovicode
+* **Entiteit:** Uitvoerend zorgkantoor (bovenregionaal)
+* **Kenmerk:** In bezit van een access-token met daarin de eigen `uzovicode`
 
 ### Action
 * **Type:** `raadplegen` (read)
@@ -28,25 +28,74 @@ N.b. Het valideren van de Acces-token door de PEP is geen onderdeel van deze bes
   - informatieve `bemiddelingspecificatieID`
 
 - **Toegangsvoorwaarde:** Er is alleen toegang als aan alle volgende voorwaarden is voldaan:
-    - De parameters zoals hierboven aanwezig zijn;
-    - De **access-token** bevat een geldige `uzovicode`van het zorgkantoor;
-    - In het **Bemiddelingsregister** bestaat er een `Bemiddelingspecificatie` waarbij:<br>
-        1. het `uitvoerendZorgkantoor` overeenkomt met de `uzovicode`uit de acces-token **én;**<br>
-        2. deze `bemiddelingspecificatie` behoort tot dezelfde `Bemiddeling` als waar de `bemiddelingspecificatie` waarvoor de `Levering` opgevraagd wordt ook bij hoort **én;**<br>
-        3. deze `bemiddelingspecificaties`overlappen in periode met elkaar **én;**<br>
- 
+
+1. Ophalen benodigde context data (PIP)
+    Input:
+    - `bemiddelingspecificatieID` uit de raadpleeg-query
+    - `uzoviCode` uit de accestoken
+
+```graphQl
+query PIPcontextBSdata(
+    $bemiddelingspecificatieID: UUID! # bemiddelingspecificatieID uit initiele raadpleging
+    $tokenUzovi: String!
+){
+    # de opgevraagde bemiddelingspecificatie
+    bemiddelingspecificatie(
+        where: { bemiddelingspecificatieID: { EQ: $bemiddelingspecificatieID } }
+    ) {
+        bemiddelingspecificatieID
+        toewijzingIngangsdatum
+        toewijzingEinddatum
+        vaststellingMoment
+        bemiddeling {
+            # de bemiddelingspecificatie van het raadplegende zorgkantoor
+            bemiddelingspecificatie(
+                where: { uitvoerendZorgkantoor: { eq: $tokenUzovi } }
+            ) {
+                toewijzingIngangsdatum
+                toewijzingEinddatum
+                vaststellingMoment
+            }
+        }
+    }
+}
+```
+2. Bepalen toegang op basis van de verkregen context-data uit stap 1.\
+   De beoordeling gaat op basis van de ontvangen contextdata en zal plaatsvinden op basis van de (REGO) policy-beoordeling door de PDP. De policy zal de volgende afweging moeten doorlopen om te bepalen of het raadplegende zorgkantoor toegang krijgt tot de opgevraagde Leveringen bij de  Bemiddelingspecificatie.\
+\
+   Op basis van de context-data uit stap 1, is er: 
+    1. **Geen enkele** `Bemiddelingspecificatie` voor het raadplegende zorgkantoor in de contextdata.   
+    Resultaat: **Geen toegang**
+
+    2. **Tenminste 1** `Bemiddelingspecificatie` voor het raadplegende zorgkantoor in de contextdata moet voldoen aan de volgende overlap-voorwaarden.  
+    Er moet beoordeeld worden of tenminste 1 `Bemiddelingspecificatie` overlap heeft met de te raadplegen `Bemiddelingspecificatie` waarvan:
+        1.  de `eigen.bspec.toewijzingIngangsdatum` *kleiner of gelijk* is aan de `opgevraagde.bspec.toewijzingEinddatum` ***of***  
+          de `eigen.bspec.vaststellingMoment` *kleiner of gelijk* is aan de `opgevraagde.bspec.toewijzingEinddatum`;  
+          **èn**
+        2. de `eigen.bspec.toewijzingEinddatum` is null (leeg) ***of***  
+          de `eigen.bspec.toewijzingEinddatum` *groter of gelijk* is aan de `opgevraagde.bspec.toewijzingIngangsdatum` ***of***  
+          de `eigen.bspec.toewijzingEinddatum` *groter of gelijk* is aan de `opgevraagde.bspec.vaststellingMoment`  
+          
+      Voldoet geen van de gevonden `Bemiddelingspecificatie` van het raadplegende zorgkantoor aan de overlap voorwaarden?  
+      Resultaat: **Geen toegang**\
+\
+   3. De toegang geldt t/m 31 mei van het jaar dat volgt op de einddatum van de eigen Bemiddelingspecificatie (`eigen.bspec.toewijzingEinddatum`).\
+\
+   Van de overlappende `Bemiddelingspecificatie`: 
+    1. is er een `eigen.bspec.toewijzingEinddatum` is null (leeg) -> Resultaat: **Toegang** 
+    2. Valt de datum van raadplegen *voor of op* 31 mei van het jaar dat volgt op de grootst gevonden `eigen.bspec.toewijzingEinddatum` -> Resultaat: **Toegang**\
+\
+    Voldoet geen van de gevonden `Bemiddelingspecificatie` van het raadplegende zorgkantoor aan de toegangs voorwaarden?  
+    Resultaat: **Geen toegang**
 
 ### Resultaat 
 
-> Toegang tot het Leveringsregister via query [QLR-0009-ZK](/gql-query/zorgkantoor/QLR-0009-ZK.graphql) is **alleen toegestaan** als:
->- De relevante parameters aanwezig zijn per query;
->- De acces-token bevat een geldige `uzovicode`;
->- Er een `Bemiddelingspecificatie` is voor:
->   - de uzovicode (uit de acces-token) én;
->   - die hoort bij dezelfde `Bemiddeling` als de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd wordt én;
->   - die overlapt met de `bemiddelingspecificatie` waarvoor de `levering` opgevraagd wordt
->
->Indien aan deze voorwaarden is voldaan, mogen alle bijbehorende GraphQL-nodes worden opgevraagd conform de structuur van de query-template. 
+Toegang tot het Bemiddelingsregister via query [QLR-0009](/gql-query/zorgkantoor/QLR-0009-ZK.graphql) is **alleen toegestaan** als:
+- Parameter `bemiddelingspecificatieID` is meegegeven in de query
+- De acces-token bevat een geldige `uzovicode`
+- De PIP raadplegeing context-data oplevert die volgens de gestelde voorwaarden toegang geeft.
+
+Als aan alle voorwaarden is voldaan, mogen de nodes `Levering`, `Leveringperiode`, `Behandelingperiode`, `Afstel`, `Uitstelperiode` en `Client` die horen bij deze `Bemiddelingspecificatie` direct worden opgevraagd. 
 
 
 ## Toegangscontrole-flows Zorgkantoor:"QLR-0009-ZK"
@@ -62,50 +111,60 @@ config:
 ---
 stateDiagram
   direction TB
+  [*] -->  indienen
+  indienen --> validerenT
   state PEP {
     direction TB
-    validerenT
+
+    validerenT --> validerenR: access-token is geldig
     state PDP {
-      direction TB
-      validerenR --> checkInput01
-      state check01 <<choice>>
+    validerenR --> checkInput01
+    state check01 <<choice>>
+    checkInput01 --> check01
 
-      checkInput01 --> check01
-      check01 --> error:nee
-      state PIP {
-        direction TB
-        state check02 <<choice>>
-
-        checkInput02 --> check02
-        check02
-        checkInput02
-      }
-      access
+    check01 --> checkInput02:ja
+    check01 --> error:nee
+    state PIP {
+        checkInput02 --> checkInput03
+        }
+    state check02 <<choice>>
+    state check03 <<choice>>
+    
+    checkInput03 --> check02
+        
+        check02 --> error:nee
+        check02 --> checkOVerlap:ja           
+    checkOVerlap --> check03
+    check03 --> access:ja
+    check03 --> error:nee
+    checkInput03
+    error
+    access
     }
+
   }
-  [*] --> indienen
-  indienen --> validerenT
-  validerenT --> validerenR:access-token is geldig
-  check01 --> checkInput02:ja
-  check02 --> error:nee
-  check02 --> access:ja
-  error --> [*]
-  access --> resource
+
+  error --> [*]: deny
+  access --> resource: allow
   resource --> [*]
+  
   PEP:Autorisatie controle PEP
-  validerenT:Valideer access token
   PDP:Toegangscontrole PDP
-  validerenR:Valideer Request
-  checkInput01:Check verplichte input aanwezig?
-  error:geen toegang tot Resource
   PIP:Contextinformatie controle PIP
-  checkInput02: Heeft het zorgkantoor een Bemiddelingspecificatie met overlap met de Bemiddelingspecificatie waarvan de Levering wordt opgevraagd?
+  indienen: Ontvang QLR-0009-ZKu + Access token
+  validerenT: Valideer access token
+  validerenR: Valideer Request
+  checkInput01:bemiddelingspecificatieID aanwezig?
+  checkInput02:Contextdata ophalen
+  checkInput03:Contextdata aanwezig?
+  checkOVerlap:Overlapping contextdata aanwezig en binnen toegangsperiode?
+  error:geen toegang tot Resource
+
   access:toegang tot Resource
-  indienen:Ontvang QLR-0009-ZK + Access token
-  resource:Query mag door naar Leveringsregister
-  style validerenR,checkInput01,checkInput02 fill:#FFD600
+  resource: Query mag door naar Leveringsregister
+  style validerenR,checkInput01,checkInput02,checkInput03,checkOVerlap fill:#FFD600
   style error fill:#D50000
-  style access,resource fill:#00C853
+  style access,Query,resource fill:#00C853
   style indienen fill:#BBDEFB,color:none
 ```
 
@@ -113,89 +172,10 @@ stateDiagram
 |:--- | :--- |
 | 1. | Ontvangst GraphQL-request + acces-token door **PEP**. |
 | 2. | De **PEP** valideert de acces-token en geeft na goedkeur het request door aan de PDP. |
-|3. | De **PDP** controleert op: <ol><li> Of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd; <li> Aanwezigheid van de verplichte parameters in het request. </ol> Is aan alle voorwaarden voldaan? <br/> - **Ja** -> Controle context-informatie door **PIP**: stap 4. <br/> - **Nee** -> geen toegang tot de resource - *Einde proces (geen toegang)*. |
-| 4. | De **PIP** controleert in het `Bemiddelingsregister` op de aanwezigheid van een `Bemiddelingspecificatie` voor het raadplegende zorgkantoor dat overlap heeft met de `Bemiddelingspecificatie` waarvoor de Levering(status) wordt geraadpleegd:<BR/>Hiervoor zijn er twee PIP-requests nodig:<BR/><ol><BR/><li> PIP-context data: Haal context-informatie op van de `Bemiddelingspecificatie` waarvoor de Levering(status) geraadpleegd wordt;<BR/><li> PIP-context validatie: Gebruik de context-informatie uit het PIP-request onder 1 en voeg deze toe aan het PIP-request om te bepalen of er een `Bemiddelingspecificatie is voor het raadplegende zorgkantoor met overlap.<BR/></ol><BR/> Is er (minimaal) één `Bemiddelingspecificatie` voor het raadplegende zorgkantoor aanwezig? <BR/><BR/>- **Ja**  -> Toegang tot de resource: stap 5. <BR/>- **Nee** -> Geen toegang tot de resource - *Einde proces (geen toegang)*. |
-| 5. | Het zorgkantoor krijgt toegang tot `Levering`, met bijbehorende `Leveringperiode`, `Behandelingperiode`, `Uitstelperiode` en `Afstel`. |
-| 6. | *Einde* | 
+|3. | De **PDP** voert de volgende stappen uit:<br/>1. controleer of het request voldoet aan de template en er geen ongeoorloofde gegevens worden opgevraagd.<br/>2. Aanwezigheid van de verplichte parameters in het request;<br/>3. Laat **PIP** context-data ophalen;<br/>4. Beoordeel de aanwezigheid van de context-data en de voorwaarden van toegang. <br/><br/>Is aan alle voorwaarden voldaan?<br/> - **Ja** →  Ga verder naar stap 4<br/>- **Nee** → *Einde proces (geen toegang.)*   |
+| 4. | Het zorgkantoor krijgt toegang tot het Leveringsregister.|
+| 5. | *Einde* |
 
-  
-## Toegangscontrole PIP
-
-### 1. Ophalen Context data Bemiddelingspecificatie
-```gql
-# Raadplegen PIP contextdata
-# Haal context data op voor de Bemiddelingspecificatie waar inzage in de levering gewenst is.
-# Gebruik deze context data in de toegangscontrole "PIPcontextBSvalidatie"
-
-    query PIPcontextBSdata(
-    $bemiddelingspecificatieID: UUID! # bemiddelingspecificatieID uit initiele raadpleging
-    ) {
-    bemiddelingspecificatie(
-        where: {bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}}
-    ) {
-        bemiddelingspecificatieID
-        toewijzingIngangsdatum
-        toewijzingEinddatum
-        vaststellingMoment
-    }
-    }
-
-```
-
-### 2. PIP context validatie
-Validatie aanwezigheid *Eigen* Bemiddelingspecificatie met overlap op te vragen Bemiddelingspecificatie (Informatieve)
-
-```gql
-    # Op basis van de gegevens van de bemiddelingsspecificatie waarvan de leveringstatus geraadpleegd wordt,
-    # controleren of er voor het raadplegende zorgkantoor een bemiddelingspecifcatie is dat overlapt heeft.
-    # Als het resultaat leeg is, bestaat er geen geldige Bemiddelingspecificatie met overlap
-    # voor het raadplegende zorgkantoor.
-
-    query PIPcontextBSvalidatie(
-    $bemiddelingspecificatieID: UUID! # bemiddelingspecificatieID uit initiele query
-    $uitvoerendZorgkantoorToken: String! # afkomstig uit token
-    $toewijzingIngangsdatum: Date! # toewijzingIngangsdatum uit PIPcontextdata
-    $toewijzingEinddatum: Date # eventueel toewijzingEinddatum uit PIPcontextdata
-    $toewijzingEinddatumMoment: DateTime # als er een einddatum is + T00:00:00.000+01:00
-    $datumvaststellingMoment: Date! # datumdeel vaststellingsmoment
-    ) {
-    bemiddelingspecificatie(
-        where: {bemiddelingspecificatieID: {eq: $bemiddelingspecificatieID}}
-        ) {
-            # bemiddelingspecificatieID
-            bemiddeling {
-            # bemiddelingID
-            bemiddelingspecificatie(
-                where: {
-                and: [
-                    # Er moet een eigen.bemiddelingspecificatie zijn voor opvragende zorgkantoor
-                    {uitvoerendZorgkantoor: {eq: $uitvoerendZorgkantoorToken}}
-                    # eigen.bspec.toewijzingIngangsdatum lte opgevraagde.Bspec.toewijzingEinddatum of
-                    # eigen.bspec.vaststellingsmoment lte opgevraagde.bspec.toewijzingeinddatum
-                    {
-                    or: [
-                        {toewijzingIngangsdatum: {lte: $toewijzingEinddatum}}
-                        {vaststellingMoment: {lte: $toewijzingEinddatumMoment}}
-                    ]
-                    }
-                    # eigen.bspec.toewijzingEinddatum is null of
-                    # eigen.bspec.toewijzingEinddatum gte opgevraagde.bspec.toewijzingIngangsdatum of
-                    # eigen.bspec.toewijzingEinddatum gte opgevraagde.bspec.vaststellingMoment
-                    {
-                    or: [
-                        {toewijzingEinddatum: {eq: null}}
-                        {toewijzingEinddatum: {gte: $toewijzingIngangsdatum}}
-                        {toewijzingEinddatum: {gte: $datumvaststellingMoment}}
-                    ]
-                    }
-                    # die toegang geldt t/m 31 mei van het jaar dat volgt op de einddatum van de eigen Bemiddelingspecificatie.
-                ]
-                }
-            ) {
-                bemiddelingspecificatieID
-            }
-            }
-        }
-    }
-```
+---
+Ga naar [UC beschrijving raadplegen](UCLR-0009-raadplegen.md) -- terug naar [Raadplegen](../README.md)
 
