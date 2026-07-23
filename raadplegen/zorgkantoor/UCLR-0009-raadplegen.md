@@ -41,12 +41,12 @@ Een zorgkantoor mag de Levering (en de overige gegevens) raadplegen.
 
 |Query ID | Beschrijving | Verplichte input | Resultaat |
 | :--- | :--- | :--- | :--- |
-| [QLR-0009-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0009-ZK.graphql) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieIDInformatieve` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
+| [QLR-0009-ZK](/iWlz-levering/gql-query/zorgkantoor/QLR-0009-ZK.graphql) | Op basis van de bemiddelingspecificatieID van de informatieve toewijzing de Levering (en overige toegestane informatie), raadplegen die hoort bij de informatieve toewijzing. | `bemiddelingspecificatieID` | Levering / Client / Leveringperiode / Behandelingperiode / Uitstelperiode / Afstel | 
 
 
 ## Proces raadplegen
 
-Een zorgkantoor is (via een aanbieder) betrokken bij de zorg van een client. 
+Een zorgkantoor is (via een aanbieder) betrokken bij de zorg van een cliënt. 
 Met de aanvullende informatie uit de overlappende bemiddelingspecificatie (zie ook: [UCBR-0005_6-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgkantoor/UCBR-0005_6-raadplegen.md)) kan dat zorgkantoor de status van de levering zien die horen bij de informatieve toewijzing(en).
 
 Hiervoor is de informatieve `bemiddelingspecificatieID` nodig.
@@ -99,7 +99,7 @@ stateDiagram
 | 1.   | Start raadplegen Leveringsregister |
 | 2.   | Is de informatieve `bemiddelingsspecificatieID` bekend?<br> - **Ja** -> Ga verder naar stap 4. <br> - **Nee** -> Ga verder naar stap 3  |
 | 3.   | Gebruik eerst query-template `QBR-0005_6-ZK` (zie beschrijving [UCBR-0005_6-raadplegen](https://github.com/iStandaarden/iWlz-bemiddeling/blob/Bemiddelingsregister-1/raadplegen/zorgkantoor/UCBR-0005_6-raadplegen.md)) |
-| 4.   |  Gebruik query-template `QLR-00009-ZK` en vul de verplichte parameters:  <br> - `bemiddelingspecificatieIDInformatieve`;  |
+| 4.   |  Gebruik query-template `QLR-00009-ZK` en vul de verplichte parameters:  <br> - `bemiddelingspecificatieID`;  |
 | 5.   | Het zorgkantoor stuurt GraphQL-request + Acces-token naar het Policy Enforcement Point (PEP).  |
 | 6.   | De PEP voert de [toegangscontrole](/raadplegen/zorgkantoor/UCLR-0009-toegangscontrole.md) uit en stuurt bij toegang het request door naar het Leveringsgregister. |
 | 7.   | Het zorgkantoor ontvangt response van de PEP (bij ongeldig verzoek) of vanuit het Leveringsregister (resource).|
