@@ -83,7 +83,7 @@ jobs:
             | Querytemplate-wijziging (in gql-query/): | ${{ steps.changes.outputs.gql_query }} |
             | Notificaties (in notificaties/): | ${{ steps.changes.outputs.notificaties }} |
             | Raadpleeg en toegangs usecases (in raadplegen/): | ${{ steps.changes.outputs.raadplegen }} |
-            | Autorisatiematrix (autorisatiematrix_bemiddelingsregister.md): | ${{ steps.changes.outputs.autorisatiematrix }} |
+            | Autorisatiematrix (autorisatiematrix_leveringsregister.md): | ${{ steps.changes.outputs.autorisatiematrix }} |
 
             Voor meer informatie over de wijzigingen, zie hieronder.
         env:
